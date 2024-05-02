@@ -34,12 +34,12 @@
 
 @section('footer')
     <div class="float-right">
-        Version: {{ config('app.version', '1.0.0') }}
+        Version: {{ config('app.version', '0.0.5') }}
     </div>
 
     <strong>
         <a href="{{ config('app.company_url', '#') }}">
-            {{ config('app.company_name', 'My company') }}
+            {{ config('app.company_name', 'Industrias OP Software') }}
         </a>
     </strong>
 @stop
@@ -88,18 +88,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     .card {
         margin: 0 auto; /* Establece márgenes automáticos */
-        max-width: 60vw;
+        max-width: 70vw;
+        margin-top: 3rem!important;
     }
 
     .card-header {
         background-color: #313131;
         font-weight: 700;
         font-size: 24px!important;
-
     }
 
-    .card {
-        margin-top: 3rem!important;
+    .card-body {
+        padding: 2rem!important;
     }
 
     .form-group {
@@ -121,28 +121,71 @@ document.addEventListener("DOMContentLoaded", function() {
         color: #D6D6D6!important;
     }
 
+    .table-responsive {
+        margin-bottom: -1rem!important;
+    }
+
     .table-responsive th {
         background-color: #2C3033;
         border-bottom: none;
         text-align: center;
         border-bottom: none!important;
+        color: #ebebeb!important;
+        font-size: 20px!important;
     }
 
     .table-responsive td {
-        background-color: #393F43;
+        background-color: #4a4f4f;
+        color: #dadada!important;
         padding-bottom: 0.85rem!important;
         vertical-align: middle;
         text-align: center;
+        font-size: 18px!important;
     }
 
     .table-responsive td a {
-        margin-top: 1.1rem!important;
+        margin-top: 1rem!important;
     }
 
     .table-responsive td button {
-        margin-top: 1.1rem!important;
+        margin-top: 1rem!important;
+    }
+    
+    .user-menu {
+        margin-top: -0.3rem!important;
     }
 
+    .main-header {
+        padding-top: 1rem!important;
+    }
+
+    .main-sidebar {
+        padding-block: 0.45rem!important;
+    }
+
+    .main-sidebar a:hover {
+        color: #d2d4d5!important;
+    }
+
+    .form-control-navbar, .input-group-append {
+        margin-top: 1rem!important;
+    }
+
+    .dropdown-menu {
+        margin-top: 0.45rem!important;
+    }
+
+    .btn-sidebar {
+        margin-top: -1rem!important;
+    }
+
+    .form-control-navbar {
+        width: 45px!important;
+    }
+
+    .main-footer a {
+        color: #f4f4f4!important;
+    }
 
 }
 

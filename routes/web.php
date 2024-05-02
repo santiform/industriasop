@@ -13,6 +13,13 @@ Route::middleware(['auth'])->group(function () {
     
     Route::resource('accesos', App\Http\Controllers\AccesoController::class);
 
+    Route::resource('tipos-obras', App\Http\Controllers\TiposObraController::class);
+
+    Route::resource('tipos-funcionamientos', App\Http\Controllers\TiposFuncionamientoController::class);
+
+    Route::resource('tipos-controles', App\Http\Controllers\TiposControleController::class);
+
+    Route::resource('tipos-puertas', App\Http\Controllers\TiposPuertaController::class);
 
 });
 

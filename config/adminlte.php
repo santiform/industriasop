@@ -116,8 +116,8 @@ return [
             'path' => '../resources/img/logo.png',
             'alt' => 'Industrias OP Preloader Image',
             'effect' => 'animation__shake',
-            'width' => 60,
-            'height' => 60,
+            'width' => 100,
+            'height' => 100,
         ],
     ],
 
@@ -134,8 +134,8 @@ return [
     */
 
     'usermenu_enabled' => true,
-    'usermenu_header' => false,
-    'usermenu_header_class' => 'bg-primary',
+    'usermenu_header' => true,
+    'usermenu_header_class' => 'bg-secondary',
     'usermenu_image' => false,
     'usermenu_desc' => false,
     'usermenu_profile_url' => false,
@@ -156,7 +156,7 @@ return [
     'layout_boxed' => null,
     'layout_fixed_sidebar' => true,
     'layout_fixed_navbar' => null,
-    'layout_fixed_footer' => null,
+    'layout_fixed_footer' => true,
     'layout_dark_mode' => true,
 
     /*
@@ -329,19 +329,19 @@ return [
         ],
         [
             'text' => 'Tipos de obra',
-            'route' => 'home2',
+            'route' => 'tipos-obras.index',
             'icon_color' => 'success',
             'icon_right' => 'fas fa-tools',
         ],
         [
             'text' => 'Tipos funcionamiento',
-            'route' => 'home2',
+            'route' => 'tipos-funcionamientos.index',
             'icon_color' => 'danger',
             'icon_right' => 'fas fa-robot',
         ],
         [
             'text' => 'Tipos de control',
-            'route' => 'home2',
+            'route' => 'tipos-controles.index',
             'icon_color' => 'warning',
             'icon_right' => 'fas fa-gamepad',
         ],
