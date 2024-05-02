@@ -8,12 +8,12 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card">
+                <div class="card"  style="width: 30vw;">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Tipos Obras') }}
+                                <i class="fas fa-tools"></i>&nbsp; Tipos de obras
                             </span>
 
                              <div class="float-right">
@@ -34,7 +34,7 @@
                             <table class="table table-striped table-hover table-bordered">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
+                                        <th>ID</th>
                                         
 									<th >Nombre</th>
 
@@ -44,17 +44,17 @@
                                 <tbody>
                                     @foreach ($tiposObras as $tiposObra)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $tiposObra->id }}</td>
                                             
 										<td >{{ $tiposObra->nombre }}</td>
 
                                             <td>
                                                 <form action="{{ route('tipos-obras.destroy', $tiposObra->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('tipos-obras.show', $tiposObra->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('tipos-obras.edit', $tiposObra->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('tipos-obras.show', $tiposObra->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('tipos-obras.edit', $tiposObra->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> Borrar</button>
                                                 </form>
                                             </td>
                                         </tr>
