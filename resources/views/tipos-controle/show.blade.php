@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('template_title')
-    {{ $tiposControle->name ?? __('Show') . " " . __('Tipos Controle') }}
-@endsection
-
 @section('content')
     <section class="content container-fluid">
         <div class="row">
@@ -11,18 +7,15 @@
                 <div class="card">
                     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Tipos Controle</span>
-                        </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary btn-sm" href="{{ route('tipos-controles.index') }}"> {{ __('Back') }}</a>
+                            <span class="card-title">Mostrando detalles de <b>Tipo de control</b></span>
                         </div>
                     </div>
 
                     <div class="card-body bg-white">
                         
                                 <div class="form-group mb-2 mb20">
-                                    <strong>Id Tipo Funcionamiento:</strong>
-                                    {{ $tiposControle->id_tipo_funcionamiento }}
+                                    <strong>Tipo de funcionamiento:</strong>
+                                    {{ $tiposControle->tipo_funcionamiento }}
                                 </div>
                                 <div class="form-group mb-2 mb20">
                                     <strong>Nombre:</strong>

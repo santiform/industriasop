@@ -34,7 +34,7 @@
                             <table class="table table-striped table-hover table-bordered">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
+                                        <th>ID</th>
                                         
 									<th >Id Tipo Funcionamiento</th>
 									<th >Nombre</th>
@@ -50,9 +50,9 @@
                                 <tbody>
                                     @foreach ($tiposControles as $tiposControle)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $tiposControle->id }}</td>
                                             
-										<td >{{ $tiposControle->id_tipo_funcionamiento }}</td>
+										<td >{{ $tiposControle->tipo_funcionamiento }}</td>
 										<td >{{ $tiposControle->nombre }}</td>
 										<td >{{ $tiposControle->marca }}</td>
 										<td >{{ $tiposControle->voltaje }}</td>
@@ -62,11 +62,11 @@
 
                                             <td>
                                                 <form action="{{ route('tipos-controles.destroy', $tiposControle->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('tipos-controles.show', $tiposControle->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('tipos-controles.edit', $tiposControle->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('tipos-controles.show', $tiposControle->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('tipos-controles.edit', $tiposControle->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> Borrar</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -76,7 +76,6 @@
                         </div>
                     </div>
                 </div>
-                {!! $tiposControles->withQueryString()->links() !!}
             </div>
         </div>
     </div>

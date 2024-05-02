@@ -55,18 +55,6 @@
 
 </script>
 
-
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    var inputs = document.querySelectorAll('input');
-    inputs.forEach(function(input) {
-        input.setAttribute('autocomplete', 'off');
-    });
-});
-</script>
-
 @endpush
 
 {{-- Add common CSS customizations --}}
@@ -90,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
         margin: 0 auto; /* Establece márgenes automáticos */
         max-width: 80vw;
         margin-top: 3rem!important;
-        margin-bottom: 2rem!important;
+        margin-bottom: 6.8rem!important;
     }
 
     .card-header {
@@ -101,7 +89,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     .card-body {
         padding: 2rem!important;
-
     }
 
     .form-group {
@@ -117,7 +104,20 @@ document.addEventListener("DOMContentLoaded", function() {
         border-color: #C7C7C7!important;
         outline: 0!important;
     }
-    
+
+    /* Estilos para campos de entrada autocompletados */
+    .form-group input:-webkit-autofill,
+    .form-group input:-webkit-autofill:hover,
+    .form-group input:-webkit-autofill:focus {
+        -webkit-box-shadow: 0 0 0 30px #454B50 inset !important;
+        -webkit-text-fill-color: #fff !important;
+    }
+
+    .form-group select:focus {
+        border-color: #C7C7C7!important;
+        outline: 0!important;
+    }
+        
     .bg-white {
         background-color: #343a40!important;
         color: #D6D6D6!important;

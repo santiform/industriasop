@@ -16,10 +16,12 @@ class TiposPuertaController extends Controller
      */
     public function index(Request $request): View
     {
-        $tiposPuertas = TiposPuerta::paginate();
+        $tiposPuertas = DB::table('tipos_pertass')
+                    ->join('tipos_funcionamientos', 'tipos_controles.id_tipo_funcionamiento', '=', 'tipos_funcionamientos.id')
+                    ->select('tipos_puertas.*', 'tipos_funcionamientos.nombre AS tipo_funcionamiento')
+                    ->get();
 
         return view('tipos-puerta.index', compact('tiposPuertas'))
-            ->with('i', ($request->input('page', 1) - 1) * $tiposPuertas->perPage());
     }
 
     /**

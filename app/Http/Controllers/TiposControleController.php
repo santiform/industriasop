@@ -9,6 +9,8 @@ use App\Http\Requests\TiposControleRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use Illuminate\Support\Facades\DB;
+
 class TiposControleController extends Controller
 {
     /**
@@ -16,10 +18,12 @@ class TiposControleController extends Controller
      */
     public function index(Request $request): View
     {
-        $tiposControles = TiposControle::paginate();
+        $tiposControles = DB::table('tipos_controles')
+                    ->join('tipos_funcionamientos', 'tipos_controles.id_tipo_funcionamiento', '=', 'tipos_funcionamientos.id')
+                    ->select('tipos_controles.*', 'tipos_funcionamientos.nombre AS tipo_funcionamiento')
+                    ->get();
 
-        return view('tipos-controle.index', compact('tiposControles'))
-            ->with('i', ($request->input('page', 1) - 1) * $tiposControles->perPage());
+        return view('tipos-controle.index', compact('tiposControles'));
     }
 
     /**
@@ -29,7 +33,9 @@ class TiposControleController extends Controller
     {
         $tiposControle = new TiposControle();
 
-        return view('tipos-controle.create', compact('tiposControle'));
+        $tiposFuncionamiento = DB::table('tipos_funcionamientos')->get();
+
+        return view('tipos-controle.create', compact('tiposControle', 'tiposFuncionamiento'));
     }
 
     /**
@@ -48,7 +54,11 @@ class TiposControleController extends Controller
      */
     public function show($id): View
     {
-        $tiposControle = TiposControle::find($id);
+        $tiposControle = DB::table('tipos_controles')
+                    ->where('tipos_controles.id', $id)
+                    ->join('tipos_funcionamientos', 'tipos_controles.id_tipo_funcionamiento', '=', 'tipos_funcionamientos.id')
+                    ->select('tipos_controles.*', 'tipos_funcionamientos.nombre AS tipo_funcionamiento')
+                    ->first();
 
         return view('tipos-controle.show', compact('tiposControle'));
     }
@@ -60,7 +70,9 @@ class TiposControleController extends Controller
     {
         $tiposControle = TiposControle::find($id);
 
-        return view('tipos-controle.edit', compact('tiposControle'));
+        $tiposFuncionamiento = DB::table('tipos_funcionamientos')->get();
+
+        return view('tipos-controle.edit', compact('tiposControle', 'tiposFuncionamiento'));
     }
 
     /**

@@ -11,7 +11,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Tipos Controle</span>
+                        <span class="card-title">Creando un nuevo <b>Tipo de control</b></span>
                     </div>
                     <div class="card-body bg-white">
                         <form method="POST" action="{{ route('tipos-controles.store') }}"  role="form" enctype="multipart/form-data">

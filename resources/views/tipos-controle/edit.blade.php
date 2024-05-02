@@ -11,7 +11,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Tipos Controle</span>
+                        <span class="card-title">Editando <b>Tipo de control</b></span>
                     </div>
                     <div class="card-body bg-white">
                         <form method="POST" action="{{ route('tipos-controles.update', $tiposControle->id) }}"  role="form" enctype="multipart/form-data">
