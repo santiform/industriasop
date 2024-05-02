@@ -323,7 +323,7 @@ return [
         ],
         [
             'text' => 'Pedidos',
-            'route' => 'home2',
+            'route' => 'pedidos.index',
             'icon_color' => 'primary',
             'icon_right' => 'far fa-list-alt',  
         ],
@@ -347,18 +347,18 @@ return [
         ],
         [
             'text' => 'Tipos de puerta',
-            'route' => 'home2',
+            'route' => 'tipos-puertas.index',
             'icon_right' => 'fas fa-door-open',
         ],
         [
             'text' => 'Detalles de puerta',
-            'route' => 'home2',
+            'route' => 'detalles-puertas.index',
             'icon_color' => 'primary',
             'icon_right' => 'fas fa-info-circle',
         ],
         [
             'text' => 'Tipos de patin retráctil',
-            'route' => 'home2',
+            'route' => 'tipos-patin-retractiles.index',
             'icon_color' => 'success',
             'icon_right' => 'fas fa-unlock-alt',
         ],
@@ -370,7 +370,7 @@ return [
         ],
         [
             'text' => 'Detalles generales',
-            'route' => 'home2',
+            'route' => 'detalles-generales.index',
             'icon_color' => 'warning',
             'icon_right' => 'fas fa-question-circle',
         ],

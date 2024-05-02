@@ -88,8 +88,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     .card {
         margin: 0 auto; /* Establece márgenes automáticos */
-        max-width: 70vw;
+        max-width: 80vw;
         margin-top: 3rem!important;
+        margin-bottom: 2rem!important;
     }
 
     .card-header {
@@ -100,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     .card-body {
         padding: 2rem!important;
+
     }
 
     .form-group {
@@ -161,6 +163,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     .main-sidebar {
         padding-block: 0.45rem!important;
+        align-content: center!important;
+        align-items: center!important;
     }
 
     .main-sidebar a:hover {

@@ -1,26 +1,36 @@
 @extends('layouts.app')
 
-{{-- Customize layout sections --}}
+@section('template_title')
+    Pedidos
+@endsection
 
-@section('subtitle', 'Welcome')
-@section('content_header_title', 'Home')
-@section('content_header_subtitle', 'Welcome')
+@section('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
 
-{{-- Content body: main page content --}}
+                            <span id="card_title">
+                                Inicio
+                            </span>
 
-@section('content_body')
-    <p>Welcome to this beautiful admin zxzpanel.</p>
-@stop
+                        </div>
+                    </div>
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success m-4">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
 
-{{-- Push extra CSS --}}
-
-@push('css')
-    {{-- Add here extra stylesheets --}}
-    {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}
-@endpush
-
-{{-- Push extra scripts --}}
-
-@push('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-@endpush
+                    <div class="card-body bg-white">
+                        
+                            Bienvenido !
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

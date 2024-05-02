@@ -21,6 +21,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('tipos-puertas', App\Http\Controllers\TiposPuertaController::class);
 
+    Route::resource('detalles-puertas', App\Http\Controllers\DetallesPuertaController::class);
+
+    Route::resource('tipos-patin-retractiles', App\Http\Controllers\TiposPatinRetractileController::class);
+
+    Route::resource('detalles-generales', App\Http\Controllers\DetallesGeneraleController::class);
+
+    Route::resource('pedidos', App\Http\Controllers\PedidoController::class);
+
 });
 
 Auth::routes();
