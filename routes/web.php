@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/', function () {
-        return view('welcome');
-    })->name('home2');
+        return view('home');
+    });
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     
@@ -28,6 +28,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('detalles-generales', App\Http\Controllers\DetallesGeneraleController::class);
 
     Route::resource('pedidos', App\Http\Controllers\PedidoController::class);
+
+    Route::resource('estados-pedidos', App\Http\Controllers\EstadosPedidoController::class);
 
 });
 
