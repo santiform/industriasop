@@ -46,7 +46,7 @@
     </div>
     <div class="col-md-12 mt20 mt-2">
         <button type="submit" class="btn btn-primary" data-placement="left">
-            <i class="far fa-check-circle"></i> Aceptar
+            Submit
         </button>
     </div>
 </div>

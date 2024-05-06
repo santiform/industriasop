@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    {{ __('Update') }} Tipos Controle
+    {{ __('Update') }} Habilitaciones Acceso
 @endsection
 
 @section('content')
@@ -11,14 +11,14 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Tipos Controles</span>
+                        <span class="card-title">{{ __('Update') }} Habilitaciones Acceso</span>
                     </div>
                     <div class="card-body bg-white">
-                        <form method="POST" action="{{ route('tipos-controles.update', $tiposControle->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('habilitaciones-accesos.update', $habilitacionesAcceso->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('tipos-controle.form')
+                            @include('habilitaciones-acceso.form')
 
                         </form>
                     </div>

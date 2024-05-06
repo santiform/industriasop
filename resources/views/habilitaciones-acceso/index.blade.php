@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Tipos Funcionamientos
+    Habilitaciones Accesos
 @endsection
 
 @section('content')
@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                <i class="fas fa-robot"></i> {{ __('Tipos de funcionamientos') }}
+                                {{ __('Habilitaciones Accesos') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('tipos-funcionamientos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  <i class="fas fa-plus-circle"></i> Nuevo registro
+                                <a href="{{ route('habilitaciones-accesos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Create New') }}
                                 </a>
                               </div>
                         </div>
@@ -31,27 +31,33 @@
 
                     <div class="card-body bg-white">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover table-bordered">
+                            <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
                                         
-									<th >Nombre</th>
+									<th >Id Pedido</th>
+									<th >Parada</th>
+									<th >Salida A</th>
+									<th >Salida B</th>
 
-                                        <th>Acción</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($tiposFuncionamientos as $tiposFuncionamiento)
+                                    @foreach ($habilitacionesAccesos as $habilitacionesAcceso)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-										<td >{{ $tiposFuncionamiento->nombre }}</td>
+										<td >{{ $habilitacionesAcceso->id_pedido }}</td>
+										<td >{{ $habilitacionesAcceso->parada }}</td>
+										<td >{{ $habilitacionesAcceso->salida_a }}</td>
+										<td >{{ $habilitacionesAcceso->salida_b }}</td>
 
                                             <td>
-                                                <form action="{{ route('tipos-funcionamientos.destroy', $tiposFuncionamiento->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('tipos-funcionamientos.show', $tiposFuncionamiento->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('tipos-funcionamientos.edit', $tiposFuncionamiento->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('habilitaciones-accesos.destroy', $habilitacionesAcceso->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('habilitaciones-accesos.show', $habilitacionesAcceso->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('habilitaciones-accesos.edit', $habilitacionesAcceso->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -64,7 +70,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $tiposFuncionamientos->withQueryString()->links() !!}
+                {!! $habilitacionesAccesos->withQueryString()->links() !!}
             </div>
         </div>
     </div>

@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Tipos Puertas') }}
+                                <i class="fas fa-door-open"></i> {{ __('Tipos de puertas') }}
                             </span>
 
                              <div class="float-right">
@@ -46,10 +46,10 @@
                                 <tbody>
                                     @foreach ($tiposPuertas as $tiposPuerta)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $tiposPuerta->id }}</td>
                                             
-										<td >{{ $tiposPuerta->id_tipo_funcionamiento }}</td>
-										<td >{{ $tiposPuerta->id_tipo_control }}</td>
+										<td >{{ $tiposPuerta->tipo_funcionamiento }}</td>
+										<td >{{ $tiposPuerta->tipo_control }}</td>
 										<td >{{ $tiposPuerta->nombre }}</td>
 
                                             <td>
@@ -68,7 +68,6 @@
                         </div>
                     </div>
                 </div>
-                {!! $tiposPuertas->withQueryString()->links() !!}
             </div>
         </div>
     </div>

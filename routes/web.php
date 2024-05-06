@@ -31,6 +31,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('estados-pedidos', App\Http\Controllers\EstadosPedidoController::class);
 
+    Route::resource('habilitaciones-accesos', App\Http\Controllers\HabilitacionesAccesoController::class);
+
 });
 
 Auth::routes();

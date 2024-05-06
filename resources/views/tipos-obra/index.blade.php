@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card"  style="width: 30vw;">
+                <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
@@ -34,7 +34,7 @@
                             <table class="table table-striped table-hover table-bordered">
                                 <thead class="thead">
                                     <tr>
-                                        <th>ID</th>
+                                        <th>No</th>
                                         
 									<th >Nombre</th>
 
@@ -50,11 +50,11 @@
 
                                             <td>
                                                 <form action="{{ route('tipos-obras.destroy', $tiposObra->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('tipos-obras.show', $tiposObra->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('tipos-obras.edit', $tiposObra->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('tipos-obras.show', $tiposObra->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('tipos-obras.edit', $tiposObra->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> Borrar</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

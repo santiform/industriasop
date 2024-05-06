@@ -240,7 +240,7 @@ return [
     'right_sidebar_icon' => 'fas fa-cogs',
     'right_sidebar_theme' => 'dark',
     'right_sidebar_slide' => true,
-    'right_sidebar_push' => true,
+    'right_sidebar_push' => false,
     'right_sidebar_scrollbar_theme' => 'os-theme-light',
     'right_sidebar_scrollbar_auto_hide' => 'l',
 
@@ -379,9 +379,15 @@ return [
             'icon' => 'far fa-hand-point-right',
         ],
         [
+            'text' => 'Habilitaciones accesos',
+            'route' => 'habilitaciones-accesos.index',
+            'icon_color' => 'warning',
+            'icon_right' => 'fas fa-ban',
+            'icon' => 'far fa-hand-point-right',
+        ],
+        [
             'text' => 'Detalles generales',
             'route' => 'detalles-generales.index',
-            'icon_color' => 'warning',
             'icon_right' => 'fas fa-question-circle',
             'icon' => 'far fa-hand-point-right',
         ],
@@ -390,7 +396,9 @@ return [
             'route' => 'estados-pedidos.index',
             'icon_right' => 'fas fa-battery-half',
             'icon' => 'far fa-hand-point-right',
+            'icon_color' => 'primary',
         ],
+
         /*[
             'text' => 'pages',
             'url' => 'admin/pages',

@@ -9,6 +9,8 @@ use App\Http\Requests\AccesoRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use Illuminate\Support\Facades\DB;
+
 class AccesoController extends Controller
 {
     /**
@@ -16,10 +18,15 @@ class AccesoController extends Controller
      */
     public function index(Request $request): View
     {
-        $accesos = Acceso::paginate();
+        $accesos = DB::table('accesos')
+            ->join('tipos_funcionamientos', 'accesos.id_tipo_funcionamiento', '=', 'tipos_funcionamientos.id')
+            ->join('tipos_controles', 'accesos.id_tipo_control', '=', 'tipos_controles.id')
+            ->join('tipos_puertas', 'accesos.id_tipo_control', '=', 'tipos_puertas.id')
+            ->select('accesos.*', 'tipos_funcionamientos.nombre AS tipo_funcionamiento', 'tipos_controles.nombre AS tipo_control',
+                'tipos_puertas.nombre AS tipo_puerta')
+            ->get();
 
-        return view('acceso.index', compact('accesos'))
-            ->with('i', ($request->input('page', 1) - 1) * $accesos->perPage());
+        return view('acceso.index', compact('accesos'));
     }
 
     /**
@@ -29,7 +36,11 @@ class AccesoController extends Controller
     {
         $acceso = new Acceso();
 
-        return view('acceso.create', compact('acceso'));
+        $tiposFuncionamientos = DB::table('tipos_funcionamientos')->get();
+        $tiposControles = DB::table('tipos_controles')->get();
+        $tiposPuertas = DB::table('tipos_puertas')->get();
+
+        return view('acceso.create', compact('acceso', 'tiposPuertas', 'tiposFuncionamientos', 'tiposControles'));
     }
 
     /**
@@ -48,7 +59,14 @@ class AccesoController extends Controller
      */
     public function show($id): View
     {
-        $acceso = Acceso::find($id);
+        $acceso = DB::table('accesos')
+            ->join('tipos_funcionamientos', 'accesos.id_tipo_funcionamiento', '=', 'tipos_funcionamientos.id')
+            ->join('tipos_controles', 'accesos.id_tipo_control', '=', 'tipos_controles.id')
+            ->join('tipos_puertas', 'accesos.id_tipo_control', '=', 'tipos_puertas.id')
+            ->where('accesos.id', $id)
+            ->select('accesos.*', 'tipos_funcionamientos.nombre AS tipo_funcionamiento', 'tipos_controles.nombre AS tipo_control',
+                'tipos_puertas.nombre AS tipo_puerta')
+            ->first();
 
         return view('acceso.show', compact('acceso'));
     }
@@ -60,7 +78,11 @@ class AccesoController extends Controller
     {
         $acceso = Acceso::find($id);
 
-        return view('acceso.edit', compact('acceso'));
+        $tiposFuncionamientos = DB::table('tipos_funcionamientos')->get();
+        $tiposControles = DB::table('tipos_controles')->get();
+        $tiposPuertas = DB::table('tipos_puertas')->get();
+
+        return view('acceso.edit', compact('acceso', 'tiposPuertas', 'tiposFuncionamientos', 'tiposControles'));
     }
 
     /**

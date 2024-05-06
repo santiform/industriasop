@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Accesos') }}
+                                <i class="fas fa-person-booth"></i> Accesos
                             </span>
 
                              <div class="float-right">
@@ -47,20 +47,20 @@
                                 <tbody>
                                     @foreach ($accesos as $acceso)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $acceso->id }}</td>
                                             
-										<td >{{ $acceso->id_tipo_funcionamiento }}</td>
-										<td >{{ $acceso->id_tipo_control }}</td>
-										<td >{{ $acceso->id_tipo_puerta }}</td>
+										<td >{{ $acceso->tipo_funcionamiento }}</td>
+										<td >{{ $acceso->tipo_control }}</td>
+										<td >{{ $acceso->tipo_puerta }}</td>
 										<td >{{ $acceso->nombre }}</td>
 
                                             <td>
                                                 <form action="{{ route('accesos.destroy', $acceso->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('accesos.show', $acceso->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('accesos.edit', $acceso->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('accesos.show', $acceso->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('accesos.edit', $acceso->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> Borrar</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -70,7 +70,6 @@
                         </div>
                     </div>
                 </div>
-                {!! $accesos->withQueryString()->links() !!}
             </div>
         </div>
     </div>

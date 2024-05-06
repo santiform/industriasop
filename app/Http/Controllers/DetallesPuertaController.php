@@ -9,6 +9,8 @@ use App\Http\Requests\DetallesPuertaRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use Illuminate\Support\Facades\DB;
+
 class DetallesPuertaController extends Controller
 {
     /**
@@ -16,10 +18,17 @@ class DetallesPuertaController extends Controller
      */
     public function index(Request $request): View
     {
-        $detallesPuertas = DetallesPuerta::paginate();
+        $detallesPuertas = DB::table('detalles_puertas')
+            ->join('tipos_funcionamientos', 'detalles_puertas.id_tipo_funcionamiento', '=', 'tipos_funcionamientos.id')
+            ->join('tipos_controles', 'detalles_puertas.id_tipo_control', '=', 'tipos_controles.id')
+            ->join('tipos_puertas', 'detalles_puertas.id_tipo_control', '=', 'tipos_puertas.id')
+            ->select('detalles_puertas.*', 'tipos_funcionamientos.nombre AS tipo_funcionamiento', 'tipos_controles.nombre AS tipo_control',
+                'tipos_puertas.nombre AS tipo_puerta')
+            ->get();
 
-        return view('detalles-puerta.index', compact('detallesPuertas'))
-            ->with('i', ($request->input('page', 1) - 1) * $detallesPuertas->perPage());
+        
+
+        return view('detalles-puerta.index', compact('detallesPuertas'));
     }
 
     /**
@@ -29,7 +38,11 @@ class DetallesPuertaController extends Controller
     {
         $detallesPuerta = new DetallesPuerta();
 
-        return view('detalles-puerta.create', compact('detallesPuerta'));
+        $tiposFuncionamientos = DB::table('tipos_funcionamientos')->get();
+        $tiposControles = DB::table('tipos_controles')->get();
+        $tiposPuertas = DB::table('tipos_puertas')->get();        
+
+        return view('detalles-puerta.create', compact('detallesPuerta', 'tiposPuertas', 'tiposFuncionamientos', 'tiposControles'));
     }
 
     /**
@@ -48,7 +61,14 @@ class DetallesPuertaController extends Controller
      */
     public function show($id): View
     {
-        $detallesPuerta = DetallesPuerta::find($id);
+        $detallesPuerta = DB::table('accesos')
+            ->join('tipos_funcionamientos', 'accesos.id_tipo_funcionamiento', '=', 'tipos_funcionamientos.id')
+            ->join('tipos_controles', 'accesos.id_tipo_control', '=', 'tipos_controles.id')
+            ->join('tipos_puertas', 'accesos.id_tipo_control', '=', 'tipos_puertas.id')
+            ->where('tipos_puertas.id', $id)
+            ->select('tipos_puertas.*', 'tipos_funcionamientos.nombre AS tipo_funcionamiento', 'tipos_controles.nombre AS tipo_control',
+                'tipos_puertas.nombre AS tipo_puerta')
+            ->first();
 
         return view('detalles-puerta.show', compact('detallesPuerta'));
     }

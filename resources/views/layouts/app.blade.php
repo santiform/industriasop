@@ -76,8 +76,7 @@
 
     .card {
         margin: 0 auto; /* Establece márgenes automáticos */
-        max-width: 80vw;
-        margin-top: 3rem!important;
+        margin-top: 1rem!important;
         margin-bottom: 6.8rem!important;
     }
 
