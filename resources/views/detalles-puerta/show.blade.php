@@ -13,9 +13,6 @@
                         <div class="float-left">
                             <span class="card-title">{{ __('Show') }} Detalles Puerta</span>
                         </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary btn-sm" href="{{ route('detalles-puertas.index') }}"> {{ __('Back') }}</a>
-                        </div>
                     </div>
 
                     <div class="card-body bg-white">
@@ -25,16 +22,16 @@
                                     {{ $detallesPuerta->id_pedido }}
                                 </div>
                                 <div class="form-group mb-2 mb20">
-                                    <strong>Id Tipo Funcionamiento:</strong>
-                                    {{ $detallesPuerta->id_tipo_funcionamiento }}
+                                    <strong>Tipo de funcionamiento:</strong>
+                                    {{ $detallesPuerta->tipo_funcionamiento }}
                                 </div>
                                 <div class="form-group mb-2 mb20">
-                                    <strong>Id Tipo Control:</strong>
-                                    {{ $detallesPuerta->id_tipo_control }}
+                                    <strong>Tipo de control:</strong>
+                                    {{ $detallesPuerta->tipo_control }}
                                 </div>
                                 <div class="form-group mb-2 mb20">
-                                    <strong>Id Tipo Puerta:</strong>
-                                    {{ $detallesPuerta->id_tipo_puerta }}
+                                    <strong>Tipo de puerta:</strong>
+                                    {{ $detallesPuerta->tipo_puerta }}
                                 </div>
                                 <div class="form-group mb-2 mb20">
                                     <strong>Marca:</strong>
@@ -45,8 +42,8 @@
                                     {{ $detallesPuerta->voltaje }}
                                 </div>
                                 <div class="form-group mb-2 mb20">
-                                    <strong>Id Patin Retractil:</strong>
-                                    {{ $detallesPuerta->id_patin_retractil }}
+                                    <strong>Patin retractil:</strong>
+                                    {{ $detallesPuerta->patin_retractil }}
                                 </div>
 
                     </div>

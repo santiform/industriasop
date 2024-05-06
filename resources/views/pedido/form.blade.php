@@ -2,30 +2,72 @@
     <div class="col-md-12">
         
         <div class="form-group mb-2 mb20">
-            <label for="id_tipo_obra" class="form-label">{{ __('Id Tipo Obra') }}</label>
-            <input type="text" name="id_tipo_obra" class="form-control @error('id_tipo_obra') is-invalid @enderror" value="{{ old('id_tipo_obra', $pedido?->id_tipo_obra) }}" id="id_tipo_obra" placeholder="Id Tipo Obra">
+            <label for="id_tipo_obra" class="form-label">{{ __('Tipo de obra') }}</label>
+            <select name="id_tipo_obra" class="form-control @error('id_tipo_obra') is-invalid @enderror" id="id_tipo_obra">
+                <option value="">Selecciona una opción</option>
+                @foreach($tiposObras as $tipoObra)
+                    <option value="{{ $tipoObra->id }}" @if(old('id_tipo_obra', $pedido?->id_tipo_obra) == $tipoObra->id) selected @endif>{{ $tipoObra->nombre }}</option>
+                @endforeach
+            </select>
             {!! $errors->first('id_tipo_obra', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+
         <div class="form-group mb-2 mb20">
-            <label for="id_tipo_funcionamiento" class="form-label">{{ __('Id Tipo Funcionamiento') }}</label>
-            <input type="text" name="id_tipo_funcionamiento" class="form-control @error('id_tipo_funcionamiento') is-invalid @enderror" value="{{ old('id_tipo_funcionamiento', $pedido?->id_tipo_funcionamiento) }}" id="id_tipo_funcionamiento" placeholder="Id Tipo Funcionamiento">
+            <label for="id_tipo_funcionamiento" class="form-label">{{ __('Tipo de funcionamiento') }}</label>
+            <select name="id_tipo_funcionamiento" class="form-control @error('id_tipo_funcionamiento') is-invalid @enderror" id="id_tipo_funcionamiento">
+                <option value="">Selecciona una opción</option>
+                @foreach($tiposFuncionamientos as $tipoFuncionamiento)
+                    <option value="{{ $tipoFuncionamiento->id }}" @if(old('id_tipo_funcionamiento', $pedido?->id_tipo_funcionamiento) == $tipoFuncionamiento->id) selected @endif>{{ $tipoFuncionamiento->nombre }}</option>
+                @endforeach
+            </select>
             {!! $errors->first('id_tipo_funcionamiento', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+
         <div class="form-group mb-2 mb20">
-            <label for="id_tipo_control" class="form-label">{{ __('Id Tipo Control') }}</label>
-            <input type="text" name="id_tipo_control" class="form-control @error('id_tipo_control') is-invalid @enderror" value="{{ old('id_tipo_control', $pedido?->id_tipo_control) }}" id="id_tipo_control" placeholder="Id Tipo Control">
+            <label for="id_tipo_control" class="form-label">{{ __('Tipo de control') }}</label>
+            <select name="id_tipo_control" class="form-control @error('id_tipo_control') is-invalid @enderror" id="id_tipo_control">
+                <option value="">Selecciona una opción</option>
+                @foreach($tiposControles as $tipoControl)
+                    <option value="{{ $tipoControl->id }}" @if(old('id_tipo_control', $pedido?->id_tipo_control) == $tipoControl->id) selected @endif>{{ $tipoControl->nombre }}</option>
+                @endforeach
+            </select>
             {!! $errors->first('id_tipo_control', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+
         <div class="form-group mb-2 mb20">
-            <label for="id_tipo_puerta" class="form-label">{{ __('Id Tipo Puerta') }}</label>
-            <input type="text" name="id_tipo_puerta" class="form-control @error('id_tipo_puerta') is-invalid @enderror" value="{{ old('id_tipo_puerta', $pedido?->id_tipo_puerta) }}" id="id_tipo_puerta" placeholder="Id Tipo Puerta">
+            <label for="id_tipo_puerta" class="form-label">{{ __('Tipo de puerta') }}</label>
+            <select name="id_tipo_puerta" class="form-control @error('id_tipo_puerta') is-invalid @enderror" id="id_tipo_puerta">
+                <option value="">Selecciona una opción</option>
+                @foreach($tiposPuertas as $tipoPuerta)
+                    <option value="{{ $tipoPuerta->id }}" @if(old('id_tipo_puerta', $pedido?->id_tipo_puerta) == $tipoPuerta->id) selected @endif>{{ $tipoPuerta->nombre }}</option>
+                @endforeach
+            </select>
             {!! $errors->first('id_tipo_puerta', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+
         <div class="form-group mb-2 mb20">
-            <label for="id_acceso" class="form-label">{{ __('Id Acceso') }}</label>
-            <input type="text" name="id_acceso" class="form-control @error('id_acceso') is-invalid @enderror" value="{{ old('id_acceso', $pedido?->id_acceso) }}" id="id_acceso" placeholder="Id Acceso">
+            <label for="id_acceso" class="form-label">{{ __('Tipo de acceso') }}</label>
+            <select name="id_acceso" class="form-control @error('id_acceso') is-invalid @enderror" id="id_acceso">
+                <option value="">Selecciona una opción</option>
+                @foreach($accesos as $acceso)
+                    <option value="{{ $acceso->id }}" @if(old('id_acceso', $pedido?->id_acceso) == $acceso->id) selected @endif>{{ $acceso->nombre }}</option>
+                @endforeach
+            </select>
             {!! $errors->first('id_acceso', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+
+        <div class="form-group mb-2 mb20">
+            <label for="id_estado" class="form-label">{{ __('Estado') }}</label>
+            <select name="id_estado" class="form-control @error('id_estado') is-invalid @enderror" id="id_estado">
+                <option value="">Selecciona una opción</option>
+                @foreach($estados as $estado)
+                    <option value="{{ $estado->id }}" @if(old('id_estado', $pedido?->id_estado) == $estado->id) selected @endif>{{ $estado->nombre }}</option>
+                @endforeach
+            </select>
+            {!! $errors->first('id_estado', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
+
+
         <div class="form-group mb-2 mb20">
             <label for="nombre" class="form-label">{{ __('Nombre') }}</label>
             <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre', $pedido?->nombre) }}" id="nombre" placeholder="Nombre">

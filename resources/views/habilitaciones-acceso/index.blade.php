@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Habilitaciones Accesos') }}
+                                <i class="fas fa-ban"></i> Habilitaciones Accesos
                             </span>
 
                              <div class="float-right">
                                 <a href="{{ route('habilitaciones-accesos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  <i class="fas fa-plus-circle"></i> Nuevo registro
                                 </a>
                               </div>
                         </div>
@@ -31,7 +31,7 @@
 
                     <div class="card-body bg-white">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover table-bordered">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
@@ -41,7 +41,7 @@
 									<th >Salida A</th>
 									<th >Salida B</th>
 
-                                        <th></th>
+                                        <th>Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,8 +51,17 @@
                                             
 										<td >{{ $habilitacionesAcceso->id_pedido }}</td>
 										<td >{{ $habilitacionesAcceso->parada }}</td>
-										<td >{{ $habilitacionesAcceso->salida_a }}</td>
-										<td >{{ $habilitacionesAcceso->salida_b }}</td>
+
+										<td >
+                                            @if ($habilitacionesAcceso->salida_a === 0) No @endif
+                                            @if ($habilitacionesAcceso->salida_a === 1) Sí @endif
+                                        </td>
+
+										<td >
+                                            @if ($habilitacionesAcceso->salida_b === null) No corresponde @endif
+                                            @if ($habilitacionesAcceso->salida_b === 0) No @endif
+                                            @if ($habilitacionesAcceso->salida_b === 1) Sí @endif
+                                        </td>
 
                                             <td>
                                                 <form action="{{ route('habilitaciones-accesos.destroy', $habilitacionesAcceso->id) }}" method="POST">

@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Detalles Puertas') }}
+                                <i class="fas fa-info-circle"></i> Detalles de puertas
                             </span>
 
                              <div class="float-right">
@@ -50,15 +50,15 @@
                                 <tbody>
                                     @foreach ($detallesPuertas as $detallesPuerta)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $detallesPuerta->id }}</td>
                                             
 										<td >{{ $detallesPuerta->id_pedido }}</td>
-										<td >{{ $detallesPuerta->id_tipo_funcionamiento }}</td>
-										<td >{{ $detallesPuerta->id_tipo_control }}</td>
-										<td >{{ $detallesPuerta->id_tipo_puerta }}</td>
+										<td >{{ $detallesPuerta->tipo_funcionamiento }}</td>
+										<td >{{ $detallesPuerta->tipo_control }}</td>
+										<td >{{ $detallesPuerta->tipo_puerta }}</td>
 										<td >{{ $detallesPuerta->marca }}</td>
 										<td >{{ $detallesPuerta->voltaje }}</td>
-										<td >{{ $detallesPuerta->id_patin_retractil }}</td>
+										<td >{{ $detallesPuerta->patin_retractil }}</td>
 
                                             <td>
                                                 <form action="{{ route('detalles-puertas.destroy', $detallesPuerta->id) }}" method="POST">
@@ -76,7 +76,6 @@
                         </div>
                     </div>
                 </div>
-                {!! $detallesPuertas->withQueryString()->links() !!}
             </div>
         </div>
     </div>

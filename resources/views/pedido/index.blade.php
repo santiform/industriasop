@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Pedidos') }}
+                                <i class="fas fa-list-alt"></i> Pedidos
                             </span>
 
                              <div class="float-right">
@@ -36,11 +36,11 @@
                                     <tr>
                                         <th>No</th>
                                         
-									<th >Id Tipo Obra</th>
-									<th >Id Tipo Funcionamiento</th>
-									<th >Id Tipo Control</th>
-									<th >Id Tipo Puerta</th>
-									<th >Id Acceso</th>
+									<th >Tipo Obra</th>
+									<th >Tipo Funcionamiento</th>
+									<th >Tipo Control</th>
+									<th >Tipo Puerta</th>
+                                    <th >Estado</th>
 									<th >Nombre</th>
 									<th >Email</th>
 									<th >Telefono</th>
@@ -52,13 +52,13 @@
                                 <tbody>
                                     @foreach ($pedidos as $pedido)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $pedido->id }}</td>
                                             
-										<td >{{ $pedido->id_tipo_obra }}</td>
-										<td >{{ $pedido->id_tipo_funcionamiento }}</td>
-										<td >{{ $pedido->id_tipo_control }}</td>
-										<td >{{ $pedido->id_tipo_puerta }}</td>
-										<td >{{ $pedido->id_acceso }}</td>
+										<td >{{ $pedido->tipo_obra }}</td>
+										<td >{{ $pedido->tipo_funcionamiento }}</td>
+										<td >{{ $pedido->tipo_control }}</td>
+										<td >{{ $pedido->tipo_puerta }}</td>
+                                        <td >{{ $pedido->estado }}</td>
 										<td >{{ $pedido->nombre }}</td>
 										<td >{{ $pedido->email }}</td>
 										<td >{{ $pedido->telefono }}</td>
@@ -80,7 +80,6 @@
                         </div>
                     </div>
                 </div>
-                {!! $pedidos->withQueryString()->links() !!}
             </div>
         </div>
     </div>

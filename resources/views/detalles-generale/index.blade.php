@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Detalles Generales') }}
+                                <i class="fas fa-question-circle"></i> Detalles generales
                             </span>
 
                              <div class="float-right">
@@ -51,10 +51,26 @@
                                             <td>{{ ++$i }}</td>
                                             
 										<td >{{ $detallesGenerale->id_pedido }}</td>
-										<td >{{ $detallesGenerale->placa_cabina }}</td>
-										<td >{{ $detallesGenerale->indicador_cabina }}</td>
-										<td >{{ $detallesGenerale->indicador_pb }}</td>
-										<td >{{ $detallesGenerale->indicador_palier }}</td>
+
+										<td >
+                                            @if ($detallesGenerale->placa_cabina === 0) No @endif
+                                            @if ($detallesGenerale->placa_cabina === 1) Sí @endif
+                                        </td>
+
+										<td >
+                                            @if ($detallesGenerale->indicador_cabina === 0) No @endif
+                                            @if ($detallesGenerale->indicador_cabina === 1) Sí @endif
+                                        </td>
+
+										<td >
+                                            @if ($detallesGenerale->indicador_pb === 0) No @endif
+                                            @if ($detallesGenerale->indicador_pb === 1) Sí @endif
+                                        </td>
+
+										<td >
+                                            @if ($detallesGenerale->indicador_palier === 0) No @endif
+                                            @if ($detallesGenerale->indicador_palier === 1) Sí @endif
+                                        </td>
 
                                             <td>
                                                 <form action="{{ route('detalles-generales.destroy', $detallesGenerale->id) }}" method="POST">

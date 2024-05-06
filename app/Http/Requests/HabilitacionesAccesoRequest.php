@@ -25,7 +25,7 @@ class HabilitacionesAccesoRequest extends FormRequest
 			'id_pedido' => 'required',
 			'parada' => 'required|string',
 			'salida_a' => 'required',
-			'salida_b' => 'required',
+			'salida_b' => '',
         ];
     }
 }

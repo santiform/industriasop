@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-05-2024 a las 10:13:26
+-- Tiempo de generación: 01-05-2024 a las 20:12:28
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -42,7 +42,7 @@ CREATE TABLE `accesos` (
 --
 
 INSERT INTO `accesos` (`id`, `id_tipo_funcionamiento`, `id_tipo_control`, `id_tipo_puerta`, `nombre`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 'Santiago', '2024-05-02 05:51:15', '2024-05-02 05:51:15');
+(2, 1, 1, 1, 'SANTIAGO', '2024-05-01 09:58:55', '2024-05-01 09:58:55');
 
 -- --------------------------------------------------------
 
@@ -85,20 +85,13 @@ CREATE TABLE `detalles_generales` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `detalles_generales`
---
-
-INSERT INTO `detalles_generales` (`id`, `id_pedido`, `placa_cabina`, `indicador_cabina`, `indicador_pb`, `indicador_palier`, `created_at`, `updated_at`) VALUES
-(2, 1, 0, 0, 0, 0, '2024-05-02 05:55:08', '2024-05-02 05:55:08');
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `detalles_puertas`
+-- Estructura de tabla para la tabla `detalles_puerta`
 --
 
-CREATE TABLE `detalles_puertas` (
+CREATE TABLE `detalles_puerta` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_pedido` bigint(20) UNSIGNED NOT NULL,
   `id_tipo_funcionamiento` bigint(20) UNSIGNED NOT NULL,
@@ -110,33 +103,6 @@ CREATE TABLE `detalles_puertas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `detalles_puertas`
---
-
-INSERT INTO `detalles_puertas` (`id`, `id_pedido`, `id_tipo_funcionamiento`, `id_tipo_control`, `id_tipo_puerta`, `marca`, `voltaje`, `id_patin_retractil`, `created_at`, `updated_at`) VALUES
-(3, 1, 1, 1, 1, 'Toyota', '45V', 1, '2024-05-02 05:54:33', '2024-05-02 05:54:33');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `estados_pedidos`
---
-
-CREATE TABLE `estados_pedidos` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `nombre` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `estados_pedidos`
---
-
-INSERT INTO `estados_pedidos` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
-(1, 'Solicitud', '2024-05-01 07:50:05', '2024-05-01 07:50:09');
 
 -- --------------------------------------------------------
 
@@ -157,10 +123,10 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `habilitaciones_accesos`
+-- Estructura de tabla para la tabla `habilitaciones_acceso`
 --
 
-CREATE TABLE `habilitaciones_accesos` (
+CREATE TABLE `habilitaciones_acceso` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_pedido` bigint(20) UNSIGNED NOT NULL,
   `parada` varchar(255) NOT NULL,
@@ -234,9 +200,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (10, '2024_05_01_035627_accesos', 2),
 (11, '2024_05_01_035727_habilitaciones_acceso', 2),
 (12, '2024_05_01_035927_tipos_obras', 2),
-(13, '2024_05_01_040021_detalles_generales', 2),
-(14, '2024_05_02_074039_estados_pedidos', 3),
-(15, '2024_05_02_074617_estados_pedidos', 4);
+(13, '2024_05_01_040021_detalles_generales', 2);
 
 -- --------------------------------------------------------
 
@@ -263,7 +227,6 @@ CREATE TABLE `pedidos` (
   `id_tipo_control` bigint(20) UNSIGNED NOT NULL,
   `id_tipo_puerta` bigint(20) UNSIGNED NOT NULL,
   `id_acceso` bigint(20) UNSIGNED NOT NULL,
-  `id_estado` bigint(20) UNSIGNED NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `telefono` varchar(255) NOT NULL,
@@ -271,13 +234,6 @@ CREATE TABLE `pedidos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `pedidos`
---
-
-INSERT INTO `pedidos` (`id`, `id_tipo_obra`, `id_tipo_funcionamiento`, `id_tipo_control`, `id_tipo_puerta`, `id_acceso`, `id_estado`, `nombre`, `email`, `telefono`, `direccion_obra`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 1, 1, 1, 'DIVOX', 'santiform@gmail.com', '23951013', 'Francisco Miranda 2859', '2024-05-02 05:52:43', '2024-05-02 05:52:43');
 
 -- --------------------------------------------------------
 
@@ -299,15 +255,17 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('Ag8vwlIvXD2mKAax6YjjwL4oNwuvLNcl9335Wdv7', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiMVF4NGk2UjVXcXZpWFR0bk9xcTFFdXczZWcyb2pqdFVJa1N4VlI0SCI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ0OiJodHRwOi8vbG9jYWxob3N0L2luZHVzdHJpYXNvcC9wdWJsaWMvcGVkaWRvcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzE0NjM2NDExO319', 1714637105);
+('1BtN3PXeNoTIUAGJwXZv7FbfeFNvSCRF7zPMe7fc', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoiemthSERZUFlvMmVreGk0U1h2M080SzZLZTB5VllZa0I0MnFzSVZNQSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ0OiJodHRwOi8vbG9jYWxob3N0L2luZHVzdHJpYXNvcC9wdWJsaWMvYWNjZXNvcyI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzE0NTg2OTUwO319', 1714586961),
+('5S3Zk5qHT3smfVrYCo4zi6MhOdDlNUru7tqKaYXW', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoibExwN05SNkJLTUptWWd6NFFmZXJZRWVoZFN6aW0zbVlHRXJKZUtXQiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDQ6Imh0dHA6Ly9sb2NhbGhvc3QvaW5kdXN0cmlhc29wL3B1YmxpYy9hY2Nlc29zIjt9czozOiJ1cmwiO2E6MDp7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7czo0OiJhdXRoIjthOjE6e3M6MjE6InBhc3N3b3JkX2NvbmZpcm1lZF9hdCI7aToxNzE0NTM4MzU0O319', 1714549854),
+('WgPYLwTDrgWFRRJEOIAOJxlQot5JBbgS8D9NUsGB', 1, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoidTZnNFBzMlhlOUFva2VDbjJ0ZXZzdjVBV01SWkF0b1Y3QWEweDBHMSI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQyOiJodHRwOi8vbG9jYWxob3N0L2luZHVzdHJpYXNvcC9wdWJsaWMvbG9naW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6NDoiYXV0aCI7YToxOntzOjIxOiJwYXNzd29yZF9jb25maXJtZWRfYXQiO2k6MTcxNDU4Njk1MDt9fQ==', 1714586950);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipos_controles`
+-- Estructura de tabla para la tabla `tipos_control`
 --
 
-CREATE TABLE `tipos_controles` (
+CREATE TABLE `tipos_control` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_tipo_funcionamiento` bigint(20) UNSIGNED NOT NULL,
   `nombre` varchar(255) NOT NULL,
@@ -321,19 +279,19 @@ CREATE TABLE `tipos_controles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `tipos_controles`
+-- Volcado de datos para la tabla `tipos_control`
 --
 
-INSERT INTO `tipos_controles` (`id`, `id_tipo_funcionamiento`, `nombre`, `marca`, `voltaje`, `potencia`, `encoder`, `rescate`, `created_at`, `updated_at`) VALUES
-(1, 2, 'PROB', 'ASD', '35V', 'SD', 'ASD', 0, NULL, '2024-05-02 06:29:20');
+INSERT INTO `tipos_control` (`id`, `id_tipo_funcionamiento`, `nombre`, `marca`, `voltaje`, `potencia`, `encoder`, `rescate`, `created_at`, `updated_at`) VALUES
+(1, 1, 'PROB', 'ASD', '35V', 'SD', 'ASD', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipos_funcionamientos`
+-- Estructura de tabla para la tabla `tipos_funcionamiento`
 --
 
-CREATE TABLE `tipos_funcionamientos` (
+CREATE TABLE `tipos_funcionamiento` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -341,10 +299,10 @@ CREATE TABLE `tipos_funcionamientos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `tipos_funcionamientos`
+-- Volcado de datos para la tabla `tipos_funcionamiento`
 --
 
-INSERT INTO `tipos_funcionamientos` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
+INSERT INTO `tipos_funcionamiento` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
 (1, 'Hidraúlico', NULL, NULL),
 (2, 'Mecánico', NULL, NULL);
 
@@ -361,21 +319,13 @@ CREATE TABLE `tipos_obras` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `tipos_obras`
---
-
-INSERT INTO `tipos_obras` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
-(1, 'Renovación', '2024-05-01 23:41:56', '2024-05-01 23:41:56'),
-(2, 'Nueva', '2024-05-01 23:42:06', '2024-05-01 23:42:06');
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipos_patin_retractiles`
+-- Estructura de tabla para la tabla `tipos_patin_retractil`
 --
 
-CREATE TABLE `tipos_patin_retractiles` (
+CREATE TABLE `tipos_patin_retractil` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `tipo` varchar(255) NOT NULL,
   `voltaje` varchar(255) NOT NULL,
@@ -383,20 +333,13 @@ CREATE TABLE `tipos_patin_retractiles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Volcado de datos para la tabla `tipos_patin_retractiles`
---
-
-INSERT INTO `tipos_patin_retractiles` (`id`, `tipo`, `voltaje`, `created_at`, `updated_at`) VALUES
-(1, 'Semiautomático', '45V', '2024-05-02 05:54:20', '2024-05-02 05:54:26');
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tipos_puertas`
+-- Estructura de tabla para la tabla `tipos_puerta`
 --
 
-CREATE TABLE `tipos_puertas` (
+CREATE TABLE `tipos_puerta` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_tipo_funcionamiento` bigint(20) UNSIGNED NOT NULL,
   `id_tipo_control` bigint(20) UNSIGNED NOT NULL,
@@ -406,10 +349,10 @@ CREATE TABLE `tipos_puertas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `tipos_puertas`
+-- Volcado de datos para la tabla `tipos_puerta`
 --
 
-INSERT INTO `tipos_puertas` (`id`, `id_tipo_funcionamiento`, `id_tipo_control`, `nombre`, `created_at`, `updated_at`) VALUES
+INSERT INTO `tipos_puerta` (`id`, `id_tipo_funcionamiento`, `id_tipo_control`, `nombre`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, 'HEH', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -469,21 +412,15 @@ ALTER TABLE `detalles_generales`
   ADD KEY `id_pedido` (`id_pedido`);
 
 --
--- Indices de la tabla `detalles_puertas`
+-- Indices de la tabla `detalles_puerta`
 --
-ALTER TABLE `detalles_puertas`
+ALTER TABLE `detalles_puerta`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_pedido` (`id_pedido`,`id_tipo_funcionamiento`,`id_tipo_control`,`id_tipo_puerta`),
   ADD KEY `id_tipo_puerta` (`id_tipo_puerta`),
   ADD KEY `id_tipo_funcionamiento` (`id_tipo_funcionamiento`),
   ADD KEY `id_tipo_control` (`id_tipo_control`),
   ADD KEY `id_patin_retractil` (`id_patin_retractil`);
-
---
--- Indices de la tabla `estados_pedidos`
---
-ALTER TABLE `estados_pedidos`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `failed_jobs`
@@ -493,9 +430,9 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indices de la tabla `habilitaciones_accesos`
+-- Indices de la tabla `habilitaciones_acceso`
 --
-ALTER TABLE `habilitaciones_accesos`
+ALTER TABLE `habilitaciones_acceso`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_pedido` (`id_pedido`);
 
@@ -533,8 +470,7 @@ ALTER TABLE `pedidos`
   ADD KEY `id_tipo_obra` (`id_tipo_obra`),
   ADD KEY `id_tipo_puerta` (`id_tipo_puerta`),
   ADD KEY `id_tipo_control` (`id_tipo_control`),
-  ADD KEY `id_acceso` (`id_acceso`),
-  ADD KEY `id_estado` (`id_estado`);
+  ADD KEY `id_acceso` (`id_acceso`);
 
 --
 -- Indices de la tabla `sessions`
@@ -545,16 +481,16 @@ ALTER TABLE `sessions`
   ADD KEY `sessions_last_activity_index` (`last_activity`);
 
 --
--- Indices de la tabla `tipos_controles`
+-- Indices de la tabla `tipos_control`
 --
-ALTER TABLE `tipos_controles`
+ALTER TABLE `tipos_control`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_tipo_funcionamiento` (`id_tipo_funcionamiento`);
 
 --
--- Indices de la tabla `tipos_funcionamientos`
+-- Indices de la tabla `tipos_funcionamiento`
 --
-ALTER TABLE `tipos_funcionamientos`
+ALTER TABLE `tipos_funcionamiento`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -564,15 +500,15 @@ ALTER TABLE `tipos_obras`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `tipos_patin_retractiles`
+-- Indices de la tabla `tipos_patin_retractil`
 --
-ALTER TABLE `tipos_patin_retractiles`
+ALTER TABLE `tipos_patin_retractil`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `tipos_puertas`
+-- Indices de la tabla `tipos_puerta`
 --
-ALTER TABLE `tipos_puertas`
+ALTER TABLE `tipos_puerta`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_tipo_funcionamiento` (`id_tipo_funcionamiento`,`id_tipo_control`),
   ADD KEY `id_tipo_control` (`id_tipo_control`);
@@ -592,25 +528,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `accesos`
 --
 ALTER TABLE `accesos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `detalles_generales`
 --
 ALTER TABLE `detalles_generales`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `detalles_puertas`
+-- AUTO_INCREMENT de la tabla `detalles_puerta`
 --
-ALTER TABLE `detalles_puertas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `estados_pedidos`
---
-ALTER TABLE `estados_pedidos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `detalles_puerta`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `failed_jobs`
@@ -619,9 +549,9 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `habilitaciones_accesos`
+-- AUTO_INCREMENT de la tabla `habilitaciones_acceso`
 --
-ALTER TABLE `habilitaciones_accesos`
+ALTER TABLE `habilitaciones_acceso`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -634,42 +564,42 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tipos_controles`
+-- AUTO_INCREMENT de la tabla `tipos_control`
 --
-ALTER TABLE `tipos_controles`
+ALTER TABLE `tipos_control`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `tipos_funcionamientos`
+-- AUTO_INCREMENT de la tabla `tipos_funcionamiento`
 --
-ALTER TABLE `tipos_funcionamientos`
+ALTER TABLE `tipos_funcionamiento`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_obras`
 --
 ALTER TABLE `tipos_obras`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tipos_patin_retractiles`
+-- AUTO_INCREMENT de la tabla `tipos_patin_retractil`
 --
-ALTER TABLE `tipos_patin_retractiles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `tipos_patin_retractil`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tipos_puertas`
+-- AUTO_INCREMENT de la tabla `tipos_puerta`
 --
-ALTER TABLE `tipos_puertas`
+ALTER TABLE `tipos_puerta`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
@@ -686,9 +616,9 @@ ALTER TABLE `users`
 -- Filtros para la tabla `accesos`
 --
 ALTER TABLE `accesos`
-  ADD CONSTRAINT `accesos_ibfk_1` FOREIGN KEY (`id_tipo_control`) REFERENCES `tipos_controles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `accesos_ibfk_2` FOREIGN KEY (`id_tipo_puerta`) REFERENCES `tipos_puertas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `accesos_ibfk_3` FOREIGN KEY (`id_tipo_funcionamiento`) REFERENCES `tipos_funcionamientos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `accesos_ibfk_1` FOREIGN KEY (`id_tipo_control`) REFERENCES `tipos_control` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `accesos_ibfk_2` FOREIGN KEY (`id_tipo_puerta`) REFERENCES `tipos_puerta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `accesos_ibfk_3` FOREIGN KEY (`id_tipo_funcionamiento`) REFERENCES `tipos_funcionamiento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `detalles_generales`
@@ -697,44 +627,43 @@ ALTER TABLE `detalles_generales`
   ADD CONSTRAINT `detalles_generales_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `detalles_puertas`
+-- Filtros para la tabla `detalles_puerta`
 --
-ALTER TABLE `detalles_puertas`
-  ADD CONSTRAINT `detalles_puertas_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `detalles_puertas_ibfk_2` FOREIGN KEY (`id_tipo_puerta`) REFERENCES `tipos_puertas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `detalles_puertas_ibfk_3` FOREIGN KEY (`id_tipo_funcionamiento`) REFERENCES `tipos_funcionamientos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `detalles_puertas_ibfk_4` FOREIGN KEY (`id_tipo_control`) REFERENCES `tipos_controles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `detalles_puertas_ibfk_5` FOREIGN KEY (`id_patin_retractil`) REFERENCES `tipos_patin_retractiles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `detalles_puerta`
+  ADD CONSTRAINT `detalles_puerta_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `detalles_puerta_ibfk_2` FOREIGN KEY (`id_tipo_puerta`) REFERENCES `tipos_puerta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `detalles_puerta_ibfk_3` FOREIGN KEY (`id_tipo_funcionamiento`) REFERENCES `tipos_funcionamiento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `detalles_puerta_ibfk_4` FOREIGN KEY (`id_tipo_control`) REFERENCES `tipos_control` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `detalles_puerta_ibfk_5` FOREIGN KEY (`id_patin_retractil`) REFERENCES `tipos_patin_retractil` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `habilitaciones_accesos`
+-- Filtros para la tabla `habilitaciones_acceso`
 --
-ALTER TABLE `habilitaciones_accesos`
-  ADD CONSTRAINT `habilitaciones_accesos_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `habilitaciones_acceso`
+  ADD CONSTRAINT `habilitaciones_acceso_ibfk_1` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`id_tipo_puerta`) REFERENCES `tipos_puertas` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`id_tipo_control`) REFERENCES `tipos_controles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`id_tipo_puerta`) REFERENCES `tipos_puerta` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`id_tipo_control`) REFERENCES `tipos_control` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `pedidos_ibfk_3` FOREIGN KEY (`id_acceso`) REFERENCES `accesos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `pedidos_ibfk_4` FOREIGN KEY (`id_tipo_obra`) REFERENCES `tipos_obras` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `pedidos_ibfk_5` FOREIGN KEY (`id_tipo_funcionamiento`) REFERENCES `tipos_funcionamientos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `pedidos_ibfk_6` FOREIGN KEY (`id_estado`) REFERENCES `estados_pedidos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `pedidos_ibfk_5` FOREIGN KEY (`id_tipo_funcionamiento`) REFERENCES `tipos_funcionamiento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tipos_controles`
+-- Filtros para la tabla `tipos_control`
 --
-ALTER TABLE `tipos_controles`
-  ADD CONSTRAINT `tipos_controles_ibfk_1` FOREIGN KEY (`id_tipo_funcionamiento`) REFERENCES `tipos_funcionamientos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `tipos_control`
+  ADD CONSTRAINT `tipos_control_ibfk_1` FOREIGN KEY (`id_tipo_funcionamiento`) REFERENCES `tipos_funcionamiento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Filtros para la tabla `tipos_puertas`
+-- Filtros para la tabla `tipos_puerta`
 --
-ALTER TABLE `tipos_puertas`
-  ADD CONSTRAINT `tipos_puertas_ibfk_1` FOREIGN KEY (`id_tipo_control`) REFERENCES `tipos_controles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `tipos_puertas_ibfk_2` FOREIGN KEY (`id_tipo_funcionamiento`) REFERENCES `tipos_funcionamientos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `tipos_puerta`
+  ADD CONSTRAINT `tipos_puerta_ibfk_1` FOREIGN KEY (`id_tipo_control`) REFERENCES `tipos_control` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `tipos_puerta_ibfk_2` FOREIGN KEY (`id_tipo_funcionamiento`) REFERENCES `tipos_funcionamiento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

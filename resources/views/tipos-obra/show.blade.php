@@ -13,9 +13,6 @@
                         <div class="float-left">
                             <span class="card-title">{{ __('Show') }} Tipos Obra</span>
                         </div>
-                        <div class="float-right">
-                            <a class="btn btn-primary btn-sm" href="{{ route('tipos-obras.index') }}"> {{ __('Back') }}</a>
-                        </div>
                     </div>
 
                     <div class="card-body bg-white">

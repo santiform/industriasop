@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Estados Pedidos') }}
+                                <i class="fas fa-battery-half"></i> Estados de pedidos
                             </span>
 
                              <div class="float-right">
                                 <a href="{{ route('estados-pedidos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  <i class="fas fa-plus-circle"></i> Nuevo registro
                                 </a>
                               </div>
                         </div>
@@ -31,20 +31,20 @@
 
                     <div class="card-body bg-white">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover">
+                            <table class="table table-striped table-hover table-bordered">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
                                         
 									<th >Nombre</th>
 
-                                        <th></th>
+                                        <th>Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($estadosPedidos as $estadosPedido)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $estadosPedido->id }}</td>
                                             
 										<td >{{ $estadosPedido->nombre }}</td>
 

@@ -32,16 +32,9 @@
 
 {{-- Create a common footer --}}
 
-@section('footer')
-    <div class="float-right">
-        Version: {{ config('app.version', '0.0.5') }}
-    </div>
 
-    <strong>
-        <a href="{{ config('app.company_url', '#') }}">
-            {{ config('app.company_name', 'Industrias OP Software') }}
-        </a>
-    </strong>
+
+@section('footer')
 @stop
 
 {{-- Add common Javascript/Jquery code --}}
@@ -77,7 +70,7 @@
     .card {
         margin: 0 auto; /* Establece márgenes automáticos */
         margin-top: 1rem!important;
-        margin-bottom: 6.8rem!important;
+        margin-bottom: 7rem!important;
     }
 
     .card-header {
@@ -115,6 +108,10 @@
     .form-group select:focus {
         border-color: #C7C7C7!important;
         outline: 0!important;
+    }
+
+    .form-group select option {
+        background-color: #1e1e1e!important;
     }
         
     .bg-white {

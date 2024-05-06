@@ -13,7 +13,7 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Tipos Patin Retractiles') }}
+                                <i class="fas fa-unlock-alt"></i> Tipos de Patines retractiles
                             </span>
 
                              <div class="float-right">
