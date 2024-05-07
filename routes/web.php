@@ -36,3 +36,8 @@ Route::middleware(['auth'])->group(function () {
 });
 
 Auth::routes();
+
+    
+    Route::get('/nuevo', [App\Http\Controllers\NuevoPedidoController::class, 'newOrder'])->name('newOrder');
+
+    Route::post('/nuevo/paso2', [App\Http\Controllers\NuevoPedidoController::class, 'paso2'])->name('newPaso2');

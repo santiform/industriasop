@@ -100,21 +100,17 @@ class PedidoController extends Controller
      */
     public function edit($id): View
     {   
-        /* $pedidos = DB::table('pedidos')
-            ->join('tipos_obras', 'pedidos.id_tipo_obra', '=', 'tipos_obras.id')
-            ->join('tipos_funcionamientos', 'pedidos.id_tipo_funcionamiento', '=', 'tipos_funcionamientos.id')
-            ->join('tipos_controles', 'pedidos.id_tipo_control', '=', 'tipos_controles.id')
-            ->join('tipos_puertas', 'pedidos.id_tipo_puerta', '=', 'tipos_puertas.id')
-            ->join('accesos', 'pedidos.id_acceso', '=', 'accesos.id')
-            ->join('estados_pedidos', 'pedidos.id_estado', '=', 'estados_pedidos.id')
-            ->select('pedidos.*', 'tipos_funcionamientos.nombre AS tipo_funcionamiento',
-                'tipos_controles.nombre AS tipo_control', 'tipos_puertas.nombre AS tipo_puerta'
-                'accesos.nombre AS tipo_puerta')
-            ->get(); // dejo esto como referencia */
-
         $pedido = Pedido::find($id);
 
-        return view('pedido.edit', compact('pedido'));
+         $tiposObras = DB::table('tipos_obras')->get();
+        $tiposFuncionamientos = DB::table('tipos_funcionamientos')->get();
+        $tiposControles = DB::table('tipos_controles')->get();
+        $tiposPuertas = DB::table('tipos_puertas')->get();  
+        $accesos = DB::table('accesos')->get();
+        $estados = DB::table('estados_pedidos')->get();    
+
+        return view('pedido.edit', compact('pedido', 'tiposObras', 'tiposFuncionamientos', 'tiposControles',
+                    'tiposPuertas', 'accesos', 'estados'));
     }
 
     /**

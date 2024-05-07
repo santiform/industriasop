@@ -35,6 +35,15 @@
 
 
 @section('footer')
+    <div class="float-right">
+        Version: {{ config('app.version', '0.1.8') }}
+    </div>
+
+    <strong>
+        <a href="{{ config('app.company_url', '#') }}">
+            {{ config('app.company_name', 'Industrias OP Software') }}
+        </a>
+    </strong>
 @stop
 
 {{-- Add common Javascript/Jquery code --}}
@@ -70,7 +79,7 @@
     .card {
         margin: 0 auto; /* Establece márgenes automáticos */
         margin-top: 1rem!important;
-        margin-bottom: 7rem!important;
+        margin-bottom: 5rem!important;
     }
 
     .card-header {
