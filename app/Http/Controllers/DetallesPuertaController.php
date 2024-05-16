@@ -19,13 +19,11 @@ class DetallesPuertaController extends Controller
     public function index(Request $request): View
     {
         $detallesPuertas = DB::table('detalles_puertas')
-           ->join('tipos_funcionamientos', 'detalles_puertas.id_tipo_funcionamiento', '=', 'tipos_funcionamientos.id')
             ->join('tipos_controles', 'detalles_puertas.id_tipo_control', '=', 'tipos_controles.id')
             ->join('tipos_puertas', 'detalles_puertas.id_tipo_puerta', '=', 'tipos_puertas.id')
             ->join('tipos_patin_retractiles', 'detalles_puertas.id_patin_retractil', '=', 'tipos_patin_retractiles.id')
-            ->select('detalles_puertas.*', 'tipos_funcionamientos.nombre AS tipo_funcionamiento',
-                'tipos_controles.nombre AS tipo_control', 'tipos_puertas.nombre AS tipo_puerta',
-                'tipos_patin_retractiles.tipo AS patin_retractil')
+            ->select('detalles_puertas.*', 'tipos_controles.nombre AS tipo_control', 'tipos_puertas.nombre AS tipo_puerta',
+                'tipos_patin_retractiles.voltaje AS patin_voltaje')
             ->get();
 
         

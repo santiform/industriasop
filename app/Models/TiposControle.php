@@ -36,7 +36,7 @@ class TiposControle extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['id_tipo_funcionamiento', 'nombre', 'marca', 'voltaje', 'potencia', 'encoder', 'rescate'];
+    protected $fillable = ['id_tipo_funcionamiento', 'nombre'];
 
 
     /**

@@ -22,7 +22,6 @@ class TiposPuertaRequest extends FormRequest
     public function rules(): array
     {
         return [
-			'id_tipo_funcionamiento' => 'required',
 			'id_tipo_control' => 'required',
 			'nombre' => 'required|string',
         ];

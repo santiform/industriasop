@@ -8,15 +8,12 @@ use Illuminate\Database\Eloquent\Model;
  * Class TiposPuerta
  *
  * @property $id
- * @property $id_tipo_funcionamiento
  * @property $id_tipo_control
  * @property $nombre
  * @property $created_at
  * @property $updated_at
  *
  * @property TiposControle $tiposControle
- * @property TiposFuncionamiento $tiposFuncionamiento
- * @property Acceso[] $accesos
  * @property DetallesPuerta[] $detallesPuertas
  * @property Pedido[] $pedidos
  * @package App
@@ -32,7 +29,7 @@ class TiposPuerta extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['id_tipo_funcionamiento', 'id_tipo_control', 'nombre'];
+    protected $fillable = ['id_tipo_control', 'nombre'];
 
 
     /**
@@ -41,22 +38,6 @@ class TiposPuerta extends Model
     public function tiposControle()
     {
         return $this->belongsTo(\App\Models\TiposControle::class, 'id_tipo_control', 'id');
-    }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function tiposFuncionamiento()
-    {
-        return $this->belongsTo(\App\Models\TiposFuncionamiento::class, 'id_tipo_funcionamiento', 'id');
-    }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function accesos()
-    {
-        return $this->hasMany(\App\Models\Acceso::class, 'id', 'id_tipo_puerta');
     }
     
     /**

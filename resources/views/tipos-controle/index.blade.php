@@ -38,12 +38,6 @@
                                         
 									<th >Id Tipo Funcionamiento</th>
 									<th >Nombre</th>
-									<th >Marca</th>
-									<th >Voltaje</th>
-									<th >Potencia</th>
-									<th >Encoder</th>
-									<th >Rescate</th>
-
                                         <th>Acción</th>
                                     </tr>
                                 </thead>
@@ -54,12 +48,6 @@
                                             
 										<td >{{ $tiposControle->tipo_funcionamiento }}</td>
 										<td >{{ $tiposControle->nombre }}</td>
-										<td >{{ $tiposControle->marca }}</td>
-										<td >{{ $tiposControle->voltaje }}</td>
-										<td >{{ $tiposControle->potencia }}</td>
-										<td >{{ $tiposControle->encoder }}</td>
-										<td >{{ $tiposControle->rescate }}</td>
-
                                             <td>
                                                 <form action="{{ route('tipos-controles.destroy', $tiposControle->id) }}" method="POST">
                                                     <a class="btn btn-sm btn-primary " href="{{ route('tipos-controles.show', $tiposControle->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>

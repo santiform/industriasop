@@ -13,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                <i class="fas fa-door-open"></i> {{ __('Tipos de puertas') }}
+                                {{ __('Tipos Puertas') }}
                             </span>
 
                              <div class="float-right">
                                 <a href="{{ route('tipos-puertas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  <i class="fas fa-plus-circle"></i> Nuevo registro
+                                  {{ __('Create New') }}
                                 </a>
                               </div>
                         </div>
@@ -31,25 +31,23 @@
 
                     <div class="card-body bg-white">
                         <div class="table-responsive">
-                            <table class="table table-striped table-hover table-bordered">
+                            <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
                                         
-									<th >Id Tipo Funcionamiento</th>
 									<th >Id Tipo Control</th>
 									<th >Nombre</th>
 
-                                        <th>Acción</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($tiposPuertas as $tiposPuerta)
                                         <tr>
-                                            <td>{{ $tiposPuerta->id }}</td>
+                                            <td>{{ ++$i }}</td>
                                             
-										<td >{{ $tiposPuerta->tipo_funcionamiento }}</td>
-										<td >{{ $tiposPuerta->tipo_control }}</td>
+										<td >{{ $tiposPuerta->id_tipo_control }}</td>
 										<td >{{ $tiposPuerta->nombre }}</td>
 
                                             <td>
@@ -68,6 +66,7 @@
                         </div>
                     </div>
                 </div>
+                {!! $tiposPuertas->withQueryString()->links() !!}
             </div>
         </div>
     </div>

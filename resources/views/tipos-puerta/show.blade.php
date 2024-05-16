@@ -13,18 +13,16 @@
                         <div class="float-left">
                             <span class="card-title">{{ __('Show') }} Tipos Puerta</span>
                         </div>
-                        
+                        <div class="float-right">
+                            <a class="btn btn-primary btn-sm" href="{{ route('tipos-puertas.index') }}"> {{ __('Back') }}</a>
+                        </div>
                     </div>
 
                     <div class="card-body bg-white">
                         
                                 <div class="form-group mb-2 mb20">
-                                    <strong>Tipo Funcionamiento:</strong>
-                                    {{ $tiposPuerta->tipo_funcionamiento }}
-                                </div>
-                                <div class="form-group mb-2 mb20">
-                                    <strong>Tipo Control:</strong>
-                                    {{ $tiposPuerta->tipo_control }}
+                                    <strong>Id Tipo Control:</strong>
+                                    {{ $tiposPuerta->id_tipo_control }}
                                 </div>
                                 <div class="form-group mb-2 mb20">
                                     <strong>Nombre:</strong>
