@@ -1,82 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulario</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-      margin: 0;
-      padding: 0;
-    }
-    .formulario {
-      max-width: 600px;
-      margin: 50px auto;
-      padding: 35px;
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h1{
-      margin: 0;
-    }
-    .title {
-      text-align: center;
-      color: #333;
-    }
-    .titleSection {
-      margin-top: 30px;
-      color: #555;
-    }
-    hr {
-      border: 0;
-      height: 1px;
-      background-color: #e0e0e0;
-      margin: 20px 0;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      color: #555;
-    }
-    .form-group input, .form-group select {
-      width: calc(100% - 22px);
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      outline: none;
-      box-sizing: border-box;
-    }
-    .form-group input:focus, .form-group select:focus {
-      border-color: #007bff;
-    }
-    .btnNext {
-      text-align: center;
-    }
-    .btnNext button {
-      background-color: #007bff;
-      color: #fff;
-      padding: 10px 20px;
-      font-size: 16px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .btnNext button:hover {
-      background-color: #0056b3;
-    }
-    .btnNext i {
-      margin-left: 5px;
-    }
-  </style>
-</head>
-<body>
+<?php include '../resources/views/new/includes/header.php'; ?>
 
 <div class="formulario">
   <h1 class="title">Industrias <b>OP</b></h1>
@@ -135,6 +57,4 @@
   </form>
 </div>
 
-</body>
-</html>
-
+<?php include '../resources/views/new/includes/footer.php'; ?>
