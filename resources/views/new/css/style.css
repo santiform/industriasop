@@ -30,7 +30,7 @@
       margin: 20px 0;
     }
     .form-group {
-      margin-block: 5.5rem;
+      margin-block: 3.5rem;
     }
     .form-group label {
       display: block;
@@ -40,7 +40,9 @@
       font-size: 18px;
     }
     .form-group p {
-      margin
+      margin-block: 0.4rem;
+      font-stsyle: italic;
+      font-size: 15px;
     }
     .form-group input, .form-group select {
       width: calc(100% - 22px);

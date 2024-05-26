@@ -1,32 +1,5 @@
 <?php include '../resources/views/new/includes/header.php'; ?>
 
-    <script>
-        function mostrarInputOtro(selectId) {
-            var select = document.getElementById(selectId);
-            var otroInput = select.nextElementSibling;
-
-            if (select.value === "otra") {
-                otroInput.style.display = "block";
-            } else {
-                otroInput.style.display = "none";
-                otroInput.value = ""; // Establece el valor del campo adicional como vacío
-            }
-        }
-
-        function prepararEnvio(form) {
-            var camposAdicionales = form.getElementsByClassName("campo-adicional");
-
-            for (var i = 0; i < camposAdicionales.length; i++) {
-                var campo = camposAdicionales[i];
-                var select = campo.previousElementSibling;
-                
-                if (campo.style.display !== "none") {
-                    select.value = campo.value; // Asigna el valor del campo adicional al valor del select
-                }
-            }
-        }
-    </script>
-
 <div class="formulario">
   <h1 class="title">Industrias <b>OP</b></h1>
 
@@ -47,8 +20,8 @@
 
 
     <div class="form-group">
-        <label for="tipo_funcionamiento">Tipo de control</label>
-        <select id="tipo_funcionamiento" name="tipo_funcionamiento">
+        <label for="tipo_control">Tipo de control</label>
+        <select id="tipo_control" name="tipo_control">
             <option disabled selected>Seleccione una opción</option>
             @foreach($tipos_controles as $tipo_control)
                 <option value="{{ $tipo_control->id }}">{{ $tipo_control->nombre }}</option>
@@ -106,5 +79,6 @@
   </form>
 </div>
 
+<script src="../../resources/views/new/js/opcionOtra.js"></script>
 
 <?php include '../resources/views/new/includes/footer.php'; ?>

@@ -52,17 +52,40 @@ class NuevoPedidoController extends Controller
         $tipo_obra = $request->input('tipo_obra');
         $tipo_funcionamiento = $request->input('tipo_funcionamiento');
 
+        $tipo_control = $request->input('tipo_control');
+        $motor_potencia = $request->input('motor_potencia');
+        $motor_marca = $request->input('motor_marca');
+        $motor_voltaje = $request->input('motor_voltaje');
 
-        $tipo_control = $request->input('tipo_control');      
+        if ($tipo_funcionamiento == 1) {    
+            return view('new.paso3hidraulico', [
+                'email_empresa' => $email_empresa,
+                'nombre_empresa' => $nombre_empresa,
+                'direccion_obra' => $direccion_obra,
+                'tipo_obra' => $tipo_obra,
+                'tipo_funcionamiento' => $tipo_funcionamiento,
 
-        return view('new.paso2', [
-            'email_empresa' => $email_empresa,
-            'nombre_empresa' => $nombre_empresa,
-            'direccion_obra' => $direccion_obra,
-            'tipo_obra' => $tipo_obra,
-            'tipo_funcionamiento' => $tipo_funcionamiento,
-            'tipos_controles' => $tipos_controles,
-        ]);
+                'tipo_control' => $tipo_control,
+                'motor_potencia' => $motor_potencia,
+                'motor_marca' => $motor_marca,
+                'motor_voltaje' => $motor_voltaje,
+            ]);
+        } 
+
+        if ($tipo_funcionamiento == 2) {    
+            return view('new.paso3mecanico', [
+                'email_empresa' => $email_empresa,
+                'nombre_empresa' => $nombre_empresa,
+                'direccion_obra' => $direccion_obra,
+                'tipo_obra' => $tipo_obra,
+                'tipo_funcionamiento' => $tipo_funcionamiento,
+
+                'tipo_control' => $tipo_control,
+                'motor_potencia' => $motor_potencia,
+                'motor_marca' => $motor_marca,
+                'motor_voltaje' => $motor_voltaje,
+            ]);
+        }  
 
     }
 
