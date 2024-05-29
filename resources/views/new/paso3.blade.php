@@ -5,7 +5,7 @@
 
   <hr>
 
-  <h2 class="titleSection">Puertas</h2>
+  <h2 class="titleSection">Encoder</h2>
 
   <form action="{{ route('newPaso4') }}" method="POST">
     @csrf

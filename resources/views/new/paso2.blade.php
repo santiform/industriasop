@@ -1,11 +1,47 @@
-<?php include '../resources/views/new/includes/header.php'; ?>
+<?php include '../resources/views/new/includes/header.blade.php'; ?>
+
+<div class="container">
+
+  <div class="columna izquierda"><div class="timeline">
+
+        <div class="paso paso-azul">
+          <div class="circle circle-azul">✔</div> Datos básicos
+        </div>
+
+        <div class="linea linea-azul">|</div>
+
+        <div class="paso paso-azul">
+            <div class="circle circle-azul">2</div> Control
+        </div>
+
+        <div class="linea linea-gris">|</div>
+
+        <div class="paso paso-gris">
+            <div class="circle circle-gris">3</div> Puertas
+        </div>
+
+        <div class="linea linea-gris">|</div>
+
+        <div class="paso paso-gris">
+            <div class="circle circle-gris">4</div> Detalles generales
+        </div>
+
+        <div class="linea linea-gris">|</div>
+
+        <div class="paso paso-gris">
+            <div class="circle circle-gris">5</div> Confirmación
+        </div>
+
+    </div>
+  </div>
+
+
+  <div class="columna derecha">
+
 
 <div class="formulario">
-  <h1 class="title">Industrias <b>OP</b></h1>
 
-  <hr>
-
-  <h2 class="titleSection">Tipo de control y Motor</h2>
+  <h2 class="titleSection"> <div class="div-paso">2</div> Tipo de control y Motor</h2>  
 
   <form action="{{ route('newPaso3') }}" method="POST">
     @csrf
@@ -72,13 +108,27 @@
 </div>
 
 
-    <div class="btnNext">
-      <button type="submit">Siguiente <i class="arrow-right">➔</i></button>
-    </div>
+<div class="container">
+          <div class="boton-izquierdo">
+            <div class="btnPrev">
+              <button type="button" onclick="window.history.back()">Anterior</button>
+            </div>
+          </div>
+
+          <div class="boton-derecho">
+            <div class="btnNext">
+              <button type="submit">Siguiente</button>
+            </div>
+          </div>
+        </div>  
     
   </form>
 </div>
 
+</div>
+
+</div>
+
 <script src="../../resources/views/new/js/opcionOtra.js"></script>
 
-<?php include '../resources/views/new/includes/footer.php'; ?>
+<?php include '../resources/views/new/includes/footer.blade.php'; ?>
