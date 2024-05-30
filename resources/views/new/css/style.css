@@ -67,9 +67,10 @@
       margin-bottom: 8px;
       margin-left: 1rem;
       color: #555;
-      font-weight: 600;
+      font-weight: 500;
       font-size: 16px;
       font-family:  "Inter", sans-serif;
+      color: black;
     }
     .form-group p {
       margin-block: 0.4rem;
