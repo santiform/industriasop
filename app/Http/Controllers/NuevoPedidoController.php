@@ -57,8 +57,8 @@ class NuevoPedidoController extends Controller
         $motor_marca = $request->input('motor_marca');
         $motor_voltaje = $request->input('motor_voltaje');
 
-        if ($tipo_funcionamiento == 1) {    
-            return view('new.paso3hidraulico', [
+        if ($tipo_control == 8 || $tipo_control == 9|| $tipo_control == 10) {    
+            return view('new.paso3', [
                 'email_empresa' => $email_empresa,
                 'nombre_empresa' => $nombre_empresa,
                 'direccion_obra' => $direccion_obra,
@@ -71,9 +71,8 @@ class NuevoPedidoController extends Controller
                 'motor_voltaje' => $motor_voltaje,
             ]);
         } 
-
-        if ($tipo_funcionamiento == 2) {    
-            return view('new.paso3mecanico', [
+          
+            return view('new.paso4', [
                 'email_empresa' => $email_empresa,
                 'nombre_empresa' => $nombre_empresa,
                 'direccion_obra' => $direccion_obra,
@@ -85,7 +84,13 @@ class NuevoPedidoController extends Controller
                 'motor_marca' => $motor_marca,
                 'motor_voltaje' => $motor_voltaje,
             ]);
-        }  
+        
+
+    }
+
+    public function paso4(Request $request) {
+         $encoder = $request->input('motor_voltaje');
+        dd($encoder);
 
     }
 
