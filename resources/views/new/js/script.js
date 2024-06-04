@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Pedir al usuario la cantidad de pisos y subsuelos
-  var totalPisos = parseInt(prompt("Ingrese la cantidad de pisos:"));
-  var totalSubsuelos = parseInt(prompt("Ingrese la cantidad de subsuelos:"));
 
   // Crear una matriz para almacenar el estado de los botones A y B
   var estadoBotonesMatriz = [];
@@ -119,4 +117,16 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+
+
+
+
+ // Obtener el formulario
+    var formulario = document.getElementById('form_habilitaciones'); // Reemplaza 'tu_formulario' con el ID de tu formulario
+
+    // Agregar un evento 'submit' al formulario para prevenir el envío automático
+    formulario.addEventListener('submit', function(event) {
+        event.preventDefault(); // Evitar el envío automático del formulario
+        // Agrega cualquier lógica adicional que necesites aquí
+    });
 });

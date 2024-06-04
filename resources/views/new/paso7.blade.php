@@ -11,13 +11,13 @@
         <div class="linea linea-azul">|</div>
 
         <div class="paso paso-azul">
-            <div class="circle circle-azul">2</div> Control
+            <div class="circle circle-azul">✔</div> Control
         </div>
 
-        <div class="linea linea-gris">|</div>
+        <div class="linea linea-azul">|</div>
 
-        <div class="paso paso-gris">
-            <div class="circle circle-gris">3</div> Puertas
+        <div class="paso paso-azul">
+            <div class="circle circle-azul">3</div> Puertas
         </div>
 
         <div class="linea linea-gris">|</div>
@@ -41,9 +41,9 @@
 
 <div class="formulario">
 
-  <h2 class="titleSection"> <div class="div-paso">2</div> Tipo de control y Motor</h2>  
+  <h2 class="titleSection"> <div class="div-paso">3</div> Accesos</h2>  
 
-  <form action="{{ route('newPaso4') }}" method="POST" onsubmit="prepararEnvio(this)">
+  <form action="{{ route('newPaso8') }}" method="POST" onsubmit="prepararEnvio(this)">
     @csrf
 
 
@@ -59,21 +59,32 @@
     <input type="hidden" name="motor_potencia" value="<?php echo htmlspecialchars($motor_potencia, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_marca" value="<?php echo htmlspecialchars($motor_marca, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_voltaje" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="motor_encoder" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
+
+    <!-- este grupo en  la bd se guarda en la tabla "tipos_puertas" -->
+    <input type="hidden" name="tipo_puerta" value="<?php echo htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8'); ?>">
+
+    <!-- este grupo en  la bd se guarda en la tabla "detalles_puertas" -->
+    <input type="hidden" name="puerta_marca" value="<?php echo htmlspecialchars($puerta_marca, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="puerta_voltaje" value="<?php echo htmlspecialchars($puerta_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
 
 
 
     <div class="form-group">
-        <label for="motor_encoder">Encoder</label>
-        <select id="motor_encoder" name="motor_encoder" class="form-control">
+        <label for="accesos">Cantidad de accesos</label>
+        <select id="accesos" name="accesos" class="form-control">
             <option disabled selected>Seleccione una opción</option>
-            <option value="ECN 1313">ECN 1313</option>
-            <option value="otra">Otro...</option>
+            <option value="SIMPLE">SIMPLE</option>
+            <option value="DOBLE">DOBLE</option>
+            <option value="TRIPLE">TRIPLE</option>
+            <option value="otra">Otras...</option>
         </select>
         <div class="campo-adicional" style="display: none;">
-            <label for="motor_encoder">Ingrese un valor personalizado</label>
-            <input type="text" id="motor_encoder" name="motor_encoder" class="form-control">
+            <label for="accesos">Ingrese un valor personalizado</label>
+            <input type="text" id="accesos" name="accesos" class="form-control">
         </div>
     </div>
+
 
 
 

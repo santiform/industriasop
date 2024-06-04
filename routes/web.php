@@ -45,3 +45,13 @@ Auth::routes();
     Route::post('/nuevo/paso3', [App\Http\Controllers\NuevoPedidoController::class, 'paso3'])->name('newPaso3');
 
     Route::post('/nuevo/paso4', [App\Http\Controllers\NuevoPedidoController::class, 'paso4'])->name('newPaso4');
+
+    Route::post('/nuevo/paso5', [App\Http\Controllers\NuevoPedidoController::class, 'paso5'])->name('newPaso5');
+
+    Route::post('/nuevo/paso6', [App\Http\Controllers\NuevoPedidoController::class, 'paso6'])->name('newPaso6');
+
+    Route::post('/nuevo/paso7', [App\Http\Controllers\NuevoPedidoController::class, 'paso7'])->name('newPaso7');
+
+    Route::post('/nuevo/paso8', [App\Http\Controllers\NuevoPedidoController::class, 'paso8'])->name('newPaso8');
+
+    Route::post('/nuevo/paso9', [App\Http\Controllers\NuevoPedidoController::class, 'paso9'])->name('newPaso9');

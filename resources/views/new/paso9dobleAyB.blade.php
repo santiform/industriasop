@@ -11,13 +11,13 @@
         <div class="linea linea-azul">|</div>
 
         <div class="paso paso-azul">
-            <div class="circle circle-azul">2</div> Control
+            <div class="circle circle-azul">✔</div> Control
         </div>
 
-        <div class="linea linea-gris">|</div>
+        <div class="linea linea-azul">|</div>
 
-        <div class="paso paso-gris">
-            <div class="circle circle-gris">3</div> Puertas
+        <div class="paso paso-azul">
+            <div class="circle circle-azul">3</div> Puertas
         </div>
 
         <div class="linea linea-gris">|</div>
@@ -38,12 +38,22 @@
 
   <div class="columna derecha">
 
+  <script>
+      var totalPisosAll = {{ $paradas }};
+      var totalSubsuelos = {{ $subsuelos }};
+      var totalPisos = totalPisosAll - totalSubsuelos - 1;      
+    </script>
 
-<div class="formulario">
 
-  <h2 class="titleSection"> <div class="div-paso">2</div> Tipo de control y Motor</h2>  
+    
 
-  <form action="{{ route('newPaso4') }}" method="POST" onsubmit="prepararEnvio(this)">
+
+
+<div class="">
+
+  <h2 class="titleSection"> <div class="div-paso">3</div> Accesos</h2>  
+
+  <form class="formulario" id="form_habilitaciones" action="{{ route('newPaso8') }}" method="POST">
     @csrf
 
 
@@ -59,22 +69,20 @@
     <input type="hidden" name="motor_potencia" value="<?php echo htmlspecialchars($motor_potencia, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_marca" value="<?php echo htmlspecialchars($motor_marca, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_voltaje" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="motor_encoder" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
 
+    <!-- este grupo en  la bd se guarda en la tabla "tipos_puertas" -->
+    <input type="hidden" name="tipo_puerta" value="<?php echo htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8'); ?>">
 
+    <!-- este grupo en  la bd se guarda en la tabla "detalles_puertas" -->
+    <input type="hidden" name="puerta_marca" value="<?php echo htmlspecialchars($puerta_marca, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="puerta_voltaje" value="<?php echo htmlspecialchars($puerta_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
 
-    <div class="form-group">
-        <label for="motor_encoder">Encoder</label>
-        <select id="motor_encoder" name="motor_encoder" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
-            <option value="ECN 1313">ECN 1313</option>
-            <option value="otra">Otro...</option>
-        </select>
-        <div class="campo-adicional" style="display: none;">
-            <label for="motor_encoder">Ingrese un valor personalizado</label>
-            <input type="text" id="motor_encoder" name="motor_encoder" class="form-control">
-        </div>
-    </div>
+    
 
+  
+    <div id="botonera" ></div>
+  
 
 
 
@@ -99,6 +107,6 @@
 
 </div>
 
-<script src="../../resources/views/new/js/opcionOtra.js"></script>
+<script src="http://localhost/industriasop/resources/views/new/js/script.js"></script>
 
 <?php include '../resources/views/new/includes/footer.blade.php'; ?>
