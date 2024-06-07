@@ -83,6 +83,7 @@
         <input type="number" name="subsuelos" class="form-control">
     </div>
 
+    @if ($accesos == "DOBLE")
     <div class="form-group">
         <label for="tipo_botonera">Tipo de botonera</label>
         <select id="tipo_botonera" name="tipo_botonera" class="form-control">
@@ -91,6 +92,7 @@
             <option value="2">DOBLE</option>
         </select>
     </div>
+    @endif
 
 
 

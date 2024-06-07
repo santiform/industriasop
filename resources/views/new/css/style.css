@@ -178,9 +178,10 @@
 .btnEnc {
   width: 50px;
   height: 50px;
+  margin: 5px;
   margin-inline: 10px;
-  margin-top: 5px;
-  margin-bottom: 1px!important;
+  margin-top: 5px; /* Ajustar el margen superior */
+  margin-bottom: 5px; /* Ajustar el margen inferior */
   background-color: transparent; /* Color inicial */
   color: white;
   font-weight: 700;
@@ -189,18 +190,21 @@
   text-align: center;
 }
 
+
+
 .btnEncPiso {
   width: 80px;
   height: 50px;
   margin-inline: 10px;
   margin-top: 5px;
-  margin-bottom: 1px!important;
+  margin-bottom: 1px !important;
   background-color: transparent; /* Color inicial */
   color: white;
   font-weight: 700;
   border: none;
   font-size: 22px;
   text-align: center;
+  vertical-align: top; /* Añadido para alinear verticalmente con los botones */
 }
 
 

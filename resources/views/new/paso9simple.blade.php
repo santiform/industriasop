@@ -1,6 +1,5 @@
 <?php include '../resources/views/new/includes/header.blade.php'; ?>
 
-
 <div class="container">
 
   <div class="columna izquierda"><div class="timeline">
@@ -108,6 +107,6 @@
 
 </div>
 
-<script src="http://localhost/industriasop/resources/views/new/js/scriptB.js"></script>
+<script src="http://localhost/industriasop/resources/views/new/js/scriptC.js"></script>
 
 <?php include '../resources/views/new/includes/footer.blade.php'; ?>
