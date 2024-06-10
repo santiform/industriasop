@@ -437,6 +437,100 @@ class NuevoPedidoController extends Controller
 
 
 
+
+
+    public function paso10(Request $request) {
+
+
+        /* $datos = $request->all();
+
+    // Procesa los datos como desees
+    // Por ejemplo, puedes guardarlos en la base de datos o realizar cualquier otra operación necesaria
+    $estadoBotones = $request->input('estadoBotones');
+
+    // Itera sobre cada estadoBoton recibido y guárdalo en la base de datos
+    foreach ($estadoBotones as $estadoBoton) {
+        DB::table('habilitaciones_accesos')->insert([     
+            'id_pedido' => 2,
+            'parada' => $estadoBoton['piso'],
+            'salida_a' => $estadoBoton['estado'],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+    }
+
+
+
+    dd($datos); */
+
+
+
+
+
+
+
+
+
+        $datos = $request->all();
+        dd($datos);
+
+        // Procesa los datos como desees
+        // Por ejemplo, puedes guardarlos en la base de datos o realizar cualquier otra operación necesaria
+        $estadoBotones = $request->input('estadoBotones');
+
+        // Itera sobre cada estadoBoton recibido y guárdalo en la base de datos
+        foreach ($estadoBotones as $estadoBoton) {
+            $data = json_decode($estadoBoton, true);
+            DB::table('habilitaciones_accesos')->insert([     
+                'id_pedido' => 2,
+                'parada' => $data['piso'],
+                'salida_a' => $data['estado'],
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+
+        dd($datos);
+
+
+        $nombre_empresa = $request->input('nombre');
+        $email_empresa = $request->input('email');
+        $telefono_empresa = $request->input('telefono');
+        $direccion_obra = $request->input('direccion_obra');
+        $tipo_obra = $request->input('tipo_obra');
+        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+
+        $tipo_control = $request->input('tipo_control');
+        $motor_potencia = $request->input('motor_potencia');
+        $motor_marca = $request->input('motor_marca');
+        $motor_voltaje = $request->input('motor_voltaje');
+        $motor_encoder = $request->input('motor_encoder');
+        $motor_rescate = $request->input('motor_rescate');
+
+        $tipo_puerta = $request->input('tipo_puerta');
+
+        $puerta_marca = $request->input('puerta_marca');
+        $puerta_voltaje = $request->input('puerta_voltaje');
+
+        $accesos = $request->input('accesos');
+
+        $paradas = $request->input('paradas');
+        $subsuelos = $request->input('subsuelos');
+
+        $tipo_botonera = $request->input('tipo_botonera');
+
+        
+
+
+    }
+
+
+
+
+
+
+
+
    
 
 }

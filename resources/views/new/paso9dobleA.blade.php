@@ -39,12 +39,6 @@
 
   <div class="columna derecha">
 
-  <script>
-      var totalPisosAll = {{ $paradas }};
-      var totalSubsuelos = {{ $subsuelos }};
-      var totalPisos = totalPisosAll - totalSubsuelos - 1;      
-    </script>
-
 
     
 
@@ -54,7 +48,7 @@
 
   <h2 class="titleSection"> <div class="div-paso">3</div> Accesos</h2>  
 
-  <form class="formulario" id="form_habilitaciones" action="{{ route('newPaso8') }}" method="POST">
+  <form class="formulario" id="form_habilitaciones" action="{{ route('newPaso10') }}" method="POST">
     @csrf
 
 
@@ -79,9 +73,8 @@
     <input type="hidden" name="puerta_marca" value="<?php echo htmlspecialchars($puerta_marca, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="puerta_voltaje" value="<?php echo htmlspecialchars($puerta_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
 
-    
+    <input type="hidden" id="datosFormularioInput" name="datosFormulario">
 
-  
     <div id="botonera" ></div>
   
 
@@ -108,6 +101,132 @@
 
 </div>
 
-<script src="http://localhost/industriasop/resources/views/new/js/scriptB.js"></script>
+
+
+
+<script>
+
+    
+
+    var estadoInicialBotones = [];
+
+document.addEventListener('DOMContentLoaded', function() {
+    var botones = document.querySelectorAll('button[data-indice]');
+    botones.forEach(function(boton) {
+        var indice = parseInt(boton.dataset.indice);
+        var tipo = boton.dataset.tipo;
+        var estadoBoton = {
+            salida_a: tipo === 'A' ? 1 : 0,
+            salida_b: tipo === 'B' ? 1 : 0
+        };
+        estadoInicialBotones[indice] = estadoBoton;
+    });
+});
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var totalPisosAll = {{ $paradas ?? 0 }};
+        var totalSubsuelos = {{ $subsuelos ?? 0 }};
+        var totalPisos = totalPisosAll - totalSubsuelos - 1;
+
+        var estadoBotonesMatriz = [];
+        var botonera = document.getElementById('botonera');
+
+        crearEncabezado('A', botonera);
+        crearEncabezado('Pisos', botonera);
+        crearEncabezado('B', botonera);
+        botonera.appendChild(document.createElement('br'));
+
+        for (var i = totalPisos; i >= 0; i--) {
+    var piso = i == 0 ? 'PB' : i;
+    var indice = totalPisos - i; // Ajustamos el índice para que coincida con la numeración real del piso
+    crearBoton('A', botonera, indice);
+    crearBoton(piso, botonera, false);
+    crearBoton('B', botonera, indice);
+    botonera.appendChild(document.createElement('br'));
+    estadoBotonesMatriz.push({ salida_a: 1, piso: piso, salida_b: 0 });
+}
+
+for (var i = -1; i >= -totalSubsuelos; i--) {
+    var indicePositivo = totalPisos + Math.abs(i);
+    var piso = i == 0 ? 'PB' : i;
+    crearBoton('A', botonera, indicePositivo);
+    crearBoton(piso, botonera, false);
+    crearBoton('B', botonera, indicePositivo);
+    botonera.appendChild(document.createElement('br'));
+    estadoBotonesMatriz.push({ salida_a: 1, piso: piso, salida_b: 0 });
+}
+
+function crearBoton(texto, contenedor, indice) { // Eliminamos el parámetro adicional para el índice del piso
+    var button = document.createElement('button');
+    button.textContent = texto;
+    button.classList.add('btn');
+
+    if (texto === 'A' || texto === 'B') {
+        button.classList.add('btn-ascensor');
+        button.dataset.indice = indice;
+        button.dataset.tipo = texto;
+        button.addEventListener('click', handleClickBoton);
+    }
+
+    contenedor.appendChild(button);
+
+    if (texto !== 'A' && texto !== 'B') {
+        button.classList.add('piso');
+        button.disabled = true;
+    }
+}
+
+
+        function crearEncabezado(texto, contenedor) {
+            var button = document.createElement('button');
+            button.textContent = texto;
+            button.classList.add('btnEnc');
+            if (texto === 'Pisos') {
+                button.classList.add('btnEncPiso');
+            }
+            contenedor.appendChild(button);
+        }
+
+        function handleClickBoton(event) {
+    event.preventDefault();
+    var indice = parseInt(this.dataset.indice);
+    var tipo = this.dataset.tipo;
+    var estadoBoton = estadoBotonesMatriz[indice];
+    var otroTipo = tipo === 'A' ? 'salida_b' : 'salida_a';
+
+    estadoBoton[tipo === 'A' ? 'salida_a' : 'salida_b'] = 1 - estadoBoton[tipo === 'A' ? 'salida_a' : 'salida_b'];
+    estadoBoton[otroTipo] = 1 - estadoBoton[tipo === 'A' ? 'salida_a' : 'salida_b'];
+
+    var botonesFila = document.querySelectorAll('button[data-indice="' + indice + '"]');
+    botonesFila.forEach(function(boton) {
+        actualizarColorBoton(boton, estadoBotonesMatriz[indice]);
+    });
+    actualizarInputHidden();
+}
+
+
+        function actualizarColorBoton(boton, estado) {
+            if (boton.dataset.tipo === 'A') {
+                boton.style.backgroundColor = estado.salida_a === 1 ? 'green' : 'red';
+            } else if (boton.dataset.tipo === 'B') {
+                boton.style.backgroundColor = estado.salida_b === 1 ? 'green' : 'red';
+            }
+        }
+
+        document.querySelectorAll('.btn-ascensor').forEach(function(boton) {
+            var indice = parseInt(boton.dataset.indice);
+            actualizarColorBoton(boton, estadoBotonesMatriz[indice]);
+        });
+
+        function actualizarInputHidden() {
+            var inputHidden = document.getElementById('datosFormularioInput');
+            inputHidden.value = JSON.stringify(estadoBotonesMatriz);
+        }
+    });
+</script>
+
+
+
 
 <?php include '../resources/views/new/includes/footer.blade.php'; ?>

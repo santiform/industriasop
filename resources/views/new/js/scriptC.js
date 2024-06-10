@@ -1,132 +1,121 @@
 document.addEventListener('DOMContentLoaded', function() {
-  // Pedir al usuario la cantidad de pisos y subsuelos
+    // Pedir al usuario la cantidad de pisos y subsuelos
 
-  // Crear una matriz para almacenar el estado de los botones A
-  var estadoBotonesMatriz = [];
+    // Crear una matriz para almacenar el estado de los botones A
+    var estadoBotonesMatriz = [];
 
-  // Crear la botonera de ascensor
-  var botonera = document.getElementById('botonera');
+    window.estadoBotonesMatriz = estadoBotonesMatriz;
 
-  // Agregar encabezado para la primera fila
-  crearEncabezado('A', botonera, true, true); // Primer botón de encabezado
-  crearEncabezado('Pisos', botonera, true, true); // Segundo botón de encabezado
-  botonera.appendChild(document.createElement('br'));
+    // Crear la botonera de ascensor
+    var botonera = document.getElementById('botonera');
 
-  // Crear botones para los pisos superiores (N, N-1, N-2, ...)
-  for (var i = totalPisos; i >= 0; i--) {
-    console.log("Creando botón para piso:", i);
-    crearBoton('A', botonera, true, i);
-    crearBoton(i == 0 ? 'PB' : i, botonera, false, i);
+    // Agregar encabezado para la primera fila
+    crearEncabezado('A', botonera, true, true); // Primer botón de encabezado
+    crearEncabezado('Pisos', botonera, true, true); // Segundo botón de encabezado
     botonera.appendChild(document.createElement('br'));
-    estadoBotonesMatriz.push(0); // Inicializar cada fila con el estado del botón A como 0
-  }
 
-  // Crear botones para los subsuelos en orden descendente (-1, -2, -3, ...)
-  for (var i = -1; i >= -totalSubsuelos; i--) {
-    console.log("Creando botón para subsuelo:", i);
-    var indicePositivo = totalPisos + Math.abs(i); // Mapear el índice negativo a un índice positivo
-    crearBoton('A', botonera, true, indicePositivo);
-    crearBoton(i == 0 ? 'PB' : i, botonera, false, indicePositivo);
-    botonera.appendChild(document.createElement('br'));
-    estadoBotonesMatriz.push(0); // Inicializar cada fila con el estado del botón A como 0
-  }
-
-  // Función para crear botones
-  function crearBoton(texto, contenedor, noCambiaColor, indice) {
-    var button = document.createElement('button');
-    button.textContent = texto;
-    button.classList.add('btn');
-    
-    // Si el botón es A, se le asigna la clase 'btn' para cambiar de color
-    if (texto === 'A') {
-      button.classList.add('btn-ascensor');
-      button.dataset.indice = indice;
-      button.addEventListener('click', function() {
-        var indice = parseInt(this.dataset.indice);
-        estadoBotonesMatriz[indice] = 1 - estadoBotonesMatriz[indice]; // Alternar entre 0 y 1
-        actualizarColorBotones();
-        actualizarInputsHidden();
-        console.log('Estado de botones:', estadoBotonesMatriz);
-      });
+    // Crear botones para los pisos superiores (N, N-1, N-2, ...)
+    for (var i = totalPisos; i >= 0; i--) {
+        console.log("Creando botón para piso:", i);
+        crearBoton('A', botonera, true, i);
+        crearBoton(i == 0 ? 'PB' : i, botonera, false, i);
+        botonera.appendChild(document.createElement('br'));
+        estadoBotonesMatriz.push(0); // Inicializar cada fila con el estado del botón A como 0
     }
-    
-    // Agregar el botón al contenedor
-    contenedor.appendChild(button);
 
-    // Si no es A, se le asigna la clase 'piso' para diferenciarlos
-    if (texto !== 'A') {
-      button.classList.add('piso');
-      button.disabled = true; // Deshabilitar el botón para evitar que se active
+    // Crear botones para los subsuelos en orden descendente (-1, -2, -3, ...)
+    for (var i = -1; i >= -totalSubsuelos; i--) {
+        console.log("Creando botón para subsuelo:", i);
+        var indicePositivo = totalPisos + Math.abs(i); // Mapear el índice negativo a un índice positivo
+        crearBoton('A', botonera, true, indicePositivo);
+        crearBoton(i == 0 ? 'PB' : i, botonera, false, indicePositivo);
+        botonera.appendChild(document.createElement('br'));
+        estadoBotonesMatriz.push(0); // Inicializar cada fila con el estado del botón A como 0
     }
-  }
 
-  // Función para crear el encabezado
-  function crearEncabezado(texto, contenedor, noCambiaColor) {
-    var button = document.createElement('button');
-    button.textContent = texto;
-    button.classList.add('btnEnc');
-    if (!noCambiaColor) {
-      button.classList.add('btnEncPiso');
-    }
-    if (texto !== 'A') {
-      button.classList.add('btnEncPiso');
-    }
-    contenedor.appendChild(button);
-  }
-
-  // Función para actualizar el color de los botones A según el estado actual
-  function actualizarColorBotones() {
-    var botones = botonera.getElementsByClassName('btn');
-    for (var i = 0; i < botones.length; i++) {
-      var boton = botones[i];
-      if (boton.textContent === 'A') {
-        var indice = parseInt(boton.dataset.indice);
-        var estadoBoton = estadoBotonesMatriz[indice];
-        if (estadoBoton === 1) {
-          boton.style.backgroundColor = 'red';
-        } else {
-          boton.style.backgroundColor = '';
+    // Función para crear botones
+    function crearBoton(texto, contenedor, noCambiaColor, indice) {
+        var button = document.createElement('button');
+        button.textContent = texto;
+        button.classList.add('btn');
+        
+        // Si el botón es A, se le asigna la clase 'btn' para cambiar de color
+        if (texto === 'A') {
+            button.classList.add('btn-ascensor');
+            button.dataset.indice = indice;
+            button.addEventListener('click', function() {
+                var indice = parseInt(this.dataset.indice);
+                estadoBotonesMatriz[indice] = 1 - estadoBotonesMatriz[indice]; // Alternar entre 0 y 1
+                actualizarColorBotones();
+                actualizarInputsHidden();
+                console.log('Estado de botones:', estadoBotonesMatriz);
+            });
         }
-      }
-    }
-  }
+        
+        // Agregar el botón al contenedor
+        contenedor.appendChild(button);
 
-  // Función para actualizar los inputs hidden con los valores de la matriz
-  function actualizarInputsHidden() {
-    var inputsHidden = document.getElementsByClassName('estadoBotonesInput');
+        // Si no es A, se le asigna la clase 'piso' para diferenciarlos
+        if (texto !== 'A') {
+            button.classList.add('piso');
+            button.disabled = true; // Deshabilitar el botón para evitar que se active
+        }
+    }
+
+    // Función para crear el encabezado
+    function crearEncabezado(texto, contenedor, noCambiaColor) {
+        var button = document.createElement('button');
+        button.textContent = texto;
+        button.classList.add('btnEnc');
+        if (!noCambiaColor) {
+            button.classList.add('btnEncPiso');
+        }
+        if (texto !== 'A') {
+            button.classList.add('btnEncPiso');
+        }
+        contenedor.appendChild(button);
+    }
+
+    // Función para actualizar el color de los botones A según el estado actual
+    function actualizarColorBotones() {
+        var botones = botonera.getElementsByClassName('btn');
+        for (var i = 0; i < botones.length; i++) {
+            var boton = botones[i];
+            if (boton.textContent === 'A') {
+                var indice = parseInt(boton.dataset.indice);
+                var estadoBoton = estadoBotonesMatriz[indice];
+                if (estadoBoton === 1) {
+                    boton.style.backgroundColor = 'red';
+                } else {
+                    boton.style.backgroundColor = '';
+                }
+            }
+        }
+    }
+
+    // Función para actualizar los inputs hidden con los valores de la matriz
+    function actualizarInputsHidden() {
+        var inputsHidden = document.getElementsByClassName('estadoBotonesInput');
+        for (var i = 0; i < estadoBotonesMatriz.length; i++) {
+            inputsHidden[i].value = estadoBotonesMatriz[i];
+        }
+    }
+
+    // Crear inputs hidden para almacenar el estado de los botones
     for (var i = 0; i < estadoBotonesMatriz.length; i++) {
-      inputsHidden[i].value = estadoBotonesMatriz[i];
+        var inputHidden = document.createElement('input');
+        inputHidden.type = 'hidden';
+        inputHidden.name = 'estadoBotones[' + i + ']';
+        inputHidden.classList.add('estadoBotonesInput');
+        botonera.appendChild(inputHidden);
     }
-  }
-
-  // Crear inputs hidden para almacenar el estado de los botones
-  for (var i = 0; i < estadoBotonesMatriz.length; i++) {
-    var inputHidden = document.createElement('input');
-    inputHidden.type = 'hidden';
-    inputHidden.name = 'estadoBotones[' + i + ']';
-    inputHidden.classList.add('estadoBotonesInput');
-    botonera.appendChild(inputHidden);
-  }
-
-  // Obtener el formulario
-  var formulario = document.getElementById('form_habilitaciones'); // Reemplaza 'tu_formulario' con el ID de tu formulario
-
-  // Agregar un evento 'submit' al formulario para prevenir el envío automático
-  formulario.addEventListener('submit', function(event) {
-    event.preventDefault(); // Evitar el envío automático del formulario
-    // Agrega cualquier lógica adicional que necesites aquí
-  });
-
-
 
     // Obtener el formulario
-    var formulario = document.getElementById('form_habilitaciones');
+    var formulario = document.getElementById('form_habilitaciones'); // Reemplaza 'tu_formulario' con el ID de tu formulario
 
     // Agregar un evento 'submit' al formulario para prevenir el envío automático
     formulario.addEventListener('submit', function(event) {
         event.preventDefault(); // Evitar el envío automático del formulario
         // Agrega cualquier lógica adicional que necesites aquí
     });
-
-
 });

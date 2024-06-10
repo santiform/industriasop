@@ -4,6 +4,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Crear una matriz para almacenar el estado de los botones A y B
   var estadoBotonesMatriz = [];
 
+  window.estadoBotonesMatriz = estadoBotonesMatriz;
+
   // Crear la botonera de ascensor
   var botonera = document.getElementById('botonera');
 
