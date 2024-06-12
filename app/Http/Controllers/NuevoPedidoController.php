@@ -370,6 +370,7 @@ class NuevoPedidoController extends Controller
 
                     'accesos' => $accesos,
 
+                    'tipo_botonera' => $tipo_botonera,
                     'paradas' => $paradas,
                     'subsuelos' => $subsuelos,
                 ]);
@@ -398,6 +399,7 @@ class NuevoPedidoController extends Controller
 
                     'accesos' => $accesos,
 
+                    'tipo_botonera' => $tipo_botonera,
                     'paradas' => $paradas,
                     'subsuelos' => $subsuelos,
                 ]);
@@ -426,6 +428,7 @@ class NuevoPedidoController extends Controller
 
                     'accesos' => $accesos,
 
+                    'tipo_botonera' => $tipo_botonera,
                     'paradas' => $paradas,
                     'subsuelos' => $subsuelos,
                 ]);
@@ -440,58 +443,6 @@ class NuevoPedidoController extends Controller
 
 
     public function paso10(Request $request) {
-
-
-        /* $datos = $request->all();
-
-    // Procesa los datos como desees
-    // Por ejemplo, puedes guardarlos en la base de datos o realizar cualquier otra operación necesaria
-    $estadoBotones = $request->input('estadoBotones');
-
-    // Itera sobre cada estadoBoton recibido y guárdalo en la base de datos
-    foreach ($estadoBotones as $estadoBoton) {
-        DB::table('habilitaciones_accesos')->insert([     
-            'id_pedido' => 2,
-            'parada' => $estadoBoton['piso'],
-            'salida_a' => $estadoBoton['estado'],
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-    }
-
-
-
-    dd($datos); */
-
-
-
-
-
-
-
-
-
-        $datos = $request->all();
-        dd($datos);
-
-        // Procesa los datos como desees
-        // Por ejemplo, puedes guardarlos en la base de datos o realizar cualquier otra operación necesaria
-        $estadoBotones = $request->input('estadoBotones');
-
-        // Itera sobre cada estadoBoton recibido y guárdalo en la base de datos
-        foreach ($estadoBotones as $estadoBoton) {
-            $data = json_decode($estadoBoton, true);
-            DB::table('habilitaciones_accesos')->insert([     
-                'id_pedido' => 2,
-                'parada' => $data['piso'],
-                'salida_a' => $data['estado'],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
-
-        dd($datos);
-
 
         $nombre_empresa = $request->input('nombre');
         $email_empresa = $request->input('email');
@@ -514,14 +465,108 @@ class NuevoPedidoController extends Controller
 
         $accesos = $request->input('accesos');
 
+        $tipo_botonera = $request->input('tipo_botonera');
         $paradas = $request->input('paradas');
         $subsuelos = $request->input('subsuelos');
+        
+        $estadoBotones = $request->input('estadoBotones');
+
+        return view('new.paso10', [
+                    'email_empresa' => $email_empresa,
+                    'nombre_empresa' => $nombre_empresa,
+                    'direccion_obra' => $direccion_obra,
+                    'tipo_obra' => $tipo_obra,
+                    'tipo_funcionamiento' => $tipo_funcionamiento,
+
+                    'tipo_control' => $tipo_control,
+                    'motor_potencia' => $motor_potencia,
+                    'motor_marca' => $motor_marca,
+                    'motor_voltaje' => $motor_voltaje,
+                    'motor_encoder' => $motor_encoder,
+                    'motor_rescate' => $motor_rescate,
+
+                    'tipo_puerta' => $tipo_puerta,
+
+                    'puerta_marca' => $puerta_marca,
+                    'puerta_voltaje' => $puerta_voltaje,
+
+                    'accesos' => $accesos,
+
+                    'tipo_botonera' => $tipo_botonera,
+                    'paradas' => $paradas,
+                    'subsuelos' => $subsuelos,
+
+                    'estadoBotones' => $estadoBotones,
+                ]);
+
+    
+    }
+
+
+
+    public function paso11(Request $request) {
+
+        $nombre_empresa = $request->input('nombre');
+        $email_empresa = $request->input('email');
+        $telefono_empresa = $request->input('telefono');
+        $direccion_obra = $request->input('direccion_obra');
+        $tipo_obra = $request->input('tipo_obra');
+        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+
+        $tipo_control = $request->input('tipo_control');
+        $motor_potencia = $request->input('motor_potencia');
+        $motor_marca = $request->input('motor_marca');
+        $motor_voltaje = $request->input('motor_voltaje');
+        $motor_encoder = $request->input('motor_encoder');
+        $motor_rescate = $request->input('motor_rescate');
+
+        $tipo_puerta = $request->input('tipo_puerta');
+
+        $puerta_marca = $request->input('puerta_marca');
+        $puerta_voltaje = $request->input('puerta_voltaje');
+
+        $accesos = $request->input('accesos');
 
         $tipo_botonera = $request->input('tipo_botonera');
-
+        $paradas = $request->input('paradas');
+        $subsuelos = $request->input('subsuelos');
         
+        $estadoBotones = $request->input('estadoBotones');
 
+        $placa_cabina = $request->input('placa_cabina');
+        $indicador_cabina = $request->input('indicador_cabina');
+        $indicador_pb = $request->input('indicador_pb');
+        $indicador_palier = $request->input('indicador_palier');
 
+        return view('new.paso11', [
+                    'email_empresa' => $email_empresa,
+                    'nombre_empresa' => $nombre_empresa,
+                    'direccion_obra' => $direccion_obra,
+                    'tipo_obra' => $tipo_obra,
+                    'tipo_funcionamiento' => $tipo_funcionamiento,
+
+                    'tipo_control' => $tipo_control,
+                    'motor_potencia' => $motor_potencia,
+                    'motor_marca' => $motor_marca,
+                    'motor_voltaje' => $motor_voltaje,
+                    'motor_encoder' => $motor_encoder,
+                    'motor_rescate' => $motor_rescate,
+
+                    'tipo_puerta' => $tipo_puerta,
+
+                    'puerta_marca' => $puerta_marca,
+                    'puerta_voltaje' => $puerta_voltaje,
+
+                    'accesos' => $accesos,
+
+                    'tipo_botonera' => $tipo_botonera,
+                    'paradas' => $paradas,
+                    'subsuelos' => $subsuelos,
+
+                    'estadoBotones' => $estadoBotones,
+                ]);
+
+    
     }
 
 

@@ -41,9 +41,9 @@
 
 <div class="formulario">
 
-  <h2 class="titleSection"> <div class="div-paso">4</div> Paradas</h2>  
+  <h2 class="titleSection"> <div class="div-paso">4</div> Detalles generales</h2>  
 
-  <form action="{{ route('newPaso9') }}" method="POST" onsubmit="prepararEnvio(this)">
+  <form action="{{ route('newPaso11') }}" method="POST">
     @csrf
 
 
@@ -71,28 +71,50 @@
     <!-- este grupo en  la bd se guarda en la tabla "accesos" -->
     <input type="hidden" name="accesos" value="<?php echo htmlspecialchars($accesos, ENT_QUOTES, 'UTF-8'); ?>">
 
+    <!-- este grupo en la bd se guarda en la tabla "detalles_generales" -->
+    <input type="hidden" name="tipo_botonera" value="<?php echo htmlspecialchars($tipo_botonera, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="paradas" value="<?php echo htmlspecialchars($paradas, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="subsuelos" value="<?php echo htmlspecialchars($subsuelos, ENT_QUOTES, 'UTF-8'); ?>">
 
+    <!-- este grupo en la bd se guarda en la tabla "habilitaciones_accesos" -->
+    <input type="hidden" name="estadoBotones" value="{{ htmlspecialchars(json_encode($estadoBotones), ENT_QUOTES, 'UTF-8') }}">
 
     <div class="form-group">
-        <label for="paradas">Cantidad de paradas (totales, incluyendo subsuelos)</label>
-        <input type="number" name="paradas" class="form-control">
-    </div>
-
-    <div class="form-group">
-        <label for="subsuelos">Cantidad de subsuelos</label>
-        <input type="number" name="subsuelos" class="form-control">
-    </div>
-
-    @if ($accesos == "DOBLE")
-    <div class="form-group">
-        <label for="tipo_botonera">Tipo de botonera</label>
-        <select id="tipo_botonera" name="tipo_botonera" class="form-control">
+        <label for="placa_cabina">Placa cabina</label>
+        <select id="placa_cabina" name="placa_cabina" class="form-control">
             <option disabled selected>Seleccione una opción</option>
-            <option value="1">SIMPLE</option>
-            <option value="2">DOBLE</option>
+            <option value="1">Sí</option>
+            <option value="0">No</option>            
         </select>
     </div>
-    @endif
+
+    <div class="form-group">
+        <label for="indicador_cabina">Indicador cabina</label>
+        <select id="indicador_cabina" name="indicador_cabina" class="form-control">
+            <option disabled selected>Seleccione una opción</option>
+            <option value="1">Sí</option>
+            <option value="0">No</option>            
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="indicador_pb">Indicador Planta Baja</label>
+        <select id="indicador_pb" name="indicador_pb" class="form-control">
+            <option disabled selected>Seleccione una opción</option>
+            <option value="1">Sí</option>
+            <option value="0">No</option>            
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="indicador_palier">Indicador Palier</label>
+        <select id="indicador_palier" name="indicador_palier" class="form-control">
+            <option disabled selected>Seleccione una opción</option>
+            <option value="1">Sí</option>
+            <option value="0">No</option>            
+        </select>
+    </div>
+
 
 
 
@@ -118,7 +140,5 @@
 </div>
 
 </div>
-
-<script src="../../resources/views/new/js/opcionOtra.js"></script>
 
 <?php include '../resources/views/new/includes/footer.blade.php'; ?>

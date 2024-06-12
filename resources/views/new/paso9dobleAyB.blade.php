@@ -17,13 +17,13 @@
         <div class="linea linea-azul">|</div>
 
         <div class="paso paso-azul">
-            <div class="circle circle-azul">3</div> Puertas
+            <div class="circle circle-azul">✔</div> Puertas
         </div>
 
-        <div class="linea linea-gris">|</div>
+        <div class="linea linea-azul">|</div>
 
-        <div class="paso paso-gris">
-            <div class="circle circle-gris">4</div> Detalles generales
+        <div class="paso paso-azul">
+            <div class="circle circle-azul">4</div> Detalles generales
         </div>
 
         <div class="linea linea-gris">|</div>
@@ -165,13 +165,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <div class="">
 
-  <h2 class="titleSection"> <div class="div-paso">3</div> Accesos</h2>  
+  <h2 class="titleSection"> <div class="div-paso">4</div> Habilitaciones accesos</h2>   
 
   <form class="formulario" id="form_habilitaciones" action="{{ route('newPaso10') }}" method="POST">
     @csrf
 
 
-    <!-- este grupo en  la bd se guarda en la tabla "pedidos" -->
+    <!-- este grupo en la bd se guarda en la tabla "pedidos" -->
     <input type="hidden" name="email_empresa" value="<?php echo htmlspecialchars($email_empresa, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="nombre_empresa" value="<?php echo htmlspecialchars($nombre_empresa, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="direccion_obra" value="<?php echo htmlspecialchars($direccion_obra, ENT_QUOTES, 'UTF-8'); ?>">
@@ -179,18 +179,24 @@ document.addEventListener('DOMContentLoaded', function() {
     <input type="hidden" name="tipo_funcionamiento" value="<?php echo htmlspecialchars($tipo_funcionamiento, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="tipo_control" value="<?php echo htmlspecialchars($tipo_control, ENT_QUOTES, 'UTF-8'); ?>">
 
-    <!-- este grupo en  la bd se guarda en la tabla "motores" -->
+    <!-- este grupo en la bd se guarda en la tabla "motores" -->
     <input type="hidden" name="motor_potencia" value="<?php echo htmlspecialchars($motor_potencia, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_marca" value="<?php echo htmlspecialchars($motor_marca, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_voltaje" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_encoder" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
 
-    <!-- este grupo en  la bd se guarda en la tabla "tipos_puertas" -->
+    <!-- este grupo en la bd se guarda en la tabla "tipos_puertas" -->
     <input type="hidden" name="tipo_puerta" value="<?php echo htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8'); ?>">
 
-    <!-- este grupo en  la bd se guarda en la tabla "detalles_puertas" -->
+    <!-- este grupo en la bd se guarda en la tabla "detalles_puertas" -->
     <input type="hidden" name="puerta_marca" value="<?php echo htmlspecialchars($puerta_marca, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="puerta_voltaje" value="<?php echo htmlspecialchars($puerta_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
+    
+    <!-- este grupo en  la bd se guarda en la tabla "accesos" -->
+    <input type="hidden" name="accesos" value="<?php echo htmlspecialchars($accesos, ENT_QUOTES, 'UTF-8'); ?>">
+
+    <!-- este grupo en la bd se guarda en la tabla "detalles_generales" -->
+    <input type="hidden" name="tipo_botonera" value="<?php echo htmlspecialchars($tipo_botonera, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="paradas" value="<?php echo htmlspecialchars($paradas, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="subsuelos" value="<?php echo htmlspecialchars($subsuelos, ENT_QUOTES, 'UTF-8'); ?>">
 
