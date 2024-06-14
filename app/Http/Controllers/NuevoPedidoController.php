@@ -471,6 +471,9 @@ class NuevoPedidoController extends Controller
         
         $estadoBotones = $request->input('estadoBotones');
 
+
+
+
         return view('new.paso10', [
                     'email_empresa' => $email_empresa,
                     'nombre_empresa' => $nombre_empresa,
@@ -538,6 +541,9 @@ class NuevoPedidoController extends Controller
         $indicador_pb = $request->input('indicador_pb');
         $indicador_palier = $request->input('indicador_palier');
 
+        $tipo_funcionamiento_nombre = DB::table('tipos_funcionamientos')->where('id', $tipo_funcionamiento)->value('nombre');
+        $tipo_control_nombre = DB::table('tipos_controles')->where('id', $tipo_control)->value('nombre');
+
         return view('new.paso11', [
                     'email_empresa' => $email_empresa,
                     'nombre_empresa' => $nombre_empresa,
@@ -564,6 +570,19 @@ class NuevoPedidoController extends Controller
                     'subsuelos' => $subsuelos,
 
                     'estadoBotones' => $estadoBotones,
+
+                    'placa_cabina' => $placa_cabina,
+                    'indicador_cabina' => $indicador_cabina,
+                    'indicador_pb' => $indicador_pb,
+                    'indicador_palier' => $indicador_palier,
+
+
+
+
+
+                    'tipo_funcionamiento_nombre' => $tipo_funcionamiento_nombre,
+                    'tipo_control_nombre' => $tipo_control_nombre,
+
                 ]);
 
     

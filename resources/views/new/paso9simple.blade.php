@@ -164,7 +164,7 @@
                 <input type="hidden" name="motor_potencia" value="{{ htmlspecialchars($motor_potencia, ENT_QUOTES, 'UTF-8') }}">
                 <input type="hidden" name="motor_marca" value="{{ htmlspecialchars($motor_marca, ENT_QUOTES, 'UTF-8') }}">
                 <input type="hidden" name="motor_voltaje" value="{{ htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8') }}">
-                <input type="hidden" name="motor_encoder" value="{{ htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8') }}">
+                <input type="hidden" name="motor_encoder" value="{{ htmlspecialchars($motor_encoder, ENT_QUOTES, 'UTF-8') }}">
 
                 <!-- Este grupo en la BD se guarda en la tabla "tipos_puertas" -->
                 <input type="hidden" name="tipo_puerta" value="{{ htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8') }}">

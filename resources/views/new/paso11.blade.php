@@ -23,13 +23,13 @@
         <div class="linea linea-azul">|</div>
 
         <div class="paso paso-azul">
-            <div class="circle circle-azul">4</div> Detalles generales
+            <div class="circle circle-azul">✔</div> Detalles generales
         </div>
 
-        <div class="linea linea-gris">|</div>
+        <div class="linea linea-azul">|</div>
 
-        <div class="paso paso-gris">
-            <div class="circle circle-gris">5</div> Confirmación
+        <div class="paso paso-azul">
+            <div class="circle circle-azul">5</div> Confirmación
         </div>
 
     </div>
@@ -59,7 +59,7 @@
     <input type="hidden" name="motor_potencia" value="<?php echo htmlspecialchars($motor_potencia, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_marca" value="<?php echo htmlspecialchars($motor_marca, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_voltaje" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="motor_encoder" value="<?php echo htmlspecialchars($motor_encoder, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="motor_encoder" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- este grupo en  la bd se guarda en la tabla "tipos_puertas" -->
     <input type="hidden" name="tipo_puerta" value="<?php echo htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8'); ?>">
@@ -75,47 +75,109 @@
     <input type="hidden" name="tipo_botonera" value="<?php echo htmlspecialchars($tipo_botonera, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="paradas" value="<?php echo htmlspecialchars($paradas, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="subsuelos" value="<?php echo htmlspecialchars($subsuelos, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="placa_cabina" value="<?php echo htmlspecialchars($placa_cabina, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="indicador_cabina" value="<?php echo htmlspecialchars($indicador_cabina, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="indicador_pb" value="<?php echo htmlspecialchars($indicador_pb, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="indicador_palier" value="<?php echo htmlspecialchars($indicador_palier, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- este grupo en la bd se guarda en la tabla "habilitaciones_accesos" -->
     <input type="hidden" name="estadoBotones" value="{{ htmlspecialchars(json_encode($estadoBotones), ENT_QUOTES, 'UTF-8') }}">
 
-    <div class="form-group">
-        <label for="placa_cabina">Placa cabina</label>
-        <select id="placa_cabina" name="placa_cabina" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
-            <option value="1">Sí</option>
-            <option value="0">No</option>            
-        </select>
-    </div>
 
-    <div class="form-group">
-        <label for="indicador_cabina">Indicador cabina</label>
-        <select id="indicador_cabina" name="indicador_cabina" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
-            <option value="1">Sí</option>
-            <option value="0">No</option>            
-        </select>
-    </div>
+    <style>
+        table {
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            border-top: 1px solid #000;
+            border-left: 1px solid #000;
+            border-radius: 30px;
+            overflow: hidden;
+            margin-bottom: 3.3rem;
+            font-family: "Inter", sans-serif;
+        }
+        td {
+            border-bottom: 1px solid #000;
+            border-right: 1px solid #000;
+            padding: 13px;
+            padding-inline: 20px;
+            padding-left: 40px;
+            text-align: left;
+        }
 
-    <div class="form-group">
-        <label for="indicador_pb">Indicador Planta Baja</label>
-        <select id="indicador_pb" name="indicador_pb" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
-            <option value="1">Sí</option>
-            <option value="0">No</option>            
-        </select>
-    </div>
+        td:first-child {
+            width: 40%;
+            padding-left: 2.8rem;
+            color: #004991;
+            font-weight: 700;
+        }
+        td:last-child {
+            width: 60%;
+            padding-left: 2rem;
+        }
+        /* Para evitar que los bordes de las celdas oculten el borde redondeado de la tabla */
+        table tr:first-child td:first-child {
+            border-top-left-radius: 29px;
+        }
+        table tr:first-child td:last-child {
+            border-top-right-radius: 29px;
+        }
+        table tr:last-child td:first-child {
+            border-bottom-left-radius: 29px;
+        }
+        table tr:last-child td:last-child {
+            border-bottom-right-radius: 29px;
+        }
+    </style>
 
-    <div class="form-group">
-        <label for="indicador_palier">Indicador Palier</label>
-        <select id="indicador_palier" name="indicador_palier" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
-            <option value="1">Sí</option>
-            <option value="0">No</option>            
-        </select>
-    </div>
+    <table>
+        <p class="titulo_resumen" >Datos básicos</p>
+        <tr>
+            <td>Empresa</td>
+            <td>{{$nombre_empresa}}</td>
+        </tr>
+        <tr>
+            <td>Email empresa</td>
+            <td>{{$email_empresa}}</td>
+        </tr>
+        <tr>
+            <td>Dirección de obra</td>
+            <td>{{$direccion_obra}}</td>
+        </tr>
+        <tr>
+            <td>Tipo de obra</td>
+            <td>{{$tipo_obra}}</td>
+        </tr>
+        <tr>
+            <td>Tipo de funcionamiento</td>
+            <td>{{$tipo_funcionamiento_nombre}}</td>
+        </tr>
+        <tr>
+            <td>Tipo de control</td>
+            <td>{{$tipo_control_nombre}}</td>
+        </tr>
+    </table>
 
 
+    <table>
+        <p class="titulo_resumen" >Motor</p>
+        <tr>
+            <td>Potencia de motor</td>
+            <td>{{$motor_potencia}}</td>
+        </tr>
+        <tr>
+            <td>Marca de motor</td>
+            <td>{{$motor_marca}}</td>
+        </tr>
+        <tr>
+            <td>Voltaje de motor</td>
+            <td>{{$motor_voltaje}}</td>
+        </tr>
+        <tr>
+            <td>Encoder</td>
+            <td>{{$motor_encoder}}</td>
+        </tr>
+    </table>
 
 
 

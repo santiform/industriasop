@@ -367,3 +367,11 @@
   background-color: black;
   margin-top: 2rem;
 }
+
+.titulo_resumen {
+  font-weight: 800;
+  color: #004991;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  margin-left: 1rem;
+}
