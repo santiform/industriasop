@@ -46,7 +46,11 @@ Auth::routes();
 
     Route::post('/nuevo/paso4', [App\Http\Controllers\NuevoPedidoController::class, 'paso4'])->name('newPaso4');
 
+
+    Route::get('/nuevo/paso5int', [App\Http\Controllers\NuevoPedidoController::class, 'newPaso5int'])->name('newPaso5int');
+
     Route::post('/nuevo/paso5', [App\Http\Controllers\NuevoPedidoController::class, 'paso5'])->name('newPaso5');
+    
 
     Route::post('/nuevo/paso6', [App\Http\Controllers\NuevoPedidoController::class, 'paso6'])->name('newPaso6');
 

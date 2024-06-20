@@ -43,7 +43,7 @@
 
   <h2 class="titleSection"> <div class="div-paso">3</div> Detalles de puerta</h2>  
 
-  <form action="{{ route('newPaso5') }}" method="POST" onsubmit="prepararEnvio(this)">
+  <form action="{{ route('newPaso7') }}" method="POST" onsubmit="prepararEnvio(this)">
     @csrf
 
 
@@ -59,7 +59,7 @@
     <input type="hidden" name="motor_potencia" value="<?php echo htmlspecialchars($motor_potencia, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_marca" value="<?php echo htmlspecialchars($motor_marca, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_voltaje" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="motor_encoder" value="<?php echo htmlspecialchars($encoder, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="motor_encoder" value="<?php echo htmlspecialchars($motor_encoder, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- este grupo en  la bd se guarda en la tabla "tipos_puertas" -->
     <input type="hidden" name="tipo_puerta" value="<?php echo htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8'); ?>">
@@ -67,18 +67,17 @@
 
 
     <div class="form-group">
-        <label for="puerta_marca">Marca de la puerta</label>
-        <select id="puerta_marca" name="puerta_marca" class="form-control">
+        <label for="patin_retractil">Voltaje de patin retráctil (si posee)</label>
+        <select id="patin_retractil" name="patin_retractil" class="form-control">
             <option disabled selected>Seleccione una opción</option>
-            <option value="WILCOX">WILCOX</option>
-            <option value="FERMATOR">FERMATOR</option>
-            <option value="MAMUT">MAMUT</option>
-            <option value="COMPANY">COMPANY</option>
-            <option value="otra">Otras...</option>
+            <option value="NO POSEE">NO POSEE PATIN RETRÁCTIL</option>
+            <option value="220 AC">220 AC</option>
+            <option value="110 DC">110 DC</option>
+            <option value="otra">Otro voltaje...</option>
         </select>
         <div class="campo-adicional" style="display: none;">
-            <label for="puerta_marca">Ingrese un valor personalizado</label>
-            <input type="text" id="puerta_marca" name="puerta_marca" class="form-control">
+            <label for="patin_retractil">Ingrese un valor personalizado</label>
+            <input type="text" id="patin_retractil" name="patin_retractil" class="form-control">
         </div>
     </div>
 

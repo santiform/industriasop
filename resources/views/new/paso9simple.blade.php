@@ -181,6 +181,8 @@
                 <input type="hidden" name="paradas" value="<?php echo htmlspecialchars($paradas, ENT_QUOTES, 'UTF-8'); ?>">
                 <input type="hidden" name="subsuelos" value="<?php echo htmlspecialchars($subsuelos, ENT_QUOTES, 'UTF-8'); ?>">
 
+                <input type="hidden" name="vista" value="simple">
+
                 <div id="botonera"></div>
 
                 <div class="container">

@@ -71,10 +71,33 @@
     <!-- este grupo en  la bd se guarda en la tabla "accesos" -->
     <input type="hidden" name="accesos" value="<?php echo htmlspecialchars($accesos, ENT_QUOTES, 'UTF-8'); ?>">
 
+    @if ($accesos != "SIMPLE" && $accesos != "DOBLE")
+    <div class="form-group" style="background-color: #40464c; ">
+        <label for=""><p style="font-weight: 400; margin-bottom: -1rem; color: white;" >Si la cabina NO posee acceso doble o simple, deberás ponerte en
+        contacto con nuestro equipo de ventas para gestionar las habilitaciones de puertas.</p></label>
+    </div>
 
+    @endif
+
+    @if ($tipo_funcionamiento == 1)
+    <div class="form-group">
+        <label for="paradas">Cantidad de paradas (totales, incluyendo subsuelos)<br><p style="color: red;" >(Máximo 8 paradas)</p></label>
+
+        <input type="number" name="paradas" class="form-control" min="1" max="8">
+    </div>
 
     <div class="form-group">
+        <label for="subsuelos">Cantidad de subsuelos</label>
+        <input type="number" name="subsuelos" class="form-control" min="1" max="5">
+    </div>
+
+    @endif
+
+
+
+    @if ($tipo_funcionamiento == 2) <div class="form-group">
         <label for="paradas">Cantidad de paradas (totales, incluyendo subsuelos)</label>
+
         <input type="number" name="paradas" class="form-control">
     </div>
 
@@ -83,13 +106,17 @@
         <input type="number" name="subsuelos" class="form-control">
     </div>
 
+    @endif
+
+
+
     @if ($accesos == "DOBLE")
     <div class="form-group">
-        <label for="tipo_botonera">Tipo de botonera</label>
+        <label for="tipo_botonera">Cantidad de botoneras</label>
         <select id="tipo_botonera" name="tipo_botonera" class="form-control">
             <option disabled selected>Seleccione una opción</option>
-            <option value="1">SIMPLE</option>
-            <option value="2">DOBLE</option>
+            <option value="1">1 botonera</option>
+            <option value="2">2 botoneras</option>
         </select>
     </div>
     @endif

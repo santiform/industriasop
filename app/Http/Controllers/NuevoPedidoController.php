@@ -57,7 +57,7 @@ class NuevoPedidoController extends Controller
         $motor_marca = $request->input('motor_marca');
         $motor_voltaje = $request->input('motor_voltaje');
 
-        if ($tipo_control == 8 || $tipo_control == 9|| $tipo_control == 10) {    
+        if ($tipo_control == 8 || $tipo_control == 9 || $tipo_control == 10) {    
             return view('new.paso3', [
                 'email_empresa' => $email_empresa,
                 'nombre_empresa' => $nombre_empresa,
@@ -71,21 +71,28 @@ class NuevoPedidoController extends Controller
                 'motor_voltaje' => $motor_voltaje,
             ]);
         } 
+
+        $motor_encoder = null;
+        $motor_rescate = null;
           
-            return view('new.paso4', [
-                'email_empresa' => $email_empresa,
-                'nombre_empresa' => $nombre_empresa,
-                'direccion_obra' => $direccion_obra,
-                'tipo_obra' => $tipo_obra,
-                'tipo_funcionamiento' => $tipo_funcionamiento,
+         // Almacena los datos en la sesión
+        $request->session()->put('datos', [
+            'email_empresa' => $email_empresa,
+            'nombre_empresa' => $nombre_empresa,
+            'direccion_obra' => $direccion_obra,
+            'tipo_obra' => $tipo_obra,
+            'tipo_funcionamiento' => $tipo_funcionamiento,
+            'tipo_control' => $tipo_control,
+            'motor_potencia' => $motor_potencia,
+            'motor_marca' => $motor_marca,
+            'motor_voltaje' => $motor_voltaje,
+            'motor_encoder' => $motor_encoder,
+            'motor_rescate' => $motor_rescate,
+        ]);
 
-                'tipo_control' => $tipo_control,
-                'motor_potencia' => $motor_potencia,
-                'motor_marca' => $motor_marca,
-                'motor_voltaje' => $motor_voltaje,
-            ]);
+        // Redirige al siguiente paso
+        return redirect()->action([NuevoPedidoController::class, 'newPaso5int']);
         
-
     }
 
     public function paso4(Request $request) {
@@ -102,6 +109,27 @@ class NuevoPedidoController extends Controller
         $motor_marca = $request->input('motor_marca');
         $motor_voltaje = $request->input('motor_voltaje');
         $motor_encoder = $request->input('motor_encoder');
+
+        if ($tipo_control == 9 || $tipo_control == 10) {
+
+            $motor_rescate = null;
+
+            return view('new.paso5mecanico', [
+                'email_empresa' => $email_empresa,
+                'nombre_empresa' => $nombre_empresa,
+                'direccion_obra' => $direccion_obra,
+                'tipo_obra' => $tipo_obra,
+                'tipo_funcionamiento' => $tipo_funcionamiento,
+
+                'tipo_control' => $tipo_control,
+                'motor_potencia' => $motor_potencia,
+                'motor_marca' => $motor_marca,
+                'motor_voltaje' => $motor_voltaje,
+                'motor_encoder' => $motor_encoder,
+                'motor_rescate' => $motor_rescate,
+            ]);
+
+        }
 
         return view('new.paso4', [
                 'email_empresa' => $email_empresa,
@@ -120,21 +148,51 @@ class NuevoPedidoController extends Controller
     }
 
 
+    public function newPaso5int(Request $request)
+    {
+        // Obtener los datos de la sesión
+        $datos = $request->session()->get('datos');
+
+        return view('new.newPaso5int', compact('datos'));
+    }
+
+
     public function paso5(Request $request) {
 
-        $nombre_empresa = $request->input('nombre');
-        $email_empresa = $request->input('email');
-        $telefono_empresa = $request->input('telefono');
-        $direccion_obra = $request->input('direccion_obra');
-        $tipo_obra = $request->input('tipo_obra');
-        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+        // Recupera los datos de la sesión
+        $datos_obra = $request->session()->get('datos');
 
-        $tipo_control = $request->input('tipo_control');
-        $motor_potencia = $request->input('motor_potencia');
-        $motor_marca = $request->input('motor_marca');
-        $motor_voltaje = $request->input('motor_voltaje');
-        $motor_encoder = $request->input('motor_encoder');
-        $motor_rescate = $request->input('motor_rescate');
+        $nombre_empresa = $datos_obra['nombre'] ?? null;
+        $email_empresa = $datos_obra['email'] ?? null;
+        $telefono_empresa = $datos_obra['telefono'] ?? null;
+        $direccion_obra = $datos_obra['direccion_obra'] ?? null;
+        $tipo_obra = $datos_obra['tipo_obra'] ?? null;
+        $tipo_funcionamiento = $datos_obra['tipo_funcionamiento'] ?? null;
+
+        $tipo_control = $datos_obra['tipo_control'] ?? null;
+        $motor_potencia = $datos_obra['motor_potencia'] ?? null;
+        $motor_marca = $datos_obra['motor_marca'] ?? null;
+        $motor_voltaje = $datos_obra['motor_voltaje'] ?? null;
+        $motor_encoder = $datos_obra['motor_encoder'] ?? null;
+        $motor_rescate = $datos_obra['motor_rescate'] ?? null;
+
+        $tipo_control_2 = $request->input('tipo_control');
+
+        if ($tipo_control_2 !== null) {    
+            $nombre_empresa = $request->input('nombre');
+            $email_empresa = $request->input('email');
+            $telefono_empresa = $request->input('telefono');
+            $direccion_obra = $request->input('direccion_obra');
+            $tipo_obra = $request->input('tipo_obra');
+            $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+
+            $tipo_control = $request->input('tipo_control');
+            $motor_potencia = $request->input('motor_potencia');
+            $motor_marca = $request->input('motor_marca');
+            $motor_voltaje = $request->input('motor_voltaje');
+            $motor_encoder = $request->input('motor_encoder');
+            $motor_rescate = $request->input('motor_rescate');
+        }
 
         if ($tipo_control == 1 || $tipo_control == 2) { 
             return view('new.paso5hidrauA', [
@@ -153,6 +211,7 @@ class NuevoPedidoController extends Controller
             ]);
         }  
 
+
         if ($tipo_control == 3 || $tipo_control == 4 || $tipo_control == 5) { 
             return view('new.paso5hidrauB', [
                 'email_empresa' => $email_empresa,
@@ -169,6 +228,23 @@ class NuevoPedidoController extends Controller
                 'motor_rescate' => $motor_rescate,
             ]);
         }   
+
+
+        return view('new.paso5mecanico', [
+                'email_empresa' => $email_empresa,
+                'nombre_empresa' => $nombre_empresa,
+                'direccion_obra' => $direccion_obra,
+                'tipo_obra' => $tipo_obra,
+                'tipo_funcionamiento' => $tipo_funcionamiento,
+
+                'tipo_control' => $tipo_control,
+                'motor_potencia' => $motor_potencia,
+                'motor_marca' => $motor_marca,
+                'motor_voltaje' => $motor_voltaje,
+                'motor_encoder' => $motor_encoder,
+                'motor_rescate' => $motor_rescate,
+            ]);
+
 
 
     }
@@ -196,6 +272,26 @@ class NuevoPedidoController extends Controller
 
         $tipo_puerta = $request->input('tipo_puerta');
 
+        if ($tipo_control == 5) { 
+            return view('new.paso6manualB', [
+                    'email_empresa' => $email_empresa,
+                    'nombre_empresa' => $nombre_empresa,
+                    'direccion_obra' => $direccion_obra,
+                    'tipo_obra' => $tipo_obra,
+                    'tipo_funcionamiento' => $tipo_funcionamiento,
+
+                    'tipo_control' => $tipo_control,
+                    'motor_potencia' => $motor_potencia,
+                    'motor_marca' => $motor_marca,
+                    'motor_voltaje' => $motor_voltaje,
+                    'motor_encoder' => $motor_encoder,
+                    'motor_rescate' => $motor_rescate,
+
+                    'tipo_puerta' => $tipo_puerta,
+                ]);
+        }
+
+
         if ($tipo_puerta == "AUTOMÁTICAS") { 
             return view('new.paso6automatico', [
                     'email_empresa' => $email_empresa,
@@ -213,7 +309,48 @@ class NuevoPedidoController extends Controller
 
                     'tipo_puerta' => $tipo_puerta,
                 ]);
-        } 
+        }
+
+        if (($tipo_puerta == "MANUALES" || $tipo_puerta == "SEMIAUTOMÁTICAS") && ($tipo_control == 1 || $tipo_control == 2
+        || $tipo_control == 6 || $tipo_control == 7)) { 
+            return view('new.paso6manualA', [
+                    'email_empresa' => $email_empresa,
+                    'nombre_empresa' => $nombre_empresa,
+                    'direccion_obra' => $direccion_obra,
+                    'tipo_obra' => $tipo_obra,
+                    'tipo_funcionamiento' => $tipo_funcionamiento,
+
+                    'tipo_control' => $tipo_control,
+                    'motor_potencia' => $motor_potencia,
+                    'motor_marca' => $motor_marca,
+                    'motor_voltaje' => $motor_voltaje,
+                    'motor_encoder' => $motor_encoder,
+                    'motor_rescate' => $motor_rescate,
+
+                    'tipo_puerta' => $tipo_puerta,
+                ]);
+        }
+
+        if (($tipo_puerta == "MANUALES" || $tipo_puerta == "SEMIAUTOMÁTICAS") && ($tipo_control == 3 || $tipo_control == 4
+         || $tipo_control == 8 || $tipo_control == 9 || $tipo_control == 10)) { 
+            return view('new.paso6manualB', [
+                    'email_empresa' => $email_empresa,
+                    'nombre_empresa' => $nombre_empresa,
+                    'direccion_obra' => $direccion_obra,
+                    'tipo_obra' => $tipo_obra,
+                    'tipo_funcionamiento' => $tipo_funcionamiento,
+
+                    'tipo_control' => $tipo_control,
+                    'motor_potencia' => $motor_potencia,
+                    'motor_marca' => $motor_marca,
+                    'motor_voltaje' => $motor_voltaje,
+                    'motor_encoder' => $motor_encoder,
+                    'motor_rescate' => $motor_rescate,
+
+                    'tipo_puerta' => $tipo_puerta,
+                ]);
+        }
+
 
     }
 
@@ -239,6 +376,32 @@ class NuevoPedidoController extends Controller
 
         $puerta_marca = $request->input('puerta_marca');
         $puerta_voltaje = $request->input('puerta_voltaje');
+
+        if ($tipo_control == 5) { 
+
+            $accesos = "TRIPLE";
+
+            return view('new.paso8', [
+                    'email_empresa' => $email_empresa,
+                    'nombre_empresa' => $nombre_empresa,
+                    'direccion_obra' => $direccion_obra,
+                    'tipo_obra' => $tipo_obra,
+                    'tipo_funcionamiento' => $tipo_funcionamiento,
+
+                    'tipo_control' => $tipo_control,
+                    'motor_potencia' => $motor_potencia,
+                    'motor_marca' => $motor_marca,
+                    'motor_voltaje' => $motor_voltaje,
+                    'motor_encoder' => $motor_encoder,
+                    'motor_rescate' => $motor_rescate,
+
+                    'tipo_puerta' => $tipo_puerta,
+
+                    'puerta_marca' => $puerta_marca,
+                    'puerta_voltaje' => $puerta_voltaje,
+                    'accesos' => $accesos,
+                ]);
+        }
 
         
             return view('new.paso7', [
@@ -435,6 +598,41 @@ class NuevoPedidoController extends Controller
         }   
 
 
+
+
+        $vista =  null;
+        $estadoBotones = null;
+        return view('new.paso10', [ 
+                    'email_empresa' => $email_empresa,
+                    'nombre_empresa' => $nombre_empresa,
+                    'direccion_obra' => $direccion_obra,
+                    'tipo_obra' => $tipo_obra,
+                    'tipo_funcionamiento' => $tipo_funcionamiento,
+
+                    'tipo_control' => $tipo_control,
+                    'motor_potencia' => $motor_potencia,
+                    'motor_marca' => $motor_marca,
+                    'motor_voltaje' => $motor_voltaje,
+                    'motor_encoder' => $motor_encoder,
+                    'motor_rescate' => $motor_rescate,
+
+                    'tipo_puerta' => $tipo_puerta,
+
+                    'puerta_marca' => $puerta_marca,
+                    'puerta_voltaje' => $puerta_voltaje,
+
+                    'accesos' => $accesos,
+
+                    'tipo_botonera' => $tipo_botonera,
+                    'paradas' => $paradas,
+                    'subsuelos' => $subsuelos,
+
+                    'vista' => $vista,
+                    'estadoBotones' => $estadoBotones,
+                ]);
+
+
+
     }
 
 
@@ -468,10 +666,29 @@ class NuevoPedidoController extends Controller
         $tipo_botonera = $request->input('tipo_botonera');
         $paradas = $request->input('paradas');
         $subsuelos = $request->input('subsuelos');
-        
-        $estadoBotones = $request->input('estadoBotones');
 
+        $vista = $request->input('vista');
 
+        if ($vista == "simple") {
+            // Obtén los datos del formulario
+            $estadoBotones = $request->input('estadoBotones');
+        }
+
+        if ($vista == "dobleA") {
+            // Obtén los datos del formulario
+            $datosFormulario = $request->input('datosFormulario');
+
+            // Decodifica el JSON
+            $estadoBotones = json_decode($datosFormulario, true);
+        }
+
+        if ($vista == "dobleAyB") {
+            // Obtén los datos del formulario
+            $datosFormulario = $request->input('estadoBotonesJson');
+
+            // Decodifica el JSON
+            $estadoBotones = json_decode($datosFormulario, true);
+        }
 
 
         return view('new.paso10', [
@@ -499,6 +716,7 @@ class NuevoPedidoController extends Controller
                     'paradas' => $paradas,
                     'subsuelos' => $subsuelos,
 
+                    'vista' => $vista,
                     'estadoBotones' => $estadoBotones,
                 ]);
 
@@ -536,6 +754,8 @@ class NuevoPedidoController extends Controller
         
         $estadoBotones = $request->input('estadoBotones');
 
+        $vista = $request->input('vista');
+
         $placa_cabina = $request->input('placa_cabina');
         $indicador_cabina = $request->input('indicador_cabina');
         $indicador_pb = $request->input('indicador_pb');
@@ -543,6 +763,7 @@ class NuevoPedidoController extends Controller
 
         $tipo_funcionamiento_nombre = DB::table('tipos_funcionamientos')->where('id', $tipo_funcionamiento)->value('nombre');
         $tipo_control_nombre = DB::table('tipos_controles')->where('id', $tipo_control)->value('nombre');
+
 
         return view('new.paso11', [
                     'email_empresa' => $email_empresa,
@@ -569,6 +790,7 @@ class NuevoPedidoController extends Controller
                     'paradas' => $paradas,
                     'subsuelos' => $subsuelos,
 
+                    'vista' => $vista,
                     'estadoBotones' => $estadoBotones,
 
                     'placa_cabina' => $placa_cabina,

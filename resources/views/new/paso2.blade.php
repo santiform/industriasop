@@ -65,11 +65,11 @@
         </select>
     </div>
 
-
+@if ($tipo_funcionamiento == 1)
 <div class="form-group">
     <label for="motor_potencia">Potencia del Motor</label>
     <p>Escriba en números los HP del motor que necesita. Recuerde usar punto si es un valor con decimal.</p>
-    <input type="number" name="motor_potencia" class="form-control">
+    <input type="number" id="motor_potencia" name="motor_potencia" step="0.01" min="0" class="form-control">
 </div>
 
 
@@ -106,6 +106,53 @@
         <input type="text" id="motor_voltaje" name="motor_voltaje" class="form-control">
     </div>
 </div>
+
+@endif
+
+
+
+@if ($tipo_funcionamiento == 2)
+<div class="form-group">
+    <label for="motor_potencia">Potencia del Motor</label>
+    <p>Escriba en números los HP del motor que necesita. Recuerde usar punto si es un valor con decimal.</p>
+    <input type="number" id="motor_potencia" name="motor_potencia" step="0.01" min="0" class="form-control">
+</div>
+
+
+
+<div class="form-group">
+    <label for="motor_marca">Marca del Motor</label>
+    <select id="motor_marca" name="motor_marca" class="form-control" onchange="mostrarInputOtro('motor_marca')">
+        <option disabled selected>Seleccione una opción</option>
+        <option value="ADSUR">ADSUR</option>
+        <option value="REDUAR">REDUAR</option>
+        <option value="otra">Otro...</option>
+    </select>
+    <div class="campo-adicional" style="display: none;">
+        <label for="motor_marca">Ingrese un valor personalizado</label>
+        <input type="text" id="motor_marca" name="motor_marca" class="form-control">
+    </div>
+</div>
+
+
+
+      <div class="form-group">
+    <label for="motor_voltaje">Freno del Motor:</label>
+    <select id="motor_voltaje" name="motor_voltaje" class="form-control" onchange="mostrarInputOtro('motor_voltaje')">
+        <option disabled selected>Seleccione una opción</option>
+        <option value="FRENO 110V DC">FRENO 110V DC</option>
+        <option value="FRENO 110V AC">FRENO 110V AC</option>
+        <option value="FRENO 220V DC">FRENO 220V DC</option>
+        <option value="FRENO 220V AC">FRENO 220V AC</option>        
+        <option value="otra">Otro...</option>
+    </select>
+    <div class="campo-adicional" id="otro_motor_voltaje" style="display: none;">
+        <label for="motor_voltaje" class="labelpers">Ingrese un valor personalizado</label>
+        <input type="text" id="motor_voltaje" name="motor_voltaje" class="form-control">
+    </div>
+</div>
+
+@endif
 
 
 <div class="container">

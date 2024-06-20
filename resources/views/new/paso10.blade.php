@@ -76,6 +76,9 @@
     <input type="hidden" name="paradas" value="<?php echo htmlspecialchars($paradas, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="subsuelos" value="<?php echo htmlspecialchars($subsuelos, ENT_QUOTES, 'UTF-8'); ?>">
 
+    <!-- esto no se guarda en bd, es solo para lógica -->
+    <input type="hidden" name="vista" value="<?php echo htmlspecialchars($vista, ENT_QUOTES, 'UTF-8'); ?>">
+
     <!-- este grupo en la bd se guarda en la tabla "habilitaciones_accesos" -->
     <input type="hidden" name="estadoBotones" value="{{ htmlspecialchars(json_encode($estadoBotones), ENT_QUOTES, 'UTF-8') }}">
 

@@ -52,15 +52,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var botonera = document.getElementById('botonera');
 
-  crearEncabezado('A', botonera, true);
-  crearEncabezado('Pisos', botonera, true);
-  crearEncabezado('B', botonera, true);
+  crearEncabezado('A', botonera);
+  crearEncabezado('Pisos', botonera);
+  crearEncabezado('B', botonera);
   botonera.appendChild(document.createElement('br'));
 
   for (var i = totalPisos; i >= 0; i--) {
     crearBoton('A', botonera, i);
-    crearBoton(i == 0 ? 'PB' : i, botonera, false);
-    crearBoton('B', botonera, i, false);
+    crearBoton(i === 0 ? 'PB' : i, botonera, -1);
+    crearBoton('B', botonera, i);
     botonera.appendChild(document.createElement('br'));
     estadoBotonesMatriz.push([1, 0]);
   }
@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
   for (var i = -1; i >= -totalSubsuelos; i--) {
     var indicePositivo = totalPisos + Math.abs(i);
     crearBoton('A', botonera, indicePositivo);
-    crearBoton(i == 0 ? 'PB' : i, botonera, false);
-    crearBoton('B', botonera, -i, false);
+    crearBoton(i, botonera, -1);
+    crearBoton('B', botonera, indicePositivo);
     botonera.appendChild(document.createElement('br'));
     estadoBotonesMatriz.push([1, 0]);
   }
@@ -113,37 +113,47 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function actualizarInputsHidden() {
-    var datos = [];
-    var pisosPositivos = [];
-    var pisosNegativos = [];
-    
-    for (var i = 0; i <= totalPisos; i++) {
-      if (i === 0) {
-        pisosPositivos.unshift('PB');
-      } else {
-        pisosPositivos.unshift(i);
-      }
-    }
-    
-    for (var i = -1; i >= -totalSubsuelos; i--) {
-      pisosNegativos.push(i);
-    }
-    
-    var pisos = pisosPositivos.concat(pisosNegativos);
-    
-    for (var i = 0; i < estadoBotonesMatriz.length; i++) {
-      var estadoBoton = estadoBotonesMatriz[i];
-      var piso = pisos[i];
-      datos.push({
-        salida_a: estadoBoton[0],
-        piso: piso,
-        salida_b: estadoBoton[1]
-      });
-    }
-    
-    var inputHidden = document.getElementById('estadoBotonesJson');
-    inputHidden.value = JSON.stringify(datos);
+  var datos = [];
+  var pisos = [];
+
+  // Agregar los pisos positivos en orden descendente
+  for (var i = totalPisos; i > 0; i--) {
+    pisos.push(i);
   }
+  
+  // Agregar PB
+  pisos.push('PB');
+  
+  // Agregar los pisos negativos en orden ascendente
+  for (var i = -1; i >= -totalSubsuelos; i--) {
+    pisos.push(i);
+  }
+  
+  // Generar los datos en el orden deseado
+  for (var i = 0; i < pisos.length; i++) {
+    var piso = pisos[i];
+    var indice;
+
+    if (piso === 'PB') {
+      indice = 0;  // PB es el piso 0
+    } else if (piso > 0) {
+      indice = piso;  // Pisos positivos
+    } else {
+      indice = totalPisos + Math.abs(piso);  // Pisos negativos
+    }
+
+    var estadoBoton = estadoBotonesMatriz[indice];
+    datos.push({
+      salida_a: estadoBoton[0],
+      piso: piso,
+      salida_b: estadoBoton[1]
+    });
+  }
+  
+  var inputHidden = document.getElementById('estadoBotonesJson');
+  inputHidden.value = JSON.stringify(datos);
+}
+
 
   var inputHidden = document.createElement('input');
   inputHidden.type = 'hidden';
@@ -159,6 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
     formulario.submit();
   });
 });
+
 </script>
 
 
@@ -200,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
     <input type="hidden" name="paradas" value="<?php echo htmlspecialchars($paradas, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="subsuelos" value="<?php echo htmlspecialchars($subsuelos, ENT_QUOTES, 'UTF-8'); ?>">
 
-    
+    <input type="hidden" name="vista" value="dobleAyB">
 
   
     <div id="botonera" ></div>

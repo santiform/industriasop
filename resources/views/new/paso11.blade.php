@@ -71,6 +71,9 @@
     <!-- este grupo en  la bd se guarda en la tabla "accesos" -->
     <input type="hidden" name="accesos" value="<?php echo htmlspecialchars($accesos, ENT_QUOTES, 'UTF-8'); ?>">
 
+    <!-- esto no se guarda en bd, es solo para lógica -->
+    <input type="hidden" name="vista" value="<?php echo htmlspecialchars($vista, ENT_QUOTES, 'UTF-8'); ?>">
+
     <!-- este grupo en la bd se guarda en la tabla "detalles_generales" -->
     <input type="hidden" name="tipo_botonera" value="<?php echo htmlspecialchars($tipo_botonera, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="paradas" value="<?php echo htmlspecialchars($paradas, ENT_QUOTES, 'UTF-8'); ?>">
@@ -179,6 +182,70 @@
         </tr>
     </table>
 
+    <table>
+        <p class="titulo_resumen" >Puertas</p>
+        <tr>
+            <td>Tipo de puerta</td>
+            <td>{{$tipo_puerta}}</td>
+        </tr>
+        <tr>
+            <td>Marca de puerta</td>
+            <td>{{$puerta_marca}}</td>
+        </tr>
+        <tr>
+            <td>Voltaje de puerta</td>
+            <td>{{$puerta_voltaje}}</td>
+        </tr>
+    </table>
+
+    <table>
+        <p class="titulo_resumen" >Acceso</p>
+        <tr>
+            <td>Tipo de acceso</td>
+            <td>{{$accesos}}</td>
+        </tr>
+        <tr>
+            <td>Tipo de acceso</td>
+            <td>{{$tipo_botonera}}</td>
+        </tr>
+        <tr>
+            <td>Paradas</td>
+            <td>{{$paradas}}</td>
+        </tr>
+        <tr>
+            <td>Subsuelos</td>
+            <td>{{$subsuelos}}</td>
+        </tr>
+    </table>
+
+    <table>
+        <p class="titulo_resumen" >Habilitaciones de acceso</p>
+        <tr>
+            <td>Habilitaciones</td>
+            <td>{{$estadoBotones}}</td>
+        </tr>
+    </table>
+
+
+    <table>
+        <p class="titulo_resumen">Detalles generales</p>
+        <tr>
+            <td>Placa cabina</td>
+            <td>@php ({{$placa_cabina}}</td>
+        </tr>
+        <tr>
+            <td>Indicador de cabina</td>
+            <td>{{$indicador_cabina}}</td>
+        </tr>
+        <tr>
+            <td>Indicador de Planta Baja</td>
+            <td>{{$indicador_pb}}</td>
+        </tr>
+        <tr>
+            <td>Indicador de palier</td>
+            <td>{{$indicador_palier}}</td>
+        </tr>
+    </table>
 
 
 

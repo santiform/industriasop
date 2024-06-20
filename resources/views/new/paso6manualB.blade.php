@@ -43,7 +43,7 @@
 
   <h2 class="titleSection"> <div class="div-paso">3</div> Detalles de puerta</h2>  
 
-  <form action="{{ route('newPaso5') }}" method="POST" onsubmit="prepararEnvio(this)">
+  <form action="{{ route('newPaso7') }}" method="POST" onsubmit="prepararEnvio(this)">
     @csrf
 
 
@@ -63,23 +63,17 @@
 
     <!-- este grupo en  la bd se guarda en la tabla "tipos_puertas" -->
     <input type="hidden" name="tipo_puerta" value="<?php echo htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8'); ?>">
-
+    <input type="hidden" name="maca_puerta" value="{{ null }}">
 
 
     <div class="form-group">
-        <label for="puerta_marca">Marca de la puerta</label>
-        <select id="puerta_marca" name="puerta_marca" class="form-control">
+        <label for="puerta_voltaje">Voltaje de la puerta</label>
+        <select id="puerta_voltaje" name="puerta_voltaje" class="form-control">
             <option disabled selected>Seleccione una opción</option>
-            <option value="WILCOX">WILCOX</option>
-            <option value="FERMATOR">FERMATOR</option>
-            <option value="MAMUT">MAMUT</option>
-            <option value="COMPANY">COMPANY</option>
-            <option value="otra">Otras...</option>
+            <option value="220V">220V</option>
+            <option value="380V">380V</option>
+            <option value="VVF">VVF</option>
         </select>
-        <div class="campo-adicional" style="display: none;">
-            <label for="puerta_marca">Ingrese un valor personalizado</label>
-            <input type="text" id="puerta_marca" name="puerta_marca" class="form-control">
-        </div>
     </div>
 
 
