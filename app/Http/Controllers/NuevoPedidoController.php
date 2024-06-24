@@ -840,90 +840,123 @@ class NuevoPedidoController extends Controller
 
 
     public function enviarCorreoConAdjunto(Request $request)
-{
-    $nombre_empresa = $request->input('nombre');
-    $email_empresa = $request->input('email');
-    $telefono_empresa = $request->input('telefono');
-    $direccion_obra = $request->input('direccion_obra');
-    $tipo_obra = $request->input('tipo_obra');
-    $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+    {
+        $nombre_empresa = $request->input('nombre');
+        $email_empresa = $request->input('email');
+        $telefono_empresa = $request->input('telefono');
+        $direccion_obra = $request->input('direccion_obra');
+        $tipo_obra = $request->input('tipo_obra');
+        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+        $tipo_control = $request->input('tipo_control');
 
-    $tipo_control = $request->input('tipo_control');
-    $motor_potencia = $request->input('motor_potencia');
-    $motor_marca = $request->input('motor_marca');
-    $motor_voltaje = $request->input('motor_voltaje');
-    $motor_encoder = $request->input('motor_encoder');
-    $motor_rescate = $request->input('motor_rescate');
+        $id_estado = 1;
 
-    $tipo_puerta = $request->input('tipo_puerta');
+        DB::table('pedidos')->insert([
+            'id_tipo_obra' => $tipo_obra,
+            'id_tipo_funcionamiento' => $tipo_funcionamiento,
+            'id_tipo_control' => $tipo_control,
+            'id_estado' => $id_estado,
+            'nombre' => $nombre_empresa,
+            'email' => $email_empresa,
+            'telefono' => $telefono_empresa,
+            'direccion_obra' => $direccion_obra,
+            'created_at' => Now(),
+        ]);
 
-    $puerta_marca = $request->input('puerta_marca');
-    $puerta_voltaje = $request->input('puerta_voltaje');
+        
+        $motor_potencia = $request->input('motor_potencia');
+        $motor_marca = $request->input('motor_marca');
+        $motor_voltaje = $request->input('motor_voltaje');
+        $motor_encoder = $request->input('motor_encoder');
+        $motor_rescate = $request->input('motor_rescate');
 
-    $accesos = $request->input('accesos');
+        $id_pedido = DB::table('pedidos')
+                    ->orderBy('id', 'desc')
+                    ->first();
 
-    $tipo_botonera = $request->input('tipo_botonera');
-    $paradas = $request->input('paradas');
-    $subsuelos = $request->input('subsuelos');
-    
-    $estadoBotones = $request->input('estadoBotones');
+        DB::table('motores')->insert([
+            'id_pedido' => $id_pedido,
+            'marca' => $motor_marca,
+            'potencia' => $motor_potencia,
+            'voltaje' => $motor_voltaje,
+            'encoder' => $motor_encoder,
+            'rescate' => $motor_rescate,
+            'created_at' => Now(),
+        ]);
 
-    $vista = $request->input('vista');
+        $tipo_puerta = $request->input('tipo_puerta');
 
-    $placa_cabina = $request->input('placa_cabina');
-    $indicador_cabina = $request->input('indicador_cabina');
-    $indicador_pb = $request->input('indicador_pb');
-    $indicador_palier = $request->input('indicador_palier');
+        DB::table('tipos_puertas')->insert([
+            'id_tipo_control' => $tipo_control,
+            'nombre' => $tipo_puerta,
+            'created_at' => Now(),
+        ]);
 
-    $tipo_funcionamiento_nombre = DB::table('tipos_funcionamientos')->where('id', $tipo_funcionamiento)->value('nombre');
-    $tipo_control_nombre = DB::table('tipos_controles')->where('id', $tipo_control)->value('nombre');
+        $puerta_marca = $request->input('puerta_marca');
+        $puerta_voltaje = $request->input('puerta_voltaje');
 
-    $variables = [
-        'nombre_empresa' => $nombre_empresa,
-        'email_empresa' => $email_empresa,
-        'telefono_empresa' => $telefono_empresa,
-        'direccion_obra' => $direccion_obra,
-        'tipo_obra' => $tipo_obra,
-        'tipo_funcionamiento' => $tipo_funcionamiento,
-        'tipo_funcionamiento_nombre' => $tipo_funcionamiento_nombre,
-        'tipo_control' => $tipo_control,
-        'tipo_control_nombre' => $tipo_control_nombre,
-        'motor_potencia' => $motor_potencia,
-        'motor_marca' => $motor_marca,
-        'motor_voltaje' => $motor_voltaje,
-        'motor_encoder' => $motor_encoder,
-        'motor_rescate' => $motor_rescate,
-        'tipo_puerta' => $tipo_puerta,
-        'puerta_marca' => $puerta_marca,
-        'puerta_voltaje' => $puerta_voltaje,
-        'accesos' => $accesos,
-        'tipo_botonera' => $tipo_botonera,
-        'paradas' => $paradas,
-        'subsuelos' => $subsuelos,
-        'estadoBotones' => $estadoBotones,
-        'vista' => $vista,
-        'placa_cabina' => $placa_cabina,
-        'indicador_cabina' => $indicador_cabina,
-        'indicador_pb' => $indicador_pb,
-        'indicador_palier' => $indicador_palier,
-    ];
+        $accesos = $request->input('accesos');
 
-    // Generar el PDF
-    $pdf = PDF::loadView('emails.pdf', $variables);
-    $pdfPath = storage_path('app/public/documento.pdf');
-    $pdf->save($pdfPath);
+        $tipo_botonera = $request->input('tipo_botonera');
+        $paradas = $request->input('paradas');
+        $subsuelos = $request->input('subsuelos');
+        
+        $estadoBotones = $request->input('estadoBotones');
 
-    // Detalles del correo
-    $detalles = [
-        'nombre' => 'Juan Perez',
-        'mensaje' => 'Adjunto documentación solicitada.'
-    ];
+        $vista = $request->input('vista');
 
-    // Enviar el correo con el PDF adjunto
-    Mail::to('santiform@gmail.com')->send(new MiCorreoConAdjunto($detalles, 'documento.pdf'));
+        $placa_cabina = $request->input('placa_cabina');
+        $indicador_cabina = $request->input('indicador_cabina');
+        $indicador_pb = $request->input('indicador_pb');
+        $indicador_palier = $request->input('indicador_palier');
 
-    return "Correo con adjunto enviado con éxito!";
-}
+        $tipo_funcionamiento_nombre = DB::table('tipos_funcionamientos')->where('id', $tipo_funcionamiento)->value('nombre');
+        $tipo_control_nombre = DB::table('tipos_controles')->where('id', $tipo_control)->value('nombre');
+
+        $variables = [
+            'nombre_empresa' => $nombre_empresa,
+            'email_empresa' => $email_empresa,
+            'telefono_empresa' => $telefono_empresa,
+            'direccion_obra' => $direccion_obra,
+            'tipo_obra' => $tipo_obra,
+            'tipo_funcionamiento' => $tipo_funcionamiento,
+            'tipo_funcionamiento_nombre' => $tipo_funcionamiento_nombre,
+            'tipo_control' => $tipo_control,
+            'tipo_control_nombre' => $tipo_control_nombre,
+            'motor_potencia' => $motor_potencia,
+            'motor_marca' => $motor_marca,
+            'motor_voltaje' => $motor_voltaje,
+            'motor_encoder' => $motor_encoder,
+            'motor_rescate' => $motor_rescate,
+            'tipo_puerta' => $tipo_puerta,
+            'puerta_marca' => $puerta_marca,
+            'puerta_voltaje' => $puerta_voltaje,
+            'accesos' => $accesos,
+            'tipo_botonera' => $tipo_botonera,
+            'paradas' => $paradas,
+            'subsuelos' => $subsuelos,
+            'estadoBotones' => $estadoBotones,
+            'vista' => $vista,
+            'placa_cabina' => $placa_cabina,
+            'indicador_cabina' => $indicador_cabina,
+            'indicador_pb' => $indicador_pb,
+            'indicador_palier' => $indicador_palier,
+        ];
+
+        // Generar el PDF
+        $pdf = PDF::loadView('emails.pdf', $variables);
+        $pdfPath = storage_path('app/public/documento.pdf');
+        $pdf->save($pdfPath);
+
+        // Nombre del pdf
+        $archivoPdf = "documento.pdf";
+
+        // Enviar el correo con el PDF adjunto
+        Mail::to('santiform@gmail.com')->send(new MiCorreoConAdjunto($archivoPdf));
+        Mail::to('divoxsoluciones@gmail.com')->send(new MiCorreoConAdjunto($archivoPdf));
+
+        return "Correo con adjunto enviado con éxito!";
+    }
 
 
 

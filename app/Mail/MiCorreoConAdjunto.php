@@ -13,9 +13,8 @@ class MiCorreoConAdjunto extends Mailable
     public $detalles;
     public $archivoPdf;
 
-    public function __construct($detalles, $archivoPdf)
+    public function __construct($archivoPdf)
     {
-        $this->detalles = $detalles;
         $this->archivoPdf = $archivoPdf;
     }
 
