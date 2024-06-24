@@ -63,3 +63,6 @@ Auth::routes();
     Route::post('/nuevo/paso10', [App\Http\Controllers\NuevoPedidoController::class, 'paso10'])->name('newPaso10');
 
     Route::post('/nuevo/paso11', [App\Http\Controllers\NuevoPedidoController::class, 'paso11'])->name('newPaso11');
+
+    Route::post('/enviar-correo-con-adjunto', [App\Http\Controllers\NuevoPedidoController::class, 'enviarCorreoConAdjunto'])->name('newPaso12');
+;

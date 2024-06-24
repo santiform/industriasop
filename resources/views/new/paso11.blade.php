@@ -41,9 +41,9 @@
 
 <div class="formulario">
 
-  <h2 class="titleSection"> <div class="div-paso">4</div> Detalles generales</h2>  
+  <h2 class="titleSection"> <div class="div-paso">5</div> Confirmación</h2>  
 
-  <form action="{{ route('newPaso11') }}" method="POST">
+  <form action="{{ route('newPaso12') }}" method="POST">
     @csrf
 
 
@@ -205,10 +205,6 @@
             <td>{{$accesos}}</td>
         </tr>
         <tr>
-            <td>Tipo de acceso</td>
-            <td>{{$tipo_botonera}}</td>
-        </tr>
-        <tr>
             <td>Paradas</td>
             <td>{{$paradas}}</td>
         </tr>
@@ -231,7 +227,7 @@
         <p class="titulo_resumen">Detalles generales</p>
         <tr>
             <td>Placa cabina</td>
-            <td>@php ({{$placa_cabina}}</td>
+            <td>{{$placa_cabina}}</td>
         </tr>
         <tr>
             <td>Indicador de cabina</td>
