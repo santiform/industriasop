@@ -61,12 +61,16 @@
             <td>{{$email_empresa}}</td>
         </tr>
         <tr>
+            <td>Teléfono empresa</td>
+            <td>{{$telefono_empresa}}</td>
+        </tr>
+        <tr>
             <td>Dirección de obra</td>
             <td>{{$direccion_obra}}</td>
         </tr>
         <tr>
             <td>Tipo de obra</td>
-            <td>{{$tipo_obra}}</td>
+            <td>{{$tipo_obra_nombre}}</td>
         </tr>
         <tr>
             <td>Tipo de funcionamiento</td>
@@ -97,6 +101,11 @@
             <td>Encoder</td>
             <td>{{$motor_encoder}}</td>
         </tr>
+        <tr>
+            <td>Rescate</td>
+            <td>@if ($motor_rescate == 0) No @endif
+                @if ($motor_rescate == 1) Sí @endif</td>
+        </tr>
     </table>
 
     <table>
@@ -112,6 +121,10 @@
         <tr>
             <td>Voltaje de puerta</td>
             <td>{{$puerta_voltaje}}</td>
+        </tr>
+        <tr>
+            <td>Patin retráctil</td>
+            <td>{{$patin_retractil}}</td>
         </tr>
     </table>
 
@@ -144,18 +157,22 @@
         <p class="titulo_resumen">Detalles generales</p>
         <tr>
             <td>Placa cabina</td>
-            <td>{{$placa_cabina}}</td>
+            <td>@if ($placa_cabina == 0) No @endif
+                @if ($placa_cabina == 1) Sí @endif</td>
         </tr>
         <tr>
             <td>Indicador de cabina</td>
-            <td>{{$indicador_cabina}}</td>
+            <td>@if ($indicador_cabina == 0) No @endif
+                @if ($indicador_cabina == 1) Sí @endif</td>
         </tr>
         <tr>
             <td>Indicador de Planta Baja</td>
-            <td>{{$indicador_pb}}</td>
+            <td>@if ($indicador_pb == 0) No @endif
+                @if ($indicador_pb == 1) Sí @endif</td>
         </tr>
         <tr>
             <td>Indicador de palier</td>
-            <td>{{$indicador_palier}}</td>
+            <td>@if ($indicador_palier == 0) No @endif
+                @if ($indicador_palier == 1) Sí @endif</td>
         </tr>
     </table>

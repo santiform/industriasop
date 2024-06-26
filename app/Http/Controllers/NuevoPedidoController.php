@@ -65,8 +65,6 @@ class NuevoPedidoController extends Controller
         $motor_marca = $request->input('motor_marca');
         $motor_voltaje = $request->input('motor_voltaje');
 
-        dd($motor_marca, $motor_voltaje);
-
         if ($tipo_control == 8 || $tipo_control == 9 || $tipo_control == 10) {    
             return view('new.paso3', [
                 'nombre_empresa' => $nombre_empresa,
@@ -90,6 +88,7 @@ class NuevoPedidoController extends Controller
         $request->session()->put('datos', [
             'email_empresa' => $email_empresa,
             'nombre_empresa' => $nombre_empresa,
+            'telefono_empresa' => $telefono_empresa,
             'direccion_obra' => $direccion_obra,
             'tipo_obra' => $tipo_obra,
             'tipo_funcionamiento' => $tipo_funcionamiento,
@@ -191,7 +190,7 @@ class NuevoPedidoController extends Controller
 
         $tipo_control_2 = $request->input('tipo_control');
 
-        if ($tipo_control_2 !== null) {    
+        if ($tipo_control_2 !== null) {
             $nombre_empresa = $request->input('nombre_empresa');
             $email_empresa = $request->input('email_empresa');
             $telefono_empresa = $request->input('telefono_empresa');
@@ -205,6 +204,23 @@ class NuevoPedidoController extends Controller
             $motor_voltaje = $request->input('motor_voltaje');
             $motor_encoder = $request->input('motor_encoder');
             $motor_rescate = $request->input('motor_rescate');
+
+            return view('new.paso5mecanico', [
+                'nombre_empresa' => $nombre_empresa,
+                'email_empresa' => $email_empresa,
+                'telefono_empresa' => $telefono_empresa,
+                'direccion_obra' => $direccion_obra,
+                'tipo_obra' => $tipo_obra,
+                'tipo_funcionamiento' => $tipo_funcionamiento,
+
+                'tipo_control' => $tipo_control,
+                'motor_potencia' => $motor_potencia,
+                'motor_marca' => $motor_marca,
+                'motor_voltaje' => $motor_voltaje,
+                'motor_encoder' => $motor_encoder,
+                'motor_rescate' => $motor_rescate,
+            ]);
+
         }
 
         if ($tipo_control == 1 || $tipo_control == 2) { 
@@ -500,7 +516,6 @@ class NuevoPedidoController extends Controller
         $patin_retractil = $request->input('patin_retractil');
 
         $accesos = $request->input('accesos');
-
         
             return view('new.paso8', [
                     'nombre_empresa' => $nombre_empresa,
@@ -824,7 +839,7 @@ class NuevoPedidoController extends Controller
 
         $tipo_funcionamiento_nombre = DB::table('tipos_funcionamientos')->where('id', $tipo_funcionamiento)->value('nombre');
         $tipo_control_nombre = DB::table('tipos_controles')->where('id', $tipo_control)->value('nombre');
-
+        $tipo_obra_nombre = DB::table('tipos_obras')->where('id', $tipo_obra)->value('nombre');
 
         return view('new.paso11', [
                     'nombre_empresa' => $nombre_empresa,
@@ -867,6 +882,7 @@ class NuevoPedidoController extends Controller
 
                     'tipo_funcionamiento_nombre' => $tipo_funcionamiento_nombre,
                     'tipo_control_nombre' => $tipo_control_nombre,
+                    'tipo_obra_nombre' => $tipo_obra_nombre,
 
                 ]);
 
@@ -907,12 +923,15 @@ class NuevoPedidoController extends Controller
         $motor_encoder = $request->input('motor_encoder');
         $motor_rescate = $request->input('motor_rescate');
 
-        $id_pedido = DB::table('pedidos')
+        $id_pedido_old = DB::table('pedidos')
                     ->orderBy('id', 'desc')
                     ->first();
 
+        $id_pedido = $id_pedido_old->id;
+
         DB::table('motores')->insert([
             'id_pedido' => $id_pedido,
+            'id_tipo_control' => $tipo_control,
             'marca' => $motor_marca,
             'potencia' => $motor_potencia,
             'voltaje' => $motor_voltaje,
@@ -924,15 +943,32 @@ class NuevoPedidoController extends Controller
         $tipo_puerta = $request->input('tipo_puerta');
 
         DB::table('tipos_puertas')->insert([
+            'id_pedido' => $id_pedido,
             'id_tipo_control' => $tipo_control,
             'nombre' => $tipo_puerta,
             'created_at' => Now(),
         ]);
 
+
         $puerta_marca = $request->input('puerta_marca');
         $puerta_voltaje = $request->input('puerta_voltaje');
+        $patin_retractil = $request->input('patin_retractil');
+
+        DB::table('detalles_puertas')->insert([
+            'id_pedido' => $id_pedido,
+            'marca' => $puerta_marca,
+            'voltaje' => $puerta_voltaje,
+            'patin_retractil' => $patin_retractil,
+            'created_at' => Now(),
+        ]);        
 
         $accesos = $request->input('accesos');
+
+        DB::table('accesos')->insert([
+            'id_pedido' => $id_pedido,
+            'nombre' => $accesos,
+            'created_at' => Now(),
+        ]);
 
         $tipo_botonera = $request->input('tipo_botonera');
         $paradas = $request->input('paradas');
@@ -949,6 +985,7 @@ class NuevoPedidoController extends Controller
 
         $tipo_funcionamiento_nombre = DB::table('tipos_funcionamientos')->where('id', $tipo_funcionamiento)->value('nombre');
         $tipo_control_nombre = DB::table('tipos_controles')->where('id', $tipo_control)->value('nombre');
+        $tipo_obra_nombre = DB::table('tipos_obras')->where('id', $tipo_obra)->value('nombre');
 
         $variables = [
             'nombre_empresa' => $nombre_empresa,
@@ -968,6 +1005,7 @@ class NuevoPedidoController extends Controller
             'tipo_puerta' => $tipo_puerta,
             'puerta_marca' => $puerta_marca,
             'puerta_voltaje' => $puerta_voltaje,
+            'patin_retractil' => $patin_retractil,
             'accesos' => $accesos,
             'tipo_botonera' => $tipo_botonera,
             'paradas' => $paradas,
@@ -978,6 +1016,11 @@ class NuevoPedidoController extends Controller
             'indicador_cabina' => $indicador_cabina,
             'indicador_pb' => $indicador_pb,
             'indicador_palier' => $indicador_palier,
+
+            'tipo_funcionamiento_nombre' => $tipo_funcionamiento_nombre,
+            'tipo_control_nombre' => $tipo_control_nombre,
+            'tipo_obra_nombre' => $tipo_obra_nombre,
+
         ];
 
         // Generar el PDF

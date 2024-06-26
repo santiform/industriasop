@@ -50,6 +50,7 @@
     <!-- este grupo en  la bd se guarda en la tabla "pedidos" -->
     <input type="hidden" name="email_empresa" value="<?php echo htmlspecialchars($email_empresa, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="nombre_empresa" value="<?php echo htmlspecialchars($nombre_empresa, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="telefono_empresa" value="<?php echo htmlspecialchars($telefono_empresa, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="direccion_obra" value="<?php echo htmlspecialchars($direccion_obra, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="tipo_obra" value="<?php echo htmlspecialchars($tipo_obra, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="tipo_funcionamiento" value="<?php echo htmlspecialchars($tipo_funcionamiento, ENT_QUOTES, 'UTF-8'); ?>">
@@ -84,8 +85,8 @@
         <option value="otra">Otro...</option>
     </select>
     <div class="campo-adicional" style="display: none;">
-        <label for="motor_marca">Ingrese un valor personalizado</label>
-        <input type="text" id="motor_marca" name="motor_marca" class="form-control">
+        <label for="motor_marca_pers">Ingrese un valor personalizado</label>
+        <input type="text" id="motor_marca_pers" name="motor_marca_pers" class="form-control">
     </div>
 </div>
 
@@ -101,9 +102,9 @@
         <option value="BOBINA 12V DC">BOBINA 12V DC</option>
         <option value="otra">Otro...</option>
     </select>
-    <div class="campo-adicional" style="display: none;">
-        <label for="motor_voltaje">Ingrese un valor personalizado</label>
-        <input type="text" id="motor_voltaje" name="motor_voltaje" class="form-control">
+    <div class="campo-adicional" id="motor_voltaje" style="display: none;">
+        <label for="motor_voltaje_pers" >Ingrese un valor personalizado</label>
+        <input type="text" id="motor_voltaje_pers" name="motor_voltaje_pers" class="form-control">
     </div>
 </div>
 
@@ -129,8 +130,8 @@
         <option value="otra">Otro...</option>
     </select>
     <div class="campo-adicional" style="display: none;">
-        <label for="motor_marca">Ingrese un valor personalizado</label>
-        <input type="text" id="motor_marca" name="motor_marca" class="form-control">
+        <label for="motor_marca_pers">Ingrese un valor personalizado</label>
+        <input type="text" id="motor_marca_pers" name="motor_marca_pers" class="form-control">
     </div>
 </div>
 
@@ -146,9 +147,9 @@
         <option value="FRENO 220V AC">FRENO 220V AC</option>        
         <option value="otra">Otro...</option>
     </select>
-   <div class="campo-adicional" style="display: none;">
-        <label for="motor_voltaje">Ingrese un valor personalizado</label>
-        <input type="text" id="motor_voltaje" name="motor_voltaje" class="form-control">
+    <div class="campo-adicional" id="motor_voltaje" style="display: none;">
+        <label for="motor_voltaje_pers" >Ingrese un valor personalizado</label>
+        <input type="text" id="motor_voltaje_pers" name="motor_voltaje_pers" class="form-control">
     </div>
 </div>
 

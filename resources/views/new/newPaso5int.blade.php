@@ -10,6 +10,7 @@
         @csrf
         <input type="hidden" name="email_empresa" value="{{ $datos['email_empresa'] }}">
         <input type="hidden" name="nombre_empresa" value="{{ $datos['nombre_empresa'] }}">
+        <input type="hidden" name="telefono_empresa" value="{{ $datos['telefono_empresa'] }}">
         <input type="hidden" name="direccion_obra" value="{{ $datos['direccion_obra'] }}">
         <input type="hidden" name="tipo_obra" value="{{ $datos['tipo_obra'] }}">
         <input type="hidden" name="tipo_funcionamiento" value="{{ $datos['tipo_funcionamiento'] }}">

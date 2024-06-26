@@ -1,54 +1,24 @@
 // opcionOtra.js
 
-document.addEventListener('DOMContentLoaded', function() {
-    var selects = document.querySelectorAll('select');
+function mostrarCampoAdicional(selectId) {
+    var select = document.getElementById(selectId);
+    if (!select) return; // Salir si el select no se encuentra
 
-    selects.forEach(function(select) {
-        select.addEventListener('change', function() {
-            mostrarInputOtro(select);
-        });
-
-        // Restaurar estado desde localStorage si está almacenado
-        var storedValue = localStorage.getItem(select.id);
-        if (storedValue) {
-            select.value = storedValue;
-            mostrarInputOtro(select);
-        }
-    });
-
-    var form = document.querySelector('form');
-    if (form) {
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Evitar envío automático del formulario
-            prepararEnvio(form);
-        });
-    } else {
-        console.error('Formulario no encontrado en la página.');
-    }
-});
-
-function mostrarInputOtro(select) {
     var campoAdicional = select.nextElementSibling;
-    if (!campoAdicional) {
-        console.error('Campo adicional no encontrado para el select:', select);
-        return;
-    }
-    
+    if (!campoAdicional) return; // Salir si no hay un siguiente elemento después del select
+
     var inputAdicional = campoAdicional.querySelector('input');
-    if (!inputAdicional) {
-        console.error('Input adicional no encontrado para el campo adicional:', campoAdicional);
-        return;
-    }
+    if (!inputAdicional) return; // Salir si no se encuentra un input dentro del campo adicional
 
     if (select.value === "otra") {
         campoAdicional.style.display = "block";
-        inputAdicional.setAttribute('name', select.name); // Asignar nombre original al input
-        select.removeAttribute('name'); // Quitar nombre del select para evitar confusión
+        // Asignar el nombre original del select al input adicional
+        inputAdicional.setAttribute('name', select.getAttribute('name').replace('_pers', ''));
     } else {
         campoAdicional.style.display = "none";
-        inputAdicional.value = ""; // Limpiar valor del input adicional
-        inputAdicional.removeAttribute('name'); // Remover nombre del input si no se selecciona "otra"
-        select.setAttribute('name', select.id); // Restaurar nombre original del select
+        inputAdicional.value = ""; // Limpiar el valor del campo adicional si está visible
+        // Remover el nombre del input adicional para evitar enviarlo
+        inputAdicional.removeAttribute('name');
     }
 }
 
@@ -58,40 +28,85 @@ function prepararEnvio(form) {
     selects.forEach(function(select) {
         var campoAdicional = select.nextElementSibling;
         if (!campoAdicional) {
-            console.error('Campo adicional no encontrado para el select:', select);
-            return;
+            console.error('Campo adicional no encontrado para:', select.id);
+            return; // Salir si no hay un siguiente elemento después del select
         }
 
         var inputAdicional = campoAdicional.querySelector('input');
         if (!inputAdicional) {
-            console.error('Input adicional no encontrado para el campo adicional:', campoAdicional);
-            return;
+            console.error('Input adicional no encontrado para:', select.id);
+            return; // Salir si no se encuentra un input dentro del campo adicional
         }
 
         var valorParaEnviar;
         var nombreCampo;
 
         if (select.value === "otra") {
-            valorParaEnviar = inputAdicional.value.trim(); // Obtener valor del input adicional
-            nombreCampo = select.name; // Obtener nombre original del select
+            valorParaEnviar = inputAdicional.value.trim(); // Obtener el valor del campo adicional
+            nombreCampo = select.getAttribute('name').replace('_pers', ''); // Obtener el nombre del select sin _pers
+            inputAdicional.setAttribute('name', nombreCampo); // Asignar el nombre del select al input sin el sufijo _pers
+            select.removeAttribute('name'); // Remover el nombre del select para evitar confusión al enviar el formulario
+
             if (valorParaEnviar === "") {
                 console.log('Input adicional está vacío para:', select.id);
-                return; // Evitar enviar valor vacío
+                return; // Salir de la función para no enviar un valor vacío
             }
         } else {
             valorParaEnviar = select.value;
-            nombreCampo = select.name;
+            nombreCampo = select.getAttribute('name');
         }
 
-        console.log('Campo:', nombreCampo, 'Valor a enviar:', valorParaEnviar);
-        // Aquí deberías enviar los datos usando nombreCampo y valorParaEnviar
+        console.log('Campo:', nombreCampo, 'Valor a enviar:', valorParaEnviar); // Log para depurar
+        // Aquí deberías enviar el dato usando el nombreCampo y valorParaEnviar
         // enviarDato(valorParaEnviar, nombreCampo);
     });
 
-    // Enviar formulario después de procesar datos
+    // Aquí envía el formulario después de procesar los datos
     form.submit();
 }
 
 function enviarDato(valor, nombreCampo) {
+    // Simula el envío del dato (aquí deberías implementar la lógica real para enviar los datos)
     console.log('Campo:', nombreCampo, 'Valor a enviar:', valor);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    var selects = document.querySelectorAll('select');
+
+    selects.forEach(function(select) {
+        // Añadir evento 'change' para mostrar/ocultar el campo adicional y guardar el estado
+        select.addEventListener('change', function() {
+            mostrarCampoAdicional(select.id);
+            if (select.value === "otra") {
+                localStorage.setItem(select.id, "otra");
+            } else {
+                localStorage.removeItem(select.id);
+            }
+        });
+
+        // Restaurar el estado del select y el campo adicional si hay un valor almacenado
+        var storedValue = localStorage.getItem(select.id);
+        if (storedValue) {
+            select.value = storedValue;
+            mostrarCampoAdicional(select.id);
+        }
+    });
+
+    // Manejar cambios directos en los campos de texto asociados a "otra"
+    var inputsAdicionales = document.querySelectorAll('.campo-adicional input');
+
+    inputsAdicionales.forEach(function(input) {
+        input.addEventListener('input', function() {
+            var selectId = input.parentElement.previousElementSibling.id;
+            mostrarCampoAdicional(selectId);
+        });
+    });
+
+    // Manejar el envío del formulario al hacer clic en el botón "Siguiente"
+    var form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Evitar el envío automático del formulario para controlarlo manualmente
+        prepararEnvio(form);
+        // Aquí podrías agregar la lógica para enviar el formulario utilizando AJAX u otro método
+    });
+});

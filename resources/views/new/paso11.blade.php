@@ -50,6 +50,7 @@
     <!-- este grupo en  la bd se guarda en la tabla "pedidos" -->
     <input type="hidden" name="email_empresa" value="<?php echo htmlspecialchars($email_empresa, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="nombre_empresa" value="<?php echo htmlspecialchars($nombre_empresa, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="telefono_empresa" value="<?php echo htmlspecialchars($telefono_empresa, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="direccion_obra" value="<?php echo htmlspecialchars($direccion_obra, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="tipo_obra" value="<?php echo htmlspecialchars($tipo_obra, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="tipo_funcionamiento" value="<?php echo htmlspecialchars($tipo_funcionamiento, ENT_QUOTES, 'UTF-8'); ?>">
@@ -60,6 +61,8 @@
     <input type="hidden" name="motor_marca" value="<?php echo htmlspecialchars($motor_marca, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_voltaje" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
     <input type="hidden" name="motor_encoder" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="motor_rescate" value="<?php echo htmlspecialchars($motor_rescate, ENT_QUOTES, 'UTF-8'); ?>">
+    <input type="hidden" name="patin_retractil" value="<?php echo htmlspecialchars($patin_retractil, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- este grupo en  la bd se guarda en la tabla "tipos_puertas" -->
     <input type="hidden" name="tipo_puerta" value="<?php echo htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8'); ?>">
@@ -144,12 +147,16 @@
             <td>{{$email_empresa}}</td>
         </tr>
         <tr>
+            <td>Teléfono empresa</td>
+            <td>{{$telefono_empresa}}</td>
+        </tr>
+        <tr>
             <td>Dirección de obra</td>
             <td>{{$direccion_obra}}</td>
         </tr>
         <tr>
             <td>Tipo de obra</td>
-            <td>{{$tipo_obra}}</td>
+            <td>{{$tipo_obra_nombre}}</td>
         </tr>
         <tr>
             <td>Tipo de funcionamiento</td>
@@ -180,6 +187,11 @@
             <td>Encoder</td>
             <td>{{$motor_encoder}}</td>
         </tr>
+        <tr>
+            <td>Rescate</td>
+            <td>@if ($motor_rescate == 0) No @endif
+                @if ($motor_rescate == 1) Sí @endif</td>
+        </tr>
     </table>
 
     <table>
@@ -195,6 +207,10 @@
         <tr>
             <td>Voltaje de puerta</td>
             <td>{{$puerta_voltaje}}</td>
+        </tr>
+        <tr>
+            <td>Patin retráctil</td>
+            <td>{{$patin_retractil}}</td>
         </tr>
     </table>
 
@@ -218,7 +234,9 @@
         <p class="titulo_resumen" >Habilitaciones de acceso</p>
         <tr>
             <td>Habilitaciones</td>
-            <td>{{$estadoBotones}}</td>
+            <td>{{$estadoBotones}}
+                <div id="tabla"></div>
+            </td>
         </tr>
     </table>
 
@@ -227,19 +245,23 @@
         <p class="titulo_resumen">Detalles generales</p>
         <tr>
             <td>Placa cabina</td>
-            <td>{{$placa_cabina}}</td>
+            <td>@if ($placa_cabina == 0) No @endif
+                @if ($placa_cabina == 1) Sí @endif</td>
         </tr>
         <tr>
             <td>Indicador de cabina</td>
-            <td>{{$indicador_cabina}}</td>
+            <td>@if ($indicador_cabina == 0) No @endif
+                @if ($indicador_cabina == 1) Sí @endif</td>
         </tr>
         <tr>
             <td>Indicador de Planta Baja</td>
-            <td>{{$indicador_pb}}</td>
+            <td>@if ($indicador_pb == 0) No @endif
+                @if ($indicador_pb == 1) Sí @endif</td>
         </tr>
         <tr>
             <td>Indicador de palier</td>
-            <td>{{$indicador_palier}}</td>
+            <td>@if ($indicador_palier == 0) No @endif
+                @if ($indicador_palier == 1) Sí @endif</td>
         </tr>
     </table>
 
@@ -265,5 +287,43 @@
 </div>
 
 </div>
+
+<script>
+    var datos = @json($estadoBotones); // Convertir la variable PHP a JavaScript
+
+    // Función para generar la tabla HTML dinámicamente
+    function generarTabla(datos) {
+        var columnas = [];
+        datos.forEach(function(obj) {
+            Object.keys(obj).forEach(function(key) {
+                if (!columnas.includes(key)) {
+                    columnas.push(key);
+                }
+            });
+        });
+
+        var tablaHtml = '<table border="1">';
+        tablaHtml += '<tr>';
+        columnas.forEach(function(columna) {
+            tablaHtml += '<th>' + columna + '</th>';
+        });
+        tablaHtml += '</tr>';
+
+        datos.forEach(function(obj) {
+            tablaHtml += '<tr>';
+            columnas.forEach(function(columna) {
+                tablaHtml += '<td>' + obj[columna] + '</td>';
+            });
+            tablaHtml += '</tr>';
+        });
+
+        tablaHtml += '</table>';
+        return tablaHtml;
+    }
+
+    var tablaGenerada = generarTabla(datos);
+    document.getElementById('tabla').innerHTML = tablaGenerada;
+</script>
+
 
 <?php include '../resources/views/new/includes/footer.blade.php'; ?>

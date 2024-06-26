@@ -155,6 +155,7 @@
                 <!-- Este grupo en la BD se guarda en la tabla "pedidos" -->
                 <input type="hidden" name="email_empresa" value="{{ htmlspecialchars($email_empresa, ENT_QUOTES, 'UTF-8') }}">
                 <input type="hidden" name="nombre_empresa" value="{{ htmlspecialchars($nombre_empresa, ENT_QUOTES, 'UTF-8') }}">
+                <input type="hidden" name="telefono_empresa" value="<?php echo htmlspecialchars($telefono_empresa, ENT_QUOTES, 'UTF-8'); ?>">
                 <input type="hidden" name="direccion_obra" value="{{ htmlspecialchars($direccion_obra, ENT_QUOTES, 'UTF-8') }}">
                 <input type="hidden" name="tipo_obra" value="{{ htmlspecialchars($tipo_obra, ENT_QUOTES, 'UTF-8') }}">
                 <input type="hidden" name="tipo_funcionamiento" value="{{ htmlspecialchars($tipo_funcionamiento, ENT_QUOTES, 'UTF-8') }}">
@@ -165,6 +166,7 @@
                 <input type="hidden" name="motor_marca" value="{{ htmlspecialchars($motor_marca, ENT_QUOTES, 'UTF-8') }}">
                 <input type="hidden" name="motor_voltaje" value="{{ htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8') }}">
                 <input type="hidden" name="motor_encoder" value="{{ htmlspecialchars($motor_encoder, ENT_QUOTES, 'UTF-8') }}">
+                <input type="hidden" name="motor_rescate" value="<?php echo htmlspecialchars($motor_rescate, ENT_QUOTES, 'UTF-8'); ?>">
 
                 <!-- Este grupo en la BD se guarda en la tabla "tipos_puertas" -->
                 <input type="hidden" name="tipo_puerta" value="{{ htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8') }}">
@@ -172,6 +174,7 @@
                 <!-- Este grupo en la BD se guarda en la tabla "detalles_puertas" -->
                 <input type="hidden" name="puerta_marca" value="{{ htmlspecialchars($puerta_marca, ENT_QUOTES, 'UTF-8') }}">
                 <input type="hidden" name="puerta_voltaje" value="{{ htmlspecialchars($puerta_voltaje, ENT_QUOTES, 'UTF-8') }}">
+                <input type="hidden" name="patin_retractil" value="<?php echo htmlspecialchars($patin_retractil, ENT_QUOTES, 'UTF-8'); ?>">
 
                 <!-- este grupo en  la bd se guarda en la tabla "accesos" -->
                 <input type="hidden" name="accesos" value="<?php echo htmlspecialchars($accesos, ENT_QUOTES, 'UTF-8'); ?>">
