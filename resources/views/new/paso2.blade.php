@@ -76,7 +76,7 @@
 
 <div class="form-group">
     <label for="motor_marca">Marca del Motor</label>
-    <select id="motor_marca" name="motor_marca" class="form-control" onchange="mostrarInputOtro('motor_marca')">
+    <select id="motor_marca" name="motor_marca" class="form-control">
         <option disabled selected>Seleccione una opción</option>
         <option value="MORRIS">MORRIS</option>
         <option value="ROJAS">ROJAS</option>
@@ -93,7 +93,7 @@
 
       <div class="form-group">
     <label for="motor_voltaje">Voltaje del Motor:</label>
-    <select id="motor_voltaje" name="motor_voltaje" class="form-control" onchange="mostrarInputOtro('motor_voltaje')">
+    <select id="motor_voltaje" name="motor_voltaje" class="form-control" >
         <option disabled selected>Seleccione una opción</option>
         <option value="BOBINA 48V DC">BOBINA 48V DC</option>
         <option value="BOBINA 220V AC">BOBINA 220V AC</option>
@@ -101,8 +101,8 @@
         <option value="BOBINA 12V DC">BOBINA 12V DC</option>
         <option value="otra">Otro...</option>
     </select>
-    <div class="campo-adicional" id="otro_motor_voltaje" style="display: none;">
-        <label for="motor_voltaje" class="labelpers">Ingrese un valor personalizado</label>
+    <div class="campo-adicional" style="display: none;">
+        <label for="motor_voltaje">Ingrese un valor personalizado</label>
         <input type="text" id="motor_voltaje" name="motor_voltaje" class="form-control">
     </div>
 </div>
@@ -146,8 +146,8 @@
         <option value="FRENO 220V AC">FRENO 220V AC</option>        
         <option value="otra">Otro...</option>
     </select>
-    <div class="campo-adicional" id="otro_motor_voltaje" style="display: none;">
-        <label for="motor_voltaje" class="labelpers">Ingrese un valor personalizado</label>
+   <div class="campo-adicional" style="display: none;">
+        <label for="motor_voltaje">Ingrese un valor personalizado</label>
         <input type="text" id="motor_voltaje" name="motor_voltaje" class="form-control">
     </div>
 </div>

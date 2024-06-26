@@ -136,11 +136,10 @@
   margin-top: 5rem;
   margin-bottom: 5rem;
   text-align: center; /* Centra el contenido dentro del div */
-  background-color: #929292;
+  background-color: #E5ECF4;
   width: 14vw;
   padding-bottom: 1.1rem;
-  border: 3px solid black;
-  box-shadow: 0 0 50px rgb(31, 31, 31, 0.7);
+  border-radius: 15px;
 }
 
 
@@ -151,7 +150,7 @@
   margin-inline: 10px;
   background-color: green; /* Color inicial */
   color: transparent;
-  border: 2px solid white;
+  border: 1px solid transparent;
   border-radius: 10px;
   font-size: 18px;
 }
@@ -169,7 +168,7 @@
   border-radius: 10px;
   font-size: 18px;
   background-color: #f7f7f7;
-  border: 2px solid black;
+  border: 1px solid black;
   color: black;
 }
 
@@ -183,7 +182,7 @@
   margin-top: 5px; /* Ajustar el margen superior */
   margin-bottom: 5px; /* Ajustar el margen inferior */
   background-color: transparent; /* Color inicial */
-  color: white;
+  color: black;
   font-weight: 700;
   border: none;
   font-size: 22px;
@@ -199,7 +198,7 @@
   margin-top: 5px;
   margin-bottom: 1px !important;
   background-color: transparent; /* Color inicial */
-  color: white;
+  color: black;
   font-weight: 700;
   border: none;
   font-size: 22px;
@@ -209,11 +208,11 @@
 
 
 .campo-adicional {
-            background-color: #616161;
+            background-color: #DADADA;
             padding-inline: 2.3rem; /* Agrega un poco de espacio interior */
             padding-block: 0.8rem;
             margin-top: 0.5rem;
-            margin-bottom: 2.6rem;
+            margin-bottom: -0.5rem;
             color: darkblue;
             border-radius: 8px;
             margin-inline: 4rem;
@@ -222,7 +221,7 @@
         }
 
 .campo-adicional label {
-  color: #f4f4f4;
+  color: black;
   font-size: 14px;
   font-weight: 400;
 }

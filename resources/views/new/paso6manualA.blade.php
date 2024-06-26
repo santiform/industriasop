@@ -67,7 +67,7 @@
 
 
     <div class="form-group">
-        <label for="patin_retractil">Voltaje de patin retráctil (si posee)</label>
+        <label for="patin_retractil">Patin retráctil (Voltaje)</label>
         <select id="patin_retractil" name="patin_retractil" class="form-control">
             <option disabled selected>Seleccione una opción</option>
             <option value="NO POSEE">NO POSEE PATIN RETRÁCTIL</option>
