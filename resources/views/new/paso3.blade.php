@@ -72,7 +72,7 @@
         </select>
         <div class="campo-adicional" style="display: none;">
             <label for="motor_encoder_pers">Ingrese un valor personalizado</label>
-            <input required  type="text" id="motor_encoder_pers" name="motor_encoder_pers" class="form-control">
+            <input type="text" id="motor_encoder_pers" name="motor_encoder_pers" class="form-control">
         </div>
     </div>
 

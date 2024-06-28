@@ -63,6 +63,8 @@ class NuevoPedidoController extends Controller
 
 
 
+
+
     public function paso3(Request $request) {
     // Validar los datos del formulario
     $validatedData = $request->validate([
@@ -276,10 +278,10 @@ class NuevoPedidoController extends Controller
     $tipo_funcionamiento = $validatedData['tipo_funcionamiento'];
     $tipo_control = $validatedData['tipo_control'];
     $motor_potencia = $validatedData['motor_potencia'];
-    $motor_marca = $validatedData['motor_marca'];
-    $motor_voltaje = $validatedData['motor_voltaje'];
-    $motor_encoder = $validatedData['motor_encoder'];
-    $motor_rescate = $validatedData['motor_rescate'];
+    $motor_marca = $validatedData['motor_marca'] ?? null;
+    $motor_voltaje = $validatedData['motor_voltaje'] ?? null;
+    $motor_encoder = $validatedData['motor_encoder'] ?? null;
+    $motor_rescate = $validatedData['motor_rescate'] ?? null;
     $tipo_puerta = $validatedData['tipo_puerta'];
 
     // Determinar qué vista mostrar según los criterios
@@ -347,14 +349,14 @@ class NuevoPedidoController extends Controller
     $tipo_funcionamiento = $validatedData['tipo_funcionamiento'];
     $tipo_control = $validatedData['tipo_control'];
     $motor_potencia = $validatedData['motor_potencia'];
-    $motor_marca = $validatedData['motor_marca'];
-    $motor_voltaje = $validatedData['motor_voltaje'];
-    $motor_encoder = $validatedData['motor_encoder'];
-    $motor_rescate = $validatedData['motor_rescate'];
+    $motor_marca = $validatedData['motor_marca'] ?? null;
+    $motor_voltaje = $validatedData['motor_voltaje'] ?? null;
+    $motor_encoder = $validatedData['motor_encoder'] ?? null;
+    $motor_rescate = $validatedData['motor_rescate'] ?? null;
     $tipo_puerta = $validatedData['tipo_puerta'];
-    $puerta_marca = $validatedData['puerta_marca'];
-    $puerta_voltaje = $validatedData['puerta_voltaje'];
-    $patin_retractil = $validatedData['patin_retractil'];
+    $puerta_marca = $validatedData['puerta_marca'] ?? null;
+    $puerta_voltaje = $validatedData['puerta_voltaje'] ?? null;
+    $patin_retractil = $validatedData['patin_retractil'] ?? null;
 
     // Determinar qué vista mostrar según los criterios
     if ($tipo_control == 5) {
@@ -412,14 +414,14 @@ class NuevoPedidoController extends Controller
     $tipo_funcionamiento = $validatedData['tipo_funcionamiento'];
     $tipo_control = $validatedData['tipo_control'];
     $motor_potencia = $validatedData['motor_potencia'];
-    $motor_marca = $validatedData['motor_marca'];
-    $motor_voltaje = $validatedData['motor_voltaje'];
-    $motor_encoder = $validatedData['motor_encoder'];
-    $motor_rescate = $validatedData['motor_rescate'];
+    $motor_marca = $validatedData['motor_marca'] ?? null;
+    $motor_voltaje = $validatedData['motor_voltaje'] ?? null;
+    $motor_encoder = $validatedData['motor_encoder'] ?? null;
+    $motor_rescate = $validatedData['motor_rescate'] ?? null;
     $tipo_puerta = $validatedData['tipo_puerta'];
-    $puerta_marca = $validatedData['puerta_marca'];
-    $puerta_voltaje = $validatedData['puerta_voltaje'];
-    $patin_retractil = $validatedData['patin_retractil'];
+    $puerta_marca = $validatedData['puerta_marca'] ?? null;
+    $puerta_voltaje = $validatedData['puerta_voltaje'] ?? null;
+    $patin_retractil = $validatedData['patin_retractil'] ?? null;
     $accesos = $validatedData['accesos'];
 
     return view('new.paso8', compact(
@@ -453,7 +455,7 @@ class NuevoPedidoController extends Controller
         'puerta_voltaje' => 'nullable|string',
         'patin_retractil' => 'nullable|string',
         'accesos' => 'required|string',
-        'tipo_botonera' => 'required|integer',
+        'tipo_botonera' => 'nullable|string',
         'paradas' => 'nullable|integer',
         'subsuelos' => 'nullable|integer',
     ]);
@@ -467,16 +469,16 @@ class NuevoPedidoController extends Controller
     $tipo_funcionamiento = $validatedData['tipo_funcionamiento'];
     $tipo_control = $validatedData['tipo_control'];
     $motor_potencia = $validatedData['motor_potencia'];
-    $motor_marca = $validatedData['motor_marca'];
-    $motor_voltaje = $validatedData['motor_voltaje'];
-    $motor_encoder = $validatedData['motor_encoder'];
-    $motor_rescate = $validatedData['motor_rescate'];
+    $motor_marca = $validatedData['motor_marca'] ?? null;
+    $motor_voltaje = $validatedData['motor_voltaje'] ?? null;
+    $motor_encoder = $validatedData['motor_encoder'] ?? null;
+    $motor_rescate = $validatedData['motor_rescate'] ?? null;
     $tipo_puerta = $validatedData['tipo_puerta'];
-    $puerta_marca = $validatedData['puerta_marca'];
-    $puerta_voltaje = $validatedData['puerta_voltaje'];
-    $patin_retractil = $validatedData['patin_retractil'];
+    $puerta_marca = $validatedData['puerta_marca'] ?? null;
+    $puerta_voltaje = $validatedData['puerta_voltaje'] ?? null;
+    $patin_retractil = $validatedData['patin_retractil'] ?? null;
     $accesos = $validatedData['accesos'];
-    $tipo_botonera = $validatedData['tipo_botonera'];
+    $tipo_botonera = $validatedData['tipo_botonera'] ?? null;
     $paradas = $validatedData['paradas'];
     $subsuelos = $validatedData['subsuelos'];
 
@@ -523,8 +525,6 @@ class NuevoPedidoController extends Controller
 
 
     public function paso10(Request $request) {
-    // Validar los datos del formulario (opcional dependiendo de la implementación)
-    // $validatedData = $request->validate([ ... ]);
 
     // Obtener todos los datos del formulario
     $nombre_empresa = $request->input('nombre_empresa');
@@ -639,7 +639,7 @@ class NuevoPedidoController extends Controller
 
         $id_estado = 1;
 
-        DB::table('pedidos')->insert([
+        /* DB::table('pedidos')->insert([
             'id_tipo_obra' => $tipo_obra,
             'id_tipo_funcionamiento' => $tipo_funcionamiento,
             'id_tipo_control' => $tipo_control,
@@ -649,7 +649,7 @@ class NuevoPedidoController extends Controller
             'telefono' => $telefono_empresa,
             'direccion_obra' => $direccion_obra,
             'created_at' => Now(),
-        ]);
+        ]); */
 
         
         $motor_potencia = $request->input('motor_potencia');
@@ -658,13 +658,13 @@ class NuevoPedidoController extends Controller
         $motor_encoder = $request->input('motor_encoder');
         $motor_rescate = $request->input('motor_rescate');
 
-        $id_pedido_old = DB::table('pedidos')
+        /* $id_pedido_old = DB::table('pedidos')
                     ->orderBy('id', 'desc')
                     ->first();
 
         $id_pedido = $id_pedido_old->id;
 
-        DB::table('motores')->insert([
+         DB::table('motores')->insert([
             'id_pedido' => $id_pedido,
             'id_tipo_control' => $tipo_control,
             'marca' => $motor_marca,
@@ -673,37 +673,37 @@ class NuevoPedidoController extends Controller
             'encoder' => $motor_encoder,
             'rescate' => $motor_rescate,
             'created_at' => Now(),
-        ]);
+        ]); */
 
         $tipo_puerta = $request->input('tipo_puerta');
 
-        DB::table('tipos_puertas')->insert([
+        /* DB::table('tipos_puertas')->insert([
             'id_pedido' => $id_pedido,
             'id_tipo_control' => $tipo_control,
             'nombre' => $tipo_puerta,
             'created_at' => Now(),
-        ]);
+        ]); */
 
 
         $puerta_marca = $request->input('puerta_marca');
         $puerta_voltaje = $request->input('puerta_voltaje');
         $patin_retractil = $request->input('patin_retractil');
 
-        DB::table('detalles_puertas')->insert([
+        /* DB::table('detalles_puertas')->insert([
             'id_pedido' => $id_pedido,
             'marca' => $puerta_marca,
             'voltaje' => $puerta_voltaje,
             'patin_retractil' => $patin_retractil,
             'created_at' => Now(),
-        ]);        
+        ]);      */  
 
         $accesos = $request->input('accesos');
 
-        DB::table('accesos')->insert([
+        /* DB::table('accesos')->insert([
             'id_pedido' => $id_pedido,
             'nombre' => $accesos,
             'created_at' => Now(),
-        ]);
+        ]); */
 
         $tipo_botonera = $request->input('tipo_botonera');
         $paradas = $request->input('paradas');

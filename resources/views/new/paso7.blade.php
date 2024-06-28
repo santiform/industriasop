@@ -84,7 +84,7 @@
         </select>
         <div class="campo-adicional" style="display: none;">
             <label for="accesos_pers">Ingrese un valor personalizado</label>
-            <input required  type="text" id="accesos_pers" name="accesos_pers" class="form-control">
+            <input type="text" id="accesos_pers" name="accesos_pers" class="form-control">
         </div>
     </div>
 

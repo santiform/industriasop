@@ -80,7 +80,7 @@
         </select>
         <div class="campo-adicional" style="display: none;">
             <label for="puerta_marca_pers">Ingrese un valor personalizado</label>
-            <input required  type="text" id="puerta_marca_pers" name="puerta_marca_pers" class="form-control">
+            <input type="text" id="puerta_marca_pers" name="puerta_marca_pers" class="form-control">
         </div>
     </div>
 

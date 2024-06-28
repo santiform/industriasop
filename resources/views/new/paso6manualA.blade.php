@@ -79,7 +79,7 @@
         </select>
         <div class="campo-adicional" style="display: none;">
             <label for="patin_retractil_pers">Ingrese un valor personalizado</label>
-            <input required  type="text" id="patin_retractil_pers" name="patin_retractil_pers" class="form-control">
+            <input type="text" id="patin_retractil_pers" name="patin_retractil_pers" class="form-control">
         </div>
     </div>
 

@@ -79,7 +79,7 @@
         </select>
         <div class="campo-adicional" style="display: none;">
             <label for="puerta_voltaje_pers">Ingrese un valor personalizado</label>
-            <input required  type="text" id="puerta_voltaje_pers" name="puerta_voltaje_pers" class="form-control">
+            <input type="text" id="puerta_voltaje_pers" name="puerta_voltaje_pers" class="form-control">
         </div>
     </div>
 

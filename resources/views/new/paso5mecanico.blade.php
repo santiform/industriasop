@@ -76,7 +76,7 @@
         </select>
         <div class="campo-adicional" style="display: none;">
             <label for="tipo_puerta_pers">Ingrese un valor personalizado</label>
-            <input required  type="text" id="tipo_puerta_pers" name="tipo_puerta_pers" class="form-control">
+            <input type="text" id="tipo_puerta_pers" name="tipo_puerta_pers" class="form-control">
         </div>
     </div>
 
