@@ -43,22 +43,22 @@
 
   <h2 class="titleSection"> <div class="div-paso">2</div> Tipo de control y Motor</h2>  
 
-  <form action="{{ route('newPaso3') }}" method="POST" onsubmit="prepararEnvio(this)">
+  <form action="{{ route('newPaso3') }}" method="POST" onsubmit="prepararEnvio(this)" required>
     @csrf
 
 
     <!-- este grupo en  la bd se guarda en la tabla "pedidos" -->
-    <input type="hidden" name="email_empresa" value="<?php echo htmlspecialchars($email_empresa, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="nombre_empresa" value="<?php echo htmlspecialchars($nombre_empresa, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="telefono_empresa" value="<?php echo htmlspecialchars($telefono_empresa, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="direccion_obra" value="<?php echo htmlspecialchars($direccion_obra, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="tipo_obra" value="<?php echo htmlspecialchars($tipo_obra, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="tipo_funcionamiento" value="<?php echo htmlspecialchars($tipo_funcionamiento, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="email_empresa" value="<?php echo htmlspecialchars($email_empresa, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="nombre_empresa" value="<?php echo htmlspecialchars($nombre_empresa, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="telefono_empresa" value="<?php echo htmlspecialchars($telefono_empresa, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="direccion_obra" value="<?php echo htmlspecialchars($direccion_obra, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="tipo_obra" value="<?php echo htmlspecialchars($tipo_obra, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="tipo_funcionamiento" value="<?php echo htmlspecialchars($tipo_funcionamiento, ENT_QUOTES, 'UTF-8'); ?>">
 
 
     <div class="form-group">
         <label for="tipo_control">Tipo de control</label>
-        <select id="tipo_control" name="tipo_control">
+        <select required  id="tipo_control" name="tipo_control">
             <option disabled selected>Seleccione una opción</option>
             @foreach($tipos_controles as $tipo_control)
                 <option value="{{ $tipo_control->id }}">{{ $tipo_control->nombre }}</option>
@@ -70,14 +70,14 @@
 <div class="form-group">
     <label for="motor_potencia">Potencia del Motor</label>
     <p>Escriba en números los HP del motor que necesita. Recuerde usar punto si es un valor con decimal.</p>
-    <input type="number" id="motor_potencia" name="motor_potencia" step="0.01" min="0" class="form-control">
+    <input required  type="number" id="motor_potencia" name="motor_potencia" step="0.01" min="0" class="form-control">
 </div>
 
 
 
 <div class="form-group">
     <label for="motor_marca">Marca del Motor</label>
-    <select id="motor_marca" name="motor_marca" class="form-control">
+    <select required  id="motor_marca" name="motor_marca" class="form-control">
         <option disabled selected>Seleccione una opción</option>
         <option value="MORRIS">MORRIS</option>
         <option value="ROJAS">ROJAS</option>
@@ -94,7 +94,7 @@
 
       <div class="form-group">
     <label for="motor_voltaje">Voltaje del Motor:</label>
-    <select id="motor_voltaje" name="motor_voltaje" class="form-control" >
+    <select required  id="motor_voltaje" name="motor_voltaje" class="form-control" >
         <option disabled selected>Seleccione una opción</option>
         <option value="BOBINA 48V DC">BOBINA 48V DC</option>
         <option value="BOBINA 220V AC">BOBINA 220V AC</option>
@@ -116,14 +116,14 @@
 <div class="form-group">
     <label for="motor_potencia">Potencia del Motor</label>
     <p>Escriba en números los HP del motor que necesita. Recuerde usar punto si es un valor con decimal.</p>
-    <input type="number" id="motor_potencia" name="motor_potencia" step="0.01" min="0" class="form-control">
+    <input required  type="number" id="motor_potencia" name="motor_potencia" step="0.01" min="0" class="form-control">
 </div>
 
 
 
 <div class="form-group">
     <label for="motor_marca">Marca del Motor</label>
-    <select id="motor_marca" name="motor_marca" class="form-control" onchange="mostrarInputOtro('motor_marca')">
+    <select required  id="motor_marca" name="motor_marca" class="form-control" onchange="mostrarinput required Otro('motor_marca')">
         <option disabled selected>Seleccione una opción</option>
         <option value="ADSUR">ADSUR</option>
         <option value="REDUAR">REDUAR</option>
@@ -139,7 +139,7 @@
 
       <div class="form-group">
     <label for="motor_voltaje">Freno del Motor:</label>
-    <select id="motor_voltaje" name="motor_voltaje" class="form-control" onchange="mostrarInputOtro('motor_voltaje')">
+    <select required  id="motor_voltaje" name="motor_voltaje" class="form-control" onchange="mostrarinput required Otro('motor_voltaje')">
         <option disabled selected>Seleccione una opción</option>
         <option value="FRENO 110V DC">FRENO 110V DC</option>
         <option value="FRENO 110V AC">FRENO 110V AC</option>
@@ -177,6 +177,7 @@
 
 </div>
 
+<script src="../../resources/views/new/js/validaciconSelects.js"></script>
 <script src="../../resources/views/new/js/opcionOtra.js"></script>
 
 <?php include '../resources/views/new/includes/footer.blade.php'; ?>

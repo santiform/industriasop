@@ -42,24 +42,24 @@
 
   <h2 class="titleSection"> <div class="div-paso">1</div> DATOS BÁSICOS</h2>
 
-  <form action="{{ route('newPaso2') }}" method="POST">
+  <form action="{{ route('newPaso2') }}" method="POST" required>
     @csrf
 
       <div class="titulo-form-group">De la empresa</div>
       <div class="form-group">
 
         <label for="nombre">Nombre de empresa</label>
-        <input type="text" id="nombre" name="nombre" placeholder="">
+        <input required  type="text" id="nombre" name="nombre" placeholder="">
 
         <div style="height: 1.6rem;" ></div>
 
         <label for="email">Email de empresa</label>
-        <input type="email" id="email" name="email" placeholder="">
+        <input required  type="email" id="email" name="email" placeholder="">
 
         <div style="height: 1.6rem;" ></div>
 
         <label for="telefono">Teléfono de empresa</label>
-        <input type="tel" id="telefono" name="telefono" placeholder="">
+        <input required  type="tel" id="telefono" name="telefono" placeholder="">
 
       </div>
       
@@ -68,12 +68,12 @@
       <div class="form-group">
 
         <label for="direccion">Dirección de obra</label>
-        <input type="text" id="direccion" name="direccion" placeholder="">
+        <input required  type="text" id="direccion" name="direccion" placeholder="">
 
         <div style="height: 1.6rem;" ></div>
 
         <label for="tipo_obra">Tipo de obra</label>
-          <select id="tipo_obra" name="tipo_obra">
+          <select required  id="tipo_obra" name="tipo_obra">
               <option disabled selected>Seleccione una opción</option>
               @foreach($tipos_obras as $tipo_obra)
                   <option value="{{ $tipo_obra->id }}">{{ $tipo_obra->nombre }}</option>
@@ -85,7 +85,7 @@
       <div class="titulo-form-group">Del ascensor</div>
       <div class="form-group">
           <label for="tipo_funcionamiento">Cuadro de maniobras</label>
-          <select id="tipo_funcionamiento" name="tipo_funcionamiento">
+          <select required  id="tipo_funcionamiento" name="tipo_funcionamiento">
               <option disabled selected>Seleccione una opción</option>
               @foreach($tipos_funcionamientos as $tipo_funcionamiento)
                   <option value="{{ $tipo_funcionamiento->id }}">{{ $tipo_funcionamiento->nombre }}</option>

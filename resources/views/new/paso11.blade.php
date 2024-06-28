@@ -43,51 +43,51 @@
 
   <h2 class="titleSection"> <div class="div-paso">5</div> Confirmación</h2>  
 
-  <form action="{{ route('newPaso12') }}" method="POST">
+  <form action="{{ route('newPaso12') }}" method="POST" >
     @csrf
 
 
     <!-- este grupo en  la bd se guarda en la tabla "pedidos" -->
-    <input type="hidden" name="email_empresa" value="<?php echo htmlspecialchars($email_empresa, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="nombre_empresa" value="<?php echo htmlspecialchars($nombre_empresa, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="telefono_empresa" value="<?php echo htmlspecialchars($telefono_empresa, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="direccion_obra" value="<?php echo htmlspecialchars($direccion_obra, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="tipo_obra" value="<?php echo htmlspecialchars($tipo_obra, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="tipo_funcionamiento" value="<?php echo htmlspecialchars($tipo_funcionamiento, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="tipo_control" value="<?php echo htmlspecialchars($tipo_control, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="email_empresa" value="<?php echo htmlspecialchars($email_empresa, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="nombre_empresa" value="<?php echo htmlspecialchars($nombre_empresa, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="telefono_empresa" value="<?php echo htmlspecialchars($telefono_empresa, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="direccion_obra" value="<?php echo htmlspecialchars($direccion_obra, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="tipo_obra" value="<?php echo htmlspecialchars($tipo_obra, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="tipo_funcionamiento" value="<?php echo htmlspecialchars($tipo_funcionamiento, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="tipo_control" value="<?php echo htmlspecialchars($tipo_control, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- este grupo en  la bd se guarda en la tabla "motores" -->
-    <input type="hidden" name="motor_potencia" value="<?php echo htmlspecialchars($motor_potencia, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="motor_marca" value="<?php echo htmlspecialchars($motor_marca, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="motor_voltaje" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="motor_encoder" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="motor_rescate" value="<?php echo htmlspecialchars($motor_rescate, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="patin_retractil" value="<?php echo htmlspecialchars($patin_retractil, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="motor_potencia" value="<?php echo htmlspecialchars($motor_potencia, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="motor_marca" value="<?php echo htmlspecialchars($motor_marca, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="motor_voltaje" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="motor_encoder" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="motor_rescate" value="<?php echo htmlspecialchars($motor_rescate, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="patin_retractil" value="<?php echo htmlspecialchars($patin_retractil, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- este grupo en  la bd se guarda en la tabla "tipos_puertas" -->
-    <input type="hidden" name="tipo_puerta" value="<?php echo htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="tipo_puerta" value="<?php echo htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- este grupo en  la bd se guarda en la tabla "detalles_puertas" -->
-    <input type="hidden" name="puerta_marca" value="<?php echo htmlspecialchars($puerta_marca, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="puerta_voltaje" value="<?php echo htmlspecialchars($puerta_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="puerta_marca" value="<?php echo htmlspecialchars($puerta_marca, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="puerta_voltaje" value="<?php echo htmlspecialchars($puerta_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- este grupo en  la bd se guarda en la tabla "accesos" -->
-    <input type="hidden" name="accesos" value="<?php echo htmlspecialchars($accesos, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="accesos" value="<?php echo htmlspecialchars($accesos, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- esto no se guarda en bd, es solo para lógica -->
-    <input type="hidden" name="vista" value="<?php echo htmlspecialchars($vista, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="vista" value="<?php echo htmlspecialchars($vista, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- este grupo en la bd se guarda en la tabla "detalles_generales" -->
-    <input type="hidden" name="tipo_botonera" value="<?php echo htmlspecialchars($tipo_botonera, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="paradas" value="<?php echo htmlspecialchars($paradas, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="subsuelos" value="<?php echo htmlspecialchars($subsuelos, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="placa_cabina" value="<?php echo htmlspecialchars($placa_cabina, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="indicador_cabina" value="<?php echo htmlspecialchars($indicador_cabina, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="indicador_pb" value="<?php echo htmlspecialchars($indicador_pb, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="indicador_palier" value="<?php echo htmlspecialchars($indicador_palier, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="tipo_botonera" value="<?php echo htmlspecialchars($tipo_botonera, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="paradas" value="<?php echo htmlspecialchars($paradas, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="subsuelos" value="<?php echo htmlspecialchars($subsuelos, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="placa_cabina" value="<?php echo htmlspecialchars($placa_cabina, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="indicador_cabina" value="<?php echo htmlspecialchars($indicador_cabina, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="indicador_pb" value="<?php echo htmlspecialchars($indicador_pb, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="indicador_palier" value="<?php echo htmlspecialchars($indicador_palier, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- este grupo en la bd se guarda en la tabla "habilitaciones_accesos" -->
-    <input type="hidden" name="estadoBotones" value="{{ htmlspecialchars(json_encode($estadoBotones), ENT_QUOTES, 'UTF-8') }}">
+    <input required  type="hidden" name="estadoBotones" value="{{ htmlspecialchars(json_encode($estadoBotones), ENT_QUOTES, 'UTF-8') }}">
 
 
     <style>

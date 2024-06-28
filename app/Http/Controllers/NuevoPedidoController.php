@@ -25,261 +25,224 @@ class NuevoPedidoController extends Controller
     }
 
     public function paso2(Request $request) {
-       
-        $nombre_empresa = $request->input('nombre');
-        $email_empresa = $request->input('email');
-        $telefono_empresa = $request->input('telefono');
-        $direccion_obra = $request->input('direccion');
-        $tipo_obra = $request->input('tipo_obra');
-        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+    // Validar los datos del formulario
+    $validatedData = $request->validate([
+        'nombre' => 'required|string',
+        'email' => 'required|email',
+        'telefono' => 'required|string',
+        'direccion' => 'required|string',
+        'tipo_obra' => 'required|integer',
+        'tipo_funcionamiento' => 'required|integer',
+    ]);
 
-        $tipos_controles = DB::table('tipos_controles')
-                    ->where('id_tipo_funcionamiento', $tipo_funcionamiento)
-                    ->select('id', 'nombre')
-                    ->get();        
+    // Obtener los datos validados
+    $nombre_empresa = $validatedData['nombre'];
+    $email_empresa = $validatedData['email'];
+    $telefono_empresa = $validatedData['telefono'];
+    $direccion_obra = $validatedData['direccion'];
+    $tipo_obra = $validatedData['tipo_obra'];
+    $tipo_funcionamiento = $validatedData['tipo_funcionamiento'];
 
-        return view('new.paso2', [
-            'nombre_empresa' => $nombre_empresa,
-            'email_empresa' => $email_empresa,
-            'telefono_empresa' => $telefono_empresa,
-            'direccion_obra' => $direccion_obra,
-            'tipo_obra' => $tipo_obra,
-            'tipo_funcionamiento' => $tipo_funcionamiento,
-            'tipos_controles' => $tipos_controles,
-        ]);
+    // Consulta para obtener tipos de controles
+    $tipos_controles = DB::table('tipos_controles')
+                        ->where('id_tipo_funcionamiento', $tipo_funcionamiento)
+                        ->select('id', 'nombre')
+                        ->get();        
 
-    }
+    // Retornar la vista con los datos y tipos de controles
+    return view('new.paso2', [
+        'nombre_empresa' => $nombre_empresa,
+        'email_empresa' => $email_empresa,
+        'telefono_empresa' => $telefono_empresa,
+        'direccion_obra' => $direccion_obra,
+        'tipo_obra' => $tipo_obra,
+        'tipo_funcionamiento' => $tipo_funcionamiento,
+        'tipos_controles' => $tipos_controles,
+    ]);
+}
+
 
 
     public function paso3(Request $request) {
-        
-        $nombre_empresa = $request->input('nombre_empresa');
-        $email_empresa = $request->input('email_empresa');
-        $telefono_empresa = $request->input('telefono_empresa');
-        $direccion_obra = $request->input('direccion_obra');
-        $tipo_obra = $request->input('tipo_obra');
-        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+    // Validar los datos del formulario
+    $validatedData = $request->validate([
+        'nombre_empresa' => 'required|string',
+        'email_empresa' => 'required|email',
+        'telefono_empresa' => 'required|string',
+        'direccion_obra' => 'required|string',
+        'tipo_obra' => 'required|integer',
+        'tipo_funcionamiento' => 'required|integer',
+        'tipo_control' => 'required|integer',
+        'motor_potencia' => 'nullable|string', // Puedes ajustar según el tipo de dato
+        'motor_marca' => 'nullable|string',    // Puedes ajustar según el tipo de dato
+        'motor_voltaje' => 'nullable|string',  // Puedes ajustar según el tipo de dato
+    ]);
 
-        $tipo_control = $request->input('tipo_control');
-        $motor_potencia = $request->input('motor_potencia');
-        $motor_marca = $request->input('motor_marca');
-        $motor_voltaje = $request->input('motor_voltaje');
+    // Obtener los datos validados
+    $nombre_empresa = $validatedData['nombre_empresa'];
+    $email_empresa = $validatedData['email_empresa'];
+    $telefono_empresa = $validatedData['telefono_empresa'];
+    $direccion_obra = $validatedData['direccion_obra'];
+    $tipo_obra = $validatedData['tipo_obra'];
+    $tipo_funcionamiento = $validatedData['tipo_funcionamiento'];
+    $tipo_control = $validatedData['tipo_control'];
+    $motor_potencia = $validatedData['motor_potencia'];
+    $motor_marca = $validatedData['motor_marca'];
+    $motor_voltaje = $validatedData['motor_voltaje'];
 
-        if ($tipo_control == 8 || $tipo_control == 9 || $tipo_control == 10) {    
-            return view('new.paso3', [
-                'nombre_empresa' => $nombre_empresa,
-                'email_empresa' => $email_empresa,
-                'telefono_empresa' => $telefono_empresa,
-                'direccion_obra' => $direccion_obra,
-                'tipo_obra' => $tipo_obra,
-                'tipo_funcionamiento' => $tipo_funcionamiento,
+    // Verificar el tipo de control para decidir el flujo del formulario
+    if ($tipo_control == 8 || $tipo_control == 9 || $tipo_control == 10) {    
+        return view('new.paso3', compact(
+            'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+            'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+            'motor_marca', 'motor_voltaje'
+        ));
+    } 
 
-                'tipo_control' => $tipo_control,
-                'motor_potencia' => $motor_potencia,
-                'motor_marca' => $motor_marca,
-                'motor_voltaje' => $motor_voltaje,
-            ]);
-        } 
+    // Inicializar valores para motores opcionales si no son necesarios
+    $motor_encoder = null;
+    $motor_rescate = null;
+      
+    // Almacenar los datos en la sesión
+    $request->session()->put('datos', [
+        'email_empresa' => $email_empresa,
+        'nombre_empresa' => $nombre_empresa,
+        'telefono_empresa' => $telefono_empresa,
+        'direccion_obra' => $direccion_obra,
+        'tipo_obra' => $tipo_obra,
+        'tipo_funcionamiento' => $tipo_funcionamiento,
+        'tipo_control' => $tipo_control,
+        'motor_potencia' => $motor_potencia,
+        'motor_marca' => $motor_marca,
+        'motor_voltaje' => $motor_voltaje,
+        'motor_encoder' => $motor_encoder,
+        'motor_rescate' => $motor_rescate,
+    ]);
 
-        $motor_encoder = null;
-        $motor_rescate = null;
-          
-         // Almacena los datos en la sesión
-        $request->session()->put('datos', [
-            'email_empresa' => $email_empresa,
-            'nombre_empresa' => $nombre_empresa,
-            'telefono_empresa' => $telefono_empresa,
-            'direccion_obra' => $direccion_obra,
-            'tipo_obra' => $tipo_obra,
-            'tipo_funcionamiento' => $tipo_funcionamiento,
-            'tipo_control' => $tipo_control,
-            'motor_potencia' => $motor_potencia,
-            'motor_marca' => $motor_marca,
-            'motor_voltaje' => $motor_voltaje,
-            'motor_encoder' => $motor_encoder,
-            'motor_rescate' => $motor_rescate,
-        ]);
+    // Redirigir al siguiente paso
+    return redirect()->action([NuevoPedidoController::class, 'newPaso5int']);
+}
 
-        // Redirige al siguiente paso
-        return redirect()->action([NuevoPedidoController::class, 'newPaso5int']);
-        
-    }
 
     public function paso4(Request $request) {
+    // Validar los datos del formulario
+    $validatedData = $request->validate([
+        'nombre_empresa' => 'required|string',
+        'email_empresa' => 'required|email',
+        'telefono_empresa' => 'required|string',
+        'direccion_obra' => 'required|string',
+        'tipo_obra' => 'required|integer',
+        'tipo_funcionamiento' => 'required|integer',
+        'tipo_control' => 'required|integer',
+        'motor_potencia' => 'nullable|string',
+        'motor_marca' => 'nullable|string',
+        'motor_voltaje' => 'nullable|string',
+        'motor_encoder' => 'nullable|string',
+    ]);
 
-        $nombre_empresa = $request->input('nombre_empresa');
-        $email_empresa = $request->input('email_empresa');
-        $telefono_empresa = $request->input('telefono_empresa');
-        $direccion_obra = $request->input('direccion_obra');
-        $tipo_obra = $request->input('tipo_obra');
-        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+    // Obtener los datos validados
+    $nombre_empresa = $validatedData['nombre_empresa'];
+    $email_empresa = $validatedData['email_empresa'];
+    $telefono_empresa = $validatedData['telefono_empresa'];
+    $direccion_obra = $validatedData['direccion_obra'];
+    $tipo_obra = $validatedData['tipo_obra'];
+    $tipo_funcionamiento = $validatedData['tipo_funcionamiento'];
+    $tipo_control = $validatedData['tipo_control'];
+    $motor_potencia = $validatedData['motor_potencia'];
+    $motor_marca = $validatedData['motor_marca'];
+    $motor_voltaje = $validatedData['motor_voltaje'];
+    $motor_encoder = $validatedData['motor_encoder'];
 
-        $tipo_control = $request->input('tipo_control');
-        $motor_potencia = $request->input('motor_potencia');
-        $motor_marca = $request->input('motor_marca');
-        $motor_voltaje = $request->input('motor_voltaje');
-        $motor_encoder = $request->input('motor_encoder');
-
-        if ($tipo_control == 9 || $tipo_control == 10) {
-
-            $motor_rescate = null;
-
-            return view('new.paso5mecanico', [
-                'nombre_empresa' => $nombre_empresa,
-                'email_empresa' => $email_empresa,
-                'telefono_empresa' => $telefono_empresa,
-                'direccion_obra' => $direccion_obra,
-                'tipo_obra' => $tipo_obra,
-                'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                'tipo_control' => $tipo_control,
-                'motor_potencia' => $motor_potencia,
-                'motor_marca' => $motor_marca,
-                'motor_voltaje' => $motor_voltaje,
-                'motor_encoder' => $motor_encoder,
-                'motor_rescate' => $motor_rescate,
-            ]);
-
-        }
-
-        return view('new.paso4', [
-                'nombre_empresa' => $nombre_empresa,
-                'email_empresa' => $email_empresa,
-                'telefono_empresa' => $telefono_empresa,
-                'direccion_obra' => $direccion_obra,
-                'tipo_obra' => $tipo_obra,
-                'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                'tipo_control' => $tipo_control,
-                'motor_potencia' => $motor_potencia,
-                'motor_marca' => $motor_marca,
-                'motor_voltaje' => $motor_voltaje,
-                'motor_encoder' => $motor_encoder,
-            ]);
-
+    // Verificar el tipo de control para decidir qué vista mostrar
+    if ($tipo_control == 9 || $tipo_control == 10) {
+        $motor_rescate = null;
+        return view('new.paso5mecanico', compact(
+            'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+            'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+            'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate'
+        ));
     }
 
+    return view('new.paso4', compact(
+        'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+        'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+        'motor_marca', 'motor_voltaje', 'motor_encoder'
+    ));
+}
 
-    public function newPaso5int(Request $request)
-    {
-        // Obtener los datos de la sesión
-        $datos = $request->session()->get('datos');
 
-        return view('new.newPaso5int', compact('datos'));
+
+    public function newPaso5int(Request $request) {
+    // Obtener los datos de la sesión
+    $datos = $request->session()->get('datos');
+
+    // Validar que los datos de sesión existan para evitar errores
+    if (!$datos) {
+        // Manejar el caso donde los datos no están disponibles, posiblemente redirigir a un paso anterior o manejar el error
+        // Ejemplo:
+        return redirect()->action([NuevoPedidoController::class, 'paso3'])->with('error', 'Datos faltantes. Por favor complete el formulario anterior.');
     }
+
+    return view('new.newPaso5int', compact('datos'));
+}
+
 
 
     public function paso5(Request $request) {
+    // Validar los datos del formulario
+    $validatedData = $request->validate([
+        'nombre_empresa' => 'required|string',
+        'email_empresa' => 'required|email',
+        'telefono_empresa' => 'required|string',
+        'direccion_obra' => 'required|string',
+        'tipo_obra' => 'required|integer',
+        'tipo_funcionamiento' => 'required|integer',
+        'tipo_control' => 'required|integer',
+        'motor_potencia' => 'nullable|string',
+        'motor_marca' => 'nullable|string',
+        'motor_voltaje' => 'nullable|string',
+        'motor_encoder' => 'nullable|string',
+        'motor_rescate' => 'nullable|string',
+    ]);
 
-        // Recupera los datos de la sesión
-        $datos_obra = $request->session()->get('datos');
+    // Obtener los datos validados
+    $nombre_empresa = $validatedData['nombre_empresa'];
+    $email_empresa = $validatedData['email_empresa'];
+    $telefono_empresa = $validatedData['telefono_empresa'];
+    $direccion_obra = $validatedData['direccion_obra'];
+    $tipo_obra = $validatedData['tipo_obra'];
+    $tipo_funcionamiento = $validatedData['tipo_funcionamiento'];
+    $tipo_control = $validatedData['tipo_control'];
+    $motor_potencia = $validatedData['motor_potencia'];
+    $motor_marca = $validatedData['motor_marca'];
+    $motor_voltaje = $validatedData['motor_voltaje'];
+    $motor_encoder = $validatedData['motor_encoder'];
+    $motor_rescate = $validatedData['motor_rescate'];
 
-        $nombre_empresa = $datos_obra['nombre_empresa'] ?? null;
-        $email_empresa = $datos_obra['email_empresa'] ?? null;
-        $telefono_empresa = $datos_obra['telefono_empresa'] ?? null;
-        $direccion_obra = $datos_obra['direccion_obra'] ?? null;
-        $tipo_obra = $datos_obra['tipo_obra'] ?? null;
-        $tipo_funcionamiento = $datos_obra['tipo_funcionamiento'] ?? null;
-
-        $tipo_control = $datos_obra['tipo_control'] ?? null;
-        $motor_potencia = $datos_obra['motor_potencia'] ?? null;
-        $motor_marca = $datos_obra['motor_marca'] ?? null;
-        $motor_voltaje = $datos_obra['motor_voltaje'] ?? null;
-        $motor_encoder = $datos_obra['motor_encoder'] ?? null;
-        $motor_rescate = $datos_obra['motor_rescate'] ?? null;
-
-        $tipo_control_2 = $request->input('tipo_control');
-
-        if ($tipo_control_2 !== null) {
-            $nombre_empresa = $request->input('nombre_empresa');
-            $email_empresa = $request->input('email_empresa');
-            $telefono_empresa = $request->input('telefono_empresa');
-            $direccion_obra = $request->input('direccion_obra');
-            $tipo_obra = $request->input('tipo_obra');
-            $tipo_funcionamiento = $request->input('tipo_funcionamiento');
-
-            $tipo_control = $request->input('tipo_control');
-            $motor_potencia = $request->input('motor_potencia');
-            $motor_marca = $request->input('motor_marca');
-            $motor_voltaje = $request->input('motor_voltaje');
-            $motor_encoder = $request->input('motor_encoder');
-            $motor_rescate = $request->input('motor_rescate');
-
-            return view('new.paso5mecanico', [
-                'nombre_empresa' => $nombre_empresa,
-                'email_empresa' => $email_empresa,
-                'telefono_empresa' => $telefono_empresa,
-                'direccion_obra' => $direccion_obra,
-                'tipo_obra' => $tipo_obra,
-                'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                'tipo_control' => $tipo_control,
-                'motor_potencia' => $motor_potencia,
-                'motor_marca' => $motor_marca,
-                'motor_voltaje' => $motor_voltaje,
-                'motor_encoder' => $motor_encoder,
-                'motor_rescate' => $motor_rescate,
-            ]);
-
-        }
-
-        if ($tipo_control == 1 || $tipo_control == 2) { 
-            return view('new.paso5hidrauA', [
-                'nombre_empresa' => $nombre_empresa,
-                'email_empresa' => $email_empresa,
-                'telefono_empresa' => $telefono_empresa,
-                'direccion_obra' => $direccion_obra,
-                'tipo_obra' => $tipo_obra,
-                'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                'tipo_control' => $tipo_control,
-                'motor_potencia' => $motor_potencia,
-                'motor_marca' => $motor_marca,
-                'motor_voltaje' => $motor_voltaje,
-                'motor_encoder' => $motor_encoder,
-                'motor_rescate' => $motor_rescate,
-            ]);
-        }  
-
-
-        if ($tipo_control == 3 || $tipo_control == 4 || $tipo_control == 5) { 
-            return view('new.paso5hidrauB', [
-                'nombre_empresa' => $nombre_empresa,
-                'email_empresa' => $email_empresa,
-                'telefono_empresa' => $telefono_empresa,
-                'direccion_obra' => $direccion_obra,
-                'tipo_obra' => $tipo_obra,
-                'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                'tipo_control' => $tipo_control,
-                'motor_potencia' => $motor_potencia,
-                'motor_marca' => $motor_marca,
-                'motor_voltaje' => $motor_voltaje,
-                'motor_encoder' => $motor_encoder,
-                'motor_rescate' => $motor_rescate,
-            ]);
-        }   
-
-
-        return view('new.paso5mecanico', [
-                'nombre_empresa' => $nombre_empresa,
-                'email_empresa' => $email_empresa,
-                'telefono_empresa' => $telefono_empresa,
-                'direccion_obra' => $direccion_obra,
-                'tipo_obra' => $tipo_obra,
-                'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                'tipo_control' => $tipo_control,
-                'motor_potencia' => $motor_potencia,
-                'motor_marca' => $motor_marca,
-                'motor_voltaje' => $motor_voltaje,
-                'motor_encoder' => $motor_encoder,
-                'motor_rescate' => $motor_rescate,
-            ]);
-
-
-
+    // Determinar qué vista mostrar según el tipo de control
+    if ($tipo_control == 1 || $tipo_control == 2) {
+        return view('new.paso5hidrauA', compact(
+            'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+            'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+            'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate'
+        ));
     }
+
+    if ($tipo_control == 3 || $tipo_control == 4 || $tipo_control == 5) {
+        return view('new.paso5hidrauB', compact(
+            'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+            'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+            'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate'
+        ));
+    }
+
+    return view('new.paso5mecanico', compact(
+        'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+        'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+        'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate'
+    ));
+}
+
 
 
 
@@ -287,206 +250,131 @@ class NuevoPedidoController extends Controller
 
 
     public function paso6(Request $request) {
+    // Validar los datos del formulario
+    $validatedData = $request->validate([
+        'nombre_empresa' => 'required|string',
+        'email_empresa' => 'required|email',
+        'telefono_empresa' => 'required|string',
+        'direccion_obra' => 'required|string',
+        'tipo_obra' => 'required|integer',
+        'tipo_funcionamiento' => 'required|integer',
+        'tipo_control' => 'required|integer',
+        'motor_potencia' => 'nullable|string',
+        'motor_marca' => 'nullable|string',
+        'motor_voltaje' => 'nullable|string',
+        'motor_encoder' => 'nullable|string',
+        'motor_rescate' => 'nullable|string',
+        'tipo_puerta' => 'nullable|string',
+    ]);
 
-        $nombre_empresa = $request->input('nombre_empresa');
-        $email_empresa = $request->input('email_empresa');
-        $telefono_empresa = $request->input('telefono_empresa');
-        $direccion_obra = $request->input('direccion_obra');
-        $tipo_obra = $request->input('tipo_obra');
-        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+    // Obtener los datos validados
+    $nombre_empresa = $validatedData['nombre_empresa'];
+    $email_empresa = $validatedData['email_empresa'];
+    $telefono_empresa = $validatedData['telefono_empresa'];
+    $direccion_obra = $validatedData['direccion_obra'];
+    $tipo_obra = $validatedData['tipo_obra'];
+    $tipo_funcionamiento = $validatedData['tipo_funcionamiento'];
+    $tipo_control = $validatedData['tipo_control'];
+    $motor_potencia = $validatedData['motor_potencia'];
+    $motor_marca = $validatedData['motor_marca'];
+    $motor_voltaje = $validatedData['motor_voltaje'];
+    $motor_encoder = $validatedData['motor_encoder'];
+    $motor_rescate = $validatedData['motor_rescate'];
+    $tipo_puerta = $validatedData['tipo_puerta'];
 
-        $tipo_control = $request->input('tipo_control');
-        $motor_potencia = $request->input('motor_potencia');
-        $motor_marca = $request->input('motor_marca');
-        $motor_voltaje = $request->input('motor_voltaje');
-        $motor_encoder = $request->input('motor_encoder');
-        $motor_rescate = $request->input('motor_rescate');
-
-        $tipo_puerta = $request->input('tipo_puerta');
-
-        if ($tipo_control == 5) { 
-            return view('new.paso6manualB', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-                ]);
-        }
-
-
-        if ($tipo_puerta == "AUTOMÁTICAS") { 
-            return view('new.paso6automatico', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-                ]);
-        }
-
-        if (($tipo_puerta == "MANUALES" || $tipo_puerta == "SEMIAUTOMÁTICAS") && ($tipo_control == 1 || $tipo_control == 2
-        || $tipo_control == 6 || $tipo_control == 7)) { 
-            return view('new.paso6manualA', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-                ]);
-        }
-
-        if (($tipo_puerta == "MANUALES" || $tipo_puerta == "SEMIAUTOMÁTICAS") && ($tipo_control == 3 || $tipo_control == 4
-         || $tipo_control == 8 || $tipo_control == 9 || $tipo_control == 10)) { 
-            return view('new.paso6manualB', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-                ]);
-        }
-
-
-
-        return view('new.paso6manualA', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-                ]);
-
-
+    // Determinar qué vista mostrar según los criterios
+    if ($tipo_control == 5) {
+        return view('new.paso6manualB', compact(
+            'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+            'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+            'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta'
+        ));
     }
+
+    if (($tipo_puerta == "MANUALES" || $tipo_puerta == "SEMIAUTOMÁTICAS") && ($tipo_control == 3 || $tipo_control == 4)) {
+        return view('new.paso6manualB', compact(
+            'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+            'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+            'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta'
+        ));
+    }
+
+    if ($tipo_puerta == "AUTOMÁTICAS") {
+        return view('new.paso6automatico', compact(
+            'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+            'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+            'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta'
+        ));
+    }
+
+    return view('new.paso6manualA', compact(
+        'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+        'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+        'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta'
+    ));
+}
+
 
 
 
     public function paso7(Request $request) {
+    // Validar los datos del formulario
+    $validatedData = $request->validate([
+        'nombre_empresa' => 'required|string',
+        'email_empresa' => 'required|email',
+        'telefono_empresa' => 'required|string',
+        'direccion_obra' => 'required|string',
+        'tipo_obra' => 'required|integer',
+        'tipo_funcionamiento' => 'required|integer',
+        'tipo_control' => 'required|integer',
+        'motor_potencia' => 'nullable|string',
+        'motor_marca' => 'nullable|string',
+        'motor_voltaje' => 'nullable|string',
+        'motor_encoder' => 'nullable|string',
+        'motor_rescate' => 'nullable|string',
+        'tipo_puerta' => 'nullable|string',
+        'puerta_marca' => 'nullable|string',
+        'puerta_voltaje' => 'nullable|string',
+        'patin_retractil' => 'nullable|string',
+    ]);
 
-        $nombre_empresa = $request->input('nombre_empresa');
-        $email_empresa = $request->input('email_empresa');
-        $telefono_empresa = $request->input('telefono_empresa');
-        $direccion_obra = $request->input('direccion_obra');
-        $tipo_obra = $request->input('tipo_obra');
-        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+    // Obtener los datos validados
+    $nombre_empresa = $validatedData['nombre_empresa'];
+    $email_empresa = $validatedData['email_empresa'];
+    $telefono_empresa = $validatedData['telefono_empresa'];
+    $direccion_obra = $validatedData['direccion_obra'];
+    $tipo_obra = $validatedData['tipo_obra'];
+    $tipo_funcionamiento = $validatedData['tipo_funcionamiento'];
+    $tipo_control = $validatedData['tipo_control'];
+    $motor_potencia = $validatedData['motor_potencia'];
+    $motor_marca = $validatedData['motor_marca'];
+    $motor_voltaje = $validatedData['motor_voltaje'];
+    $motor_encoder = $validatedData['motor_encoder'];
+    $motor_rescate = $validatedData['motor_rescate'];
+    $tipo_puerta = $validatedData['tipo_puerta'];
+    $puerta_marca = $validatedData['puerta_marca'];
+    $puerta_voltaje = $validatedData['puerta_voltaje'];
+    $patin_retractil = $validatedData['patin_retractil'];
 
-        $tipo_control = $request->input('tipo_control');
-        $motor_potencia = $request->input('motor_potencia');
-        $motor_marca = $request->input('motor_marca');
-        $motor_voltaje = $request->input('motor_voltaje');
-        $motor_encoder = $request->input('motor_encoder');
-        $motor_rescate = $request->input('motor_rescate');
-
-        $tipo_puerta = $request->input('tipo_puerta');
-
-        $puerta_marca = $request->input('puerta_marca');
-        $puerta_voltaje = $request->input('puerta_voltaje');
-        $patin_retractil = $request->input('patin_retractil');
-
-        if ($tipo_control == 5) { 
-
-            $accesos = "TRIPLE";
-
-            return view('new.paso8', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-
-                    'puerta_marca' => $puerta_marca,
-                    'puerta_voltaje' => $puerta_voltaje,
-                    'patin_retractil' => $patin_retractil,
-                    'accesos' => $accesos,
-                ]);
-        }
-
-        
-            return view('new.paso7', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-
-                    'puerta_marca' => $puerta_marca,
-                    'puerta_voltaje' => $puerta_voltaje,
-                    'patin_retractil' => $patin_retractil,
-                ]);
-
-
+    // Determinar qué vista mostrar según los criterios
+    if ($tipo_control == 5) {
+        $accesos = "TRIPLE";
+        return view('new.paso8', compact(
+            'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+            'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+            'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta',
+            'puerta_marca', 'puerta_voltaje', 'patin_retractil', 'accesos'
+        ));
     }
+
+    return view('new.paso7', compact(
+        'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+        'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+        'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta',
+        'puerta_marca', 'puerta_voltaje', 'patin_retractil'
+    ));
+}
+
 
 
 
@@ -494,218 +382,140 @@ class NuevoPedidoController extends Controller
 
 
     public function paso8(Request $request) {
+    // Validar los datos del formulario
+    $validatedData = $request->validate([
+        'nombre_empresa' => 'required|string',
+        'email_empresa' => 'required|email',
+        'telefono_empresa' => 'required|string',
+        'direccion_obra' => 'required|string',
+        'tipo_obra' => 'required|integer',
+        'tipo_funcionamiento' => 'required|integer',
+        'tipo_control' => 'required|integer',
+        'motor_potencia' => 'nullable|string',
+        'motor_marca' => 'nullable|string',
+        'motor_voltaje' => 'nullable|string',
+        'motor_encoder' => 'nullable|string',
+        'motor_rescate' => 'nullable|string',
+        'tipo_puerta' => 'nullable|string',
+        'puerta_marca' => 'nullable|string',
+        'puerta_voltaje' => 'nullable|string',
+        'patin_retractil' => 'nullable|string',
+        'accesos' => 'nullable|string',
+    ]);
 
-        $nombre_empresa = $request->input('nombre_empresa');
-        $email_empresa = $request->input('email_empresa');
-        $telefono_empresa = $request->input('telefono_empresa');
-        $direccion_obra = $request->input('direccion_obra');
-        $tipo_obra = $request->input('tipo_obra');
-        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+    // Obtener los datos validados
+    $nombre_empresa = $validatedData['nombre_empresa'];
+    $email_empresa = $validatedData['email_empresa'];
+    $telefono_empresa = $validatedData['telefono_empresa'];
+    $direccion_obra = $validatedData['direccion_obra'];
+    $tipo_obra = $validatedData['tipo_obra'];
+    $tipo_funcionamiento = $validatedData['tipo_funcionamiento'];
+    $tipo_control = $validatedData['tipo_control'];
+    $motor_potencia = $validatedData['motor_potencia'];
+    $motor_marca = $validatedData['motor_marca'];
+    $motor_voltaje = $validatedData['motor_voltaje'];
+    $motor_encoder = $validatedData['motor_encoder'];
+    $motor_rescate = $validatedData['motor_rescate'];
+    $tipo_puerta = $validatedData['tipo_puerta'];
+    $puerta_marca = $validatedData['puerta_marca'];
+    $puerta_voltaje = $validatedData['puerta_voltaje'];
+    $patin_retractil = $validatedData['patin_retractil'];
+    $accesos = $validatedData['accesos'];
 
-        $tipo_control = $request->input('tipo_control');
-        $motor_potencia = $request->input('motor_potencia');
-        $motor_marca = $request->input('motor_marca');
-        $motor_voltaje = $request->input('motor_voltaje');
-        $motor_encoder = $request->input('motor_encoder');
-        $motor_rescate = $request->input('motor_rescate');
+    return view('new.paso8', compact(
+        'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+        'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+        'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta',
+        'puerta_marca', 'puerta_voltaje', 'patin_retractil', 'accesos'
+    ));
+}
 
-        $tipo_puerta = $request->input('tipo_puerta');
-
-        $puerta_marca = $request->input('puerta_marca');
-        $puerta_voltaje = $request->input('puerta_voltaje');
-        $patin_retractil = $request->input('patin_retractil');
-
-        $accesos = $request->input('accesos');
-        
-            return view('new.paso8', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-
-                    'puerta_marca' => $puerta_marca,
-                    'puerta_voltaje' => $puerta_voltaje,
-                    'patin_retractil' => $patin_retractil,
-
-                    'accesos' => $accesos,
-                ]);
-
-
-    }
 
 
 
     public function paso9(Request $request) {
+    // Validar los datos del formulario
+    $validatedData = $request->validate([
+        'nombre_empresa' => 'required|string',
+        'email_empresa' => 'required|email',
+        'telefono_empresa' => 'required|string',
+        'direccion_obra' => 'required|string',
+        'tipo_obra' => 'required|integer',
+        'tipo_funcionamiento' => 'required|integer',
+        'tipo_control' => 'required|integer',
+        'motor_potencia' => 'nullable|string',
+        'motor_marca' => 'nullable|string',
+        'motor_voltaje' => 'nullable|string',
+        'motor_encoder' => 'nullable|string',
+        'motor_rescate' => 'nullable|string',
+        'tipo_puerta' => 'nullable|string',
+        'puerta_marca' => 'nullable|string',
+        'puerta_voltaje' => 'nullable|string',
+        'patin_retractil' => 'nullable|string',
+        'accesos' => 'required|string',
+        'tipo_botonera' => 'required|integer',
+        'paradas' => 'nullable|integer',
+        'subsuelos' => 'nullable|integer',
+    ]);
 
-        $nombre_empresa = $request->input('nombre_empresa');
-        $email_empresa = $request->input('email_empresa');
-        $telefono_empresa = $request->input('telefono_empresa');
-        $direccion_obra = $request->input('direccion_obra');
-        $tipo_obra = $request->input('tipo_obra');
-        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+    // Obtener los datos validados
+    $nombre_empresa = $validatedData['nombre_empresa'];
+    $email_empresa = $validatedData['email_empresa'];
+    $telefono_empresa = $validatedData['telefono_empresa'];
+    $direccion_obra = $validatedData['direccion_obra'];
+    $tipo_obra = $validatedData['tipo_obra'];
+    $tipo_funcionamiento = $validatedData['tipo_funcionamiento'];
+    $tipo_control = $validatedData['tipo_control'];
+    $motor_potencia = $validatedData['motor_potencia'];
+    $motor_marca = $validatedData['motor_marca'];
+    $motor_voltaje = $validatedData['motor_voltaje'];
+    $motor_encoder = $validatedData['motor_encoder'];
+    $motor_rescate = $validatedData['motor_rescate'];
+    $tipo_puerta = $validatedData['tipo_puerta'];
+    $puerta_marca = $validatedData['puerta_marca'];
+    $puerta_voltaje = $validatedData['puerta_voltaje'];
+    $patin_retractil = $validatedData['patin_retractil'];
+    $accesos = $validatedData['accesos'];
+    $tipo_botonera = $validatedData['tipo_botonera'];
+    $paradas = $validatedData['paradas'];
+    $subsuelos = $validatedData['subsuelos'];
 
-        $tipo_control = $request->input('tipo_control');
-        $motor_potencia = $request->input('motor_potencia');
-        $motor_marca = $request->input('motor_marca');
-        $motor_voltaje = $request->input('motor_voltaje');
-        $motor_encoder = $request->input('motor_encoder');
-        $motor_rescate = $request->input('motor_rescate');
-
-        $tipo_puerta = $request->input('tipo_puerta');
-
-        $puerta_marca = $request->input('puerta_marca');
-        $puerta_voltaje = $request->input('puerta_voltaje');
-        $patin_retractil = $request->input('patin_retractil');
-
-        $accesos = $request->input('accesos');
-
-        $paradas = $request->input('paradas');
-        $subsuelos = $request->input('subsuelos');
-
-        $tipo_botonera = $request->input('tipo_botonera');
-
-        if ($accesos == "SIMPLE") { 
-            return view('new.paso9simple', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-
-                    'puerta_marca' => $puerta_marca,
-                    'puerta_voltaje' => $puerta_voltaje,
-                    'patin_retractil' => $patin_retractil,
-
-                    'accesos' => $accesos,
-
-                    'tipo_botonera' => $tipo_botonera,
-                    'paradas' => $paradas,
-                    'subsuelos' => $subsuelos,
-                ]);
-        }   
-
-
-        if ($accesos == "DOBLE" && $tipo_botonera == 1) { 
-            return view('new.paso9dobleA', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-
-                    'puerta_marca' => $puerta_marca,
-                    'puerta_voltaje' => $puerta_voltaje,
-                    'patin_retractil' => $patin_retractil,
-
-                    'accesos' => $accesos,
-
-                    'tipo_botonera' => $tipo_botonera,
-                    'paradas' => $paradas,
-                    'subsuelos' => $subsuelos,
-                ]);
-        }     
-
-
-        if ($tipo_botonera == 2) { 
-            return view('new.paso9dobleAyB', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-
-                    'puerta_marca' => $puerta_marca,
-                    'puerta_voltaje' => $puerta_voltaje,
-                    'patin_retractil' => $patin_retractil,
-
-                    'accesos' => $accesos,
-
-                    'tipo_botonera' => $tipo_botonera,
-                    'paradas' => $paradas,
-                    'subsuelos' => $subsuelos,
-                ]);
-        }   
-
-
-
-
-        $vista =  null;
-        $estadoBotones = null;
-        return view('new.paso10', [ 
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-
-                    'puerta_marca' => $puerta_marca,
-                    'puerta_voltaje' => $puerta_voltaje,
-                    'patin_retractil' => $patin_retractil,
-
-                    'accesos' => $accesos,
-
-                    'tipo_botonera' => $tipo_botonera,
-                    'paradas' => $paradas,
-                    'subsuelos' => $subsuelos,
-
-                    'vista' => $vista,
-                    'estadoBotones' => $estadoBotones,
-                ]);
-
-
-
+    // Determinar qué vista mostrar según las condiciones
+    if ($accesos == "SIMPLE") {
+        return view('new.paso9simple', compact(
+            'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+            'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+            'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta',
+            'puerta_marca', 'puerta_voltaje', 'patin_retractil', 'accesos',
+            'tipo_botonera', 'paradas', 'subsuelos'
+        ));
+    } elseif ($accesos == "DOBLE" && $tipo_botonera == 1) {
+        return view('new.paso9dobleA', compact(
+            'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+            'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+            'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta',
+            'puerta_marca', 'puerta_voltaje', 'patin_retractil', 'accesos',
+            'tipo_botonera', 'paradas', 'subsuelos'
+        ));
+    } elseif ($tipo_botonera == 2) {
+        return view('new.paso9dobleAyB', compact(
+            'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+            'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+            'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta',
+            'puerta_marca', 'puerta_voltaje', 'patin_retractil', 'accesos',
+            'tipo_botonera', 'paradas', 'subsuelos'
+        ));
+    } else {
+        return view('new.paso10', compact(
+            'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+            'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+            'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta',
+            'puerta_marca', 'puerta_voltaje', 'patin_retractil', 'accesos',
+            'tipo_botonera', 'paradas', 'subsuelos'
+        ));
     }
+}
+
 
 
 
@@ -713,181 +523,106 @@ class NuevoPedidoController extends Controller
 
 
     public function paso10(Request $request) {
+    // Validar los datos del formulario (opcional dependiendo de la implementación)
+    // $validatedData = $request->validate([ ... ]);
 
-        $nombre_empresa = $request->input('nombre_empresa');
-        $email_empresa = $request->input('email_empresa');
-        $telefono_empresa = $request->input('telefono_empresa');
-        $direccion_obra = $request->input('direccion_obra');
-        $tipo_obra = $request->input('tipo_obra');
-        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+    // Obtener todos los datos del formulario
+    $nombre_empresa = $request->input('nombre_empresa');
+    $email_empresa = $request->input('email_empresa');
+    $telefono_empresa = $request->input('telefono_empresa');
+    $direccion_obra = $request->input('direccion_obra');
+    $tipo_obra = $request->input('tipo_obra');
+    $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+    $tipo_control = $request->input('tipo_control');
+    $motor_potencia = $request->input('motor_potencia');
+    $motor_marca = $request->input('motor_marca');
+    $motor_voltaje = $request->input('motor_voltaje');
+    $motor_encoder = $request->input('motor_encoder');
+    $motor_rescate = $request->input('motor_rescate');
+    $tipo_puerta = $request->input('tipo_puerta');
+    $puerta_marca = $request->input('puerta_marca');
+    $puerta_voltaje = $request->input('puerta_voltaje');
+    $patin_retractil = $request->input('patin_retractil');
+    $accesos = $request->input('accesos');
+    $tipo_botonera = $request->input('tipo_botonera');
+    $paradas = $request->input('paradas');
+    $subsuelos = $request->input('subsuelos');
+    $vista = $request->input('vista');
+    $estadoBotones = null;
 
-        $tipo_control = $request->input('tipo_control');
-        $motor_potencia = $request->input('motor_potencia');
-        $motor_marca = $request->input('motor_marca');
-        $motor_voltaje = $request->input('motor_voltaje');
-        $motor_encoder = $request->input('motor_encoder');
-        $motor_rescate = $request->input('motor_rescate');
-
-        $tipo_puerta = $request->input('tipo_puerta');
-
-        $puerta_marca = $request->input('puerta_marca');
-        $puerta_voltaje = $request->input('puerta_voltaje');
-        $patin_retractil = $request->input('patin_retractil');
-
-        $accesos = $request->input('accesos');
-
-        $tipo_botonera = $request->input('tipo_botonera');
-        $paradas = $request->input('paradas');
-        $subsuelos = $request->input('subsuelos');
-
-        $vista = $request->input('vista');
-
-        if ($vista == "simple") {
-            // Obtén los datos del formulario
-            $estadoBotones = $request->input('estadoBotones');
-        }
-
-        if ($vista == "dobleA") {
-            // Obtén los datos del formulario
-            $datosFormulario = $request->input('datosFormulario');
-
-            // Decodifica el JSON
-            $estadoBotones = json_decode($datosFormulario, true);
-        }
-
-        if ($vista == "dobleAyB") {
-            // Obtén los datos del formulario
-            $datosFormulario = $request->input('estadoBotonesJson');
-
-            // Decodifica el JSON
-            $estadoBotones = json_decode($datosFormulario, true);
-        }
-
-
-        return view('new.paso10', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-
-                    'puerta_marca' => $puerta_marca,
-                    'puerta_voltaje' => $puerta_voltaje,
-                    'patin_retractil' => $patin_retractil,
-
-                    'accesos' => $accesos,
-
-                    'tipo_botonera' => $tipo_botonera,
-                    'paradas' => $paradas,
-                    'subsuelos' => $subsuelos,
-
-                    'vista' => $vista,
-                    'estadoBotones' => $estadoBotones,
-                ]);
-
-    
+    // Procesar datos específicos según la vista seleccionada
+    if ($vista == "simple") {
+        // Obtén los datos del formulario específicos de 'simple'
+        $estadoBotones = $request->input('estadoBotones');
+    } elseif ($vista == "dobleA") {
+        // Obtén los datos del formulario específicos de 'dobleA'
+        $datosFormulario = $request->input('datosFormulario');
+        $estadoBotones = json_decode($datosFormulario, true);
+    } elseif ($vista == "dobleAyB") {
+        // Obtén los datos del formulario específicos de 'dobleAyB'
+        $datosFormulario = $request->input('estadoBotonesJson');
+        $estadoBotones = json_decode($datosFormulario, true);
     }
+
+    // Retornar la vista 'new.paso10' con todos los datos
+    return view('new.paso10', compact(
+        'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+        'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+        'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta',
+        'puerta_marca', 'puerta_voltaje', 'patin_retractil', 'accesos',
+        'tipo_botonera', 'paradas', 'subsuelos', 'vista', 'estadoBotones'
+    ));
+}
+
 
 
 
     public function paso11(Request $request) {
+    // Obtener todos los datos del formulario
+    $nombre_empresa = $request->input('nombre_empresa');
+    $email_empresa = $request->input('email_empresa');
+    $telefono_empresa = $request->input('telefono_empresa');
+    $direccion_obra = $request->input('direccion_obra');
+    $tipo_obra = $request->input('tipo_obra');
+    $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+    $tipo_control = $request->input('tipo_control');
+    $motor_potencia = $request->input('motor_potencia');
+    $motor_marca = $request->input('motor_marca');
+    $motor_voltaje = $request->input('motor_voltaje');
+    $motor_encoder = $request->input('motor_encoder');
+    $motor_rescate = $request->input('motor_rescate');
+    $tipo_puerta = $request->input('tipo_puerta');
+    $puerta_marca = $request->input('puerta_marca');
+    $puerta_voltaje = $request->input('puerta_voltaje');
+    $patin_retractil = $request->input('patin_retractil');
+    $accesos = $request->input('accesos');
+    $tipo_botonera = $request->input('tipo_botonera');
+    $paradas = $request->input('paradas');
+    $subsuelos = $request->input('subsuelos');
+    $estadoBotones = $request->input('estadoBotones');
+    $vista = $request->input('vista');
+    $placa_cabina = $request->input('placa_cabina');
+    $indicador_cabina = $request->input('indicador_cabina');
+    $indicador_pb = $request->input('indicador_pb');
+    $indicador_palier = $request->input('indicador_palier');
 
-        $nombre_empresa = $request->input('nombre_empresa');
-        $email_empresa = $request->input('email_empresa');
-        $telefono_empresa = $request->input('telefono_empresa');
-        $direccion_obra = $request->input('direccion_obra');
-        $tipo_obra = $request->input('tipo_obra');
-        $tipo_funcionamiento = $request->input('tipo_funcionamiento');
+    // Obtener nombres de los tipos desde la base de datos
+    $tipo_funcionamiento_nombre = DB::table('tipos_funcionamientos')->where('id', $tipo_funcionamiento)->value('nombre');
+    $tipo_control_nombre = DB::table('tipos_controles')->where('id', $tipo_control)->value('nombre');
+    $tipo_obra_nombre = DB::table('tipos_obras')->where('id', $tipo_obra)->value('nombre');
 
-        $tipo_control = $request->input('tipo_control');
-        $motor_potencia = $request->input('motor_potencia');
-        $motor_marca = $request->input('motor_marca');
-        $motor_voltaje = $request->input('motor_voltaje');
-        $motor_encoder = $request->input('motor_encoder');
-        $motor_rescate = $request->input('motor_rescate');
+    // Retornar la vista 'new.paso11' con todos los datos necesarios
+    return view('new.paso11', compact(
+        'nombre_empresa', 'email_empresa', 'telefono_empresa', 'direccion_obra',
+        'tipo_obra', 'tipo_funcionamiento', 'tipo_control', 'motor_potencia',
+        'motor_marca', 'motor_voltaje', 'motor_encoder', 'motor_rescate', 'tipo_puerta',
+        'puerta_marca', 'puerta_voltaje', 'patin_retractil', 'accesos',
+        'tipo_botonera', 'paradas', 'subsuelos', 'estadoBotones', 'vista',
+        'placa_cabina', 'indicador_cabina', 'indicador_pb', 'indicador_palier',
+        'tipo_funcionamiento_nombre', 'tipo_control_nombre', 'tipo_obra_nombre'
+    ));
+}
 
-        $tipo_puerta = $request->input('tipo_puerta');
-
-        $puerta_marca = $request->input('puerta_marca');
-        $puerta_voltaje = $request->input('puerta_voltaje');
-        $patin_retractil = $request->input('patin_retractil');
-
-        $accesos = $request->input('accesos');
-
-        $tipo_botonera = $request->input('tipo_botonera');
-        $paradas = $request->input('paradas');
-        $subsuelos = $request->input('subsuelos');
-        
-        $estadoBotones = $request->input('estadoBotones');
-
-        $vista = $request->input('vista');
-
-        $placa_cabina = $request->input('placa_cabina');
-        $indicador_cabina = $request->input('indicador_cabina');
-        $indicador_pb = $request->input('indicador_pb');
-        $indicador_palier = $request->input('indicador_palier');
-
-        $tipo_funcionamiento_nombre = DB::table('tipos_funcionamientos')->where('id', $tipo_funcionamiento)->value('nombre');
-        $tipo_control_nombre = DB::table('tipos_controles')->where('id', $tipo_control)->value('nombre');
-        $tipo_obra_nombre = DB::table('tipos_obras')->where('id', $tipo_obra)->value('nombre');
-
-        return view('new.paso11', [
-                    'nombre_empresa' => $nombre_empresa,
-                    'email_empresa' => $email_empresa,
-                    'telefono_empresa' => $telefono_empresa,
-                    'direccion_obra' => $direccion_obra,
-                    'tipo_obra' => $tipo_obra,
-                    'tipo_funcionamiento' => $tipo_funcionamiento,
-
-                    'tipo_control' => $tipo_control,
-                    'motor_potencia' => $motor_potencia,
-                    'motor_marca' => $motor_marca,
-                    'motor_voltaje' => $motor_voltaje,
-                    'motor_encoder' => $motor_encoder,
-                    'motor_rescate' => $motor_rescate,
-
-                    'tipo_puerta' => $tipo_puerta,
-
-                    'puerta_marca' => $puerta_marca,
-                    'puerta_voltaje' => $puerta_voltaje,
-                    'patin_retractil' => $patin_retractil,
-
-                    'accesos' => $accesos,
-
-                    'tipo_botonera' => $tipo_botonera,
-                    'paradas' => $paradas,
-                    'subsuelos' => $subsuelos,
-
-                    'vista' => $vista,
-                    'estadoBotones' => $estadoBotones,
-
-                    'placa_cabina' => $placa_cabina,
-                    'indicador_cabina' => $indicador_cabina,
-                    'indicador_pb' => $indicador_pb,
-                    'indicador_palier' => $indicador_palier,
-
-
-
-
-
-                    'tipo_funcionamiento_nombre' => $tipo_funcionamiento_nombre,
-                    'tipo_control_nombre' => $tipo_control_nombre,
-                    'tipo_obra_nombre' => $tipo_obra_nombre,
-
-                ]);
-
-    
-    }
 
 
 

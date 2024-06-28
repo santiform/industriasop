@@ -43,34 +43,34 @@
 
   <h2 class="titleSection"> <div class="div-paso">3</div> Detalles de puerta</h2>  
 
-  <form action="{{ route('newPaso7') }}" method="POST" onsubmit="prepararEnvio(this)">
+  <form action="{{ route('newPaso7') }}" method="POST" onsubmit="prepararEnvio(this)" required>
     @csrf
 
 
     <!-- este grupo en  la bd se guarda en la tabla "pedidos" -->
-    <input type="hidden" name="email_empresa" value="<?php echo htmlspecialchars($email_empresa, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="nombre_empresa" value="<?php echo htmlspecialchars($nombre_empresa, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="telefono_empresa" value="<?php echo htmlspecialchars($telefono_empresa, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="direccion_obra" value="<?php echo htmlspecialchars($direccion_obra, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="tipo_obra" value="<?php echo htmlspecialchars($tipo_obra, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="tipo_funcionamiento" value="<?php echo htmlspecialchars($tipo_funcionamiento, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="tipo_control" value="<?php echo htmlspecialchars($tipo_control, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="email_empresa" value="<?php echo htmlspecialchars($email_empresa, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="nombre_empresa" value="<?php echo htmlspecialchars($nombre_empresa, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="telefono_empresa" value="<?php echo htmlspecialchars($telefono_empresa, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="direccion_obra" value="<?php echo htmlspecialchars($direccion_obra, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="tipo_obra" value="<?php echo htmlspecialchars($tipo_obra, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="tipo_funcionamiento" value="<?php echo htmlspecialchars($tipo_funcionamiento, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="tipo_control" value="<?php echo htmlspecialchars($tipo_control, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- este grupo en  la bd se guarda en la tabla "motores" -->
-    <input type="hidden" name="motor_potencia" value="<?php echo htmlspecialchars($motor_potencia, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="motor_marca" value="<?php echo htmlspecialchars($motor_marca, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="motor_voltaje" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="motor_encoder" value="<?php echo htmlspecialchars($motor_encoder, ENT_QUOTES, 'UTF-8'); ?>">
-    <input type="hidden" name="motor_rescate" value="<?php echo htmlspecialchars($motor_rescate, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="motor_potencia" value="<?php echo htmlspecialchars($motor_potencia, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="motor_marca" value="<?php echo htmlspecialchars($motor_marca, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="motor_voltaje" value="<?php echo htmlspecialchars($motor_voltaje, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="motor_encoder" value="<?php echo htmlspecialchars($motor_encoder, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="motor_rescate" value="<?php echo htmlspecialchars($motor_rescate, ENT_QUOTES, 'UTF-8'); ?>">
 
     <!-- este grupo en  la bd se guarda en la tabla "tipos_puertas" -->
-    <input type="hidden" name="tipo_puerta" value="<?php echo htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8'); ?>">
+    <input required  type="hidden" name="tipo_puerta" value="<?php echo htmlspecialchars($tipo_puerta, ENT_QUOTES, 'UTF-8'); ?>">
 
 
 
     <div class="form-group">
         <label for="puerta_marca">Marca de la puerta</label>
-        <select id="puerta_marca" name="puerta_marca" class="form-control">
+        <select required  id="puerta_marca" name="puerta_marca" class="form-control">
             <option disabled selected>Seleccione una opción</option>
             <option value="WILCOX">WILCOX</option>
             <option value="FERMATOR">FERMATOR</option>
@@ -80,13 +80,13 @@
         </select>
         <div class="campo-adicional" style="display: none;">
             <label for="puerta_marca_pers">Ingrese un valor personalizado</label>
-            <input type="text" id="puerta_marca_pers" name="puerta_marca_pers" class="form-control">
+            <input required  type="text" id="puerta_marca_pers" name="puerta_marca_pers" class="form-control">
         </div>
     </div>
 
     <div class="form-group">
         <label for="puerta_voltaje">Voltaje de la puerta</label>
-        <select id="puerta_voltaje" name="puerta_voltaje" class="form-control">
+        <select required  id="puerta_voltaje" name="puerta_voltaje" class="form-control">
             <option disabled selected>Seleccione una opción</option>
             <option value="220V">220V</option>
             <option value="380V">380V</option>
