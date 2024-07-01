@@ -68,7 +68,7 @@
     <div class="form-group">
         <label for="tipo_puerta">Tipo de puerta</label>
         <select required  id="tipo_puerta" name="tipo_puerta" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="AUTOMÁTICAS">AUTOMÁTICAS</option>
             <option value="SEMIAUTOMÁTICAS">SEMIAUTOMÁTICAS</option>
             <option value="MANUALES">MANUALES</option>

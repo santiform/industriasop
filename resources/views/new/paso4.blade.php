@@ -67,7 +67,7 @@
     <div class="form-group">
         <label for="motor_rescate">Rescate</label>
         <select required  id="motor_rescate" name="motor_rescate" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="0">Con rescate</option>
             <option value="1">Sin rescate</option>
         </select>

@@ -117,7 +117,7 @@
     <div class="form-group">
         <label for="tipo_botonera">Cantidad de botoneras</label>
         <select required  id="tipo_botonera" name="tipo_botonera" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="1">1 botonera</option>
             <option value="2">2 botoneras</option>
         </select>

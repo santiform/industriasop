@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-05-2024 a las 09:30:37
+-- Tiempo de generación: 01-07-2024 a las 09:58:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -34,6 +34,13 @@ CREATE TABLE `accesos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `accesos`
+--
+
+INSERT INTO `accesos` (`id`, `id_pedido`, `nombre`, `created_at`, `updated_at`) VALUES
+(5, 37, 'DOBLE', '2024-06-26 09:42:35', NULL);
 
 -- --------------------------------------------------------
 
@@ -68,6 +75,9 @@ CREATE TABLE `cache_locks` (
 CREATE TABLE `detalles_generales` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_pedido` bigint(20) UNSIGNED NOT NULL,
+  `botonera` varchar(255) NOT NULL,
+  `paradas` varchar(11) NOT NULL,
+  `subsuelos` varchar(11) NOT NULL,
   `placa_cabina` tinyint(1) NOT NULL,
   `indicador_cabina` tinyint(1) NOT NULL,
   `indicador_pb` tinyint(1) NOT NULL,
@@ -85,12 +95,19 @@ CREATE TABLE `detalles_generales` (
 CREATE TABLE `detalles_puertas` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `id_pedido` bigint(20) UNSIGNED NOT NULL,
-  `marca` varchar(255) NOT NULL,
-  `voltaje` varchar(255) NOT NULL,
-  `patin_retractil` varchar(255) NOT NULL,
+  `marca` varchar(255) DEFAULT NULL,
+  `voltaje` varchar(255) DEFAULT NULL,
+  `patin_retractil` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `detalles_puertas`
+--
+
+INSERT INTO `detalles_puertas` (`id`, `id_pedido`, `marca`, `voltaje`, `patin_retractil`, `created_at`, `updated_at`) VALUES
+(1, 37, NULL, NULL, 'NO POSEE', '2024-06-26 09:42:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -104,6 +121,13 @@ CREATE TABLE `estados_pedidos` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `estados_pedidos`
+--
+
+INSERT INTO `estados_pedidos` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
+(1, 'Solicitud', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -132,7 +156,7 @@ CREATE TABLE `habilitaciones_accesos` (
   `id_pedido` bigint(20) UNSIGNED NOT NULL,
   `parada` varchar(255) NOT NULL,
   `salida_a` tinyint(1) NOT NULL,
-  `salida_b` tinyint(1) NOT NULL,
+  `salida_b` tinyint(1) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -218,9 +242,29 @@ CREATE TABLE `motores` (
   `marca` varchar(255) NOT NULL,
   `voltaje` varchar(255) NOT NULL,
   `potencia` varchar(255) NOT NULL,
-  `encoder` varchar(255) NOT NULL,
-  `rescate` tinyint(1) NOT NULL
+  `encoder` varchar(255) DEFAULT NULL,
+  `rescate` tinyint(1) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `motores`
+--
+
+INSERT INTO `motores` (`id`, `id_pedido`, `id_tipo_control`, `marca`, `voltaje`, `potencia`, `encoder`, `rescate`, `created_at`, `updated_at`) VALUES
+(1, 24, 6, 'REDUAR', 'FRENO 220V DC', '21', 'FRENO 220V DC', NULL, '2024-06-26 09:09:06', NULL),
+(2, 25, 6, 'REDUAR', 'FRENO 220V DC', '21', 'FRENO 220V DC', NULL, '2024-06-26 09:09:23', NULL),
+(3, 26, 6, 'REDUAR', 'FRENO 220V DC', '21', 'FRENO 220V DC', NULL, '2024-06-26 09:10:45', NULL),
+(4, 27, 6, 'REDUAR', 'FRENO 220V DC', '21', 'FRENO 220V DC', NULL, '2024-06-26 09:11:15', NULL),
+(5, 28, 6, 'REDUAR', 'FRENO 220V DC', '21', 'FRENO 220V DC', NULL, '2024-06-26 09:11:38', NULL),
+(6, 30, 6, 'REDUAR', 'FRENO 220V DC', '21', 'FRENO 220V DC', NULL, '2024-06-26 09:14:02', NULL),
+(7, 31, 6, 'REDUAR', 'FRENO 220V DC', '21', 'FRENO 220V DC', NULL, '2024-06-26 09:15:40', NULL),
+(8, 32, 6, 'REDUAR', 'FRENO 220V DC', '21', 'FRENO 220V DC', NULL, '2024-06-26 09:17:45', NULL),
+(9, 33, 6, 'REDUAR', 'FRENO 220V DC', '21', 'FRENO 220V DC', NULL, '2024-06-26 09:18:29', NULL),
+(10, 34, 6, 'REDUAR', 'FRENO 220V DC', '21', 'FRENO 220V DC', NULL, '2024-06-26 09:39:25', NULL),
+(12, 36, 6, 'REDUAR', 'FRENO 220V DC', '21', 'FRENO 220V DC', NULL, '2024-06-26 09:42:00', NULL),
+(13, 37, 6, 'REDUAR', 'FRENO 220V DC', '21', 'FRENO 220V DC', NULL, '2024-06-26 09:42:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -261,6 +305,29 @@ CREATE TABLE `pedidos` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `id_tipo_obra`, `id_tipo_funcionamiento`, `id_tipo_control`, `id_estado`, `nombre`, `email`, `telefono`, `direccion_obra`, `created_at`, `updated_at`) VALUES
+(21, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:07:41', NULL),
+(22, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:07:55', NULL),
+(23, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:08:24', NULL),
+(24, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:09:06', NULL),
+(25, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:09:23', NULL),
+(26, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:10:45', NULL),
+(27, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:11:15', NULL),
+(28, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:11:38', NULL),
+(29, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:12:49', NULL),
+(30, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:14:02', NULL),
+(31, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:15:40', NULL),
+(32, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:17:45', NULL),
+(33, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:18:29', NULL),
+(34, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:39:25', NULL),
+(35, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:39:42', NULL),
+(36, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:42:00', NULL),
+(37, 2, 2, 6, 1, 'DIVOX', 'santiform@gmail.com', '1132435634', 'Francisco Miranda 2859', '2024-06-26 09:42:34', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -281,7 +348,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('KOFBEo9Vlpecu9tf3e3zaaG1Ne1b4cfH9CsV42PG', 2, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 'YTo2OntzOjY6Il90b2tlbiI7czo0MDoibEhEZndWbjdBSzhycXJhWUlqbzVBOWo0RUpReno1RkdvaUw5dnF4UyI7czozOiJ1cmwiO2E6MDp7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQyOiJodHRwOi8vbG9jYWxob3N0L2luZHVzdHJpYXNvcC9wdWJsaWMvbnVldm8iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO3M6NDoiYXV0aCI7YToxOntzOjIxOiJwYXNzd29yZF9jb25maXJtZWRfYXQiO2k6MTcxNjUyODYxNDt9fQ==', 1716535588);
+('jTv8kL72wG91eFLeiDju5TirjST2FX5jZE6ODlGF', NULL, '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoicE1XdWF5TGdsZ1NYUlVuRG9vNWxjVlQ4ODZuWG1Va3d0MDdFRXJvaCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTE6Imh0dHA6Ly9sb2NhbGhvc3QvaW5kdXN0cmlhc29wL3B1YmxpYy9udWV2by9wYXNvNWludCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NToiZGF0b3MiO2E6MTI6e3M6MTM6ImVtYWlsX2VtcHJlc2EiO3M6MTk6InNhbnRpZm9ybUBnbWFpbC5jb20iO3M6MTQ6Im5vbWJyZV9lbXByZXNhIjtzOjU6IkRJVk9YIjtzOjE2OiJ0ZWxlZm9ub19lbXByZXNhIjtzOjEwOiIxMTM5NDUwMzQ5IjtzOjE0OiJkaXJlY2Npb25fb2JyYSI7czoyMjoiRnJhbmNpc2NvIE1pcmFuZGEgMjg1OSI7czo5OiJ0aXBvX29icmEiO3M6MToiMSI7czoxOToidGlwb19mdW5jaW9uYW1pZW50byI7czoxOiIyIjtzOjEyOiJ0aXBvX2NvbnRyb2wiO3M6MToiNyI7czoxNDoibW90b3JfcG90ZW5jaWEiO3M6MToiMyI7czoxMToibW90b3JfbWFyY2EiO3M6NToiQURTVVIiO3M6MTM6Im1vdG9yX3ZvbHRhamUiO3M6MTM6IkZSRU5PIDExMFYgQUMiO3M6MTM6Im1vdG9yX2VuY29kZXIiO047czoxMzoibW90b3JfcmVzY2F0ZSI7Tjt9fQ==', 1719816534);
 
 -- --------------------------------------------------------
 
@@ -369,6 +436,23 @@ CREATE TABLE `tipos_puertas` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `tipos_puertas`
+--
+
+INSERT INTO `tipos_puertas` (`id`, `id_tipo_control`, `id_pedido`, `nombre`, `created_at`, `updated_at`) VALUES
+(5, 6, 25, 'SEMIAUTOMÁTICAS', '2024-06-26 09:09:23', NULL),
+(6, 6, 26, 'SEMIAUTOMÁTICAS', '2024-06-26 09:10:45', NULL),
+(7, 6, 27, 'SEMIAUTOMÁTICAS', '2024-06-26 09:11:15', NULL),
+(8, 6, 28, 'SEMIAUTOMÁTICAS', '2024-06-26 09:11:38', NULL),
+(9, 6, 30, 'SEMIAUTOMÁTICAS', '2024-06-26 09:14:02', NULL),
+(10, 6, 31, 'SEMIAUTOMÁTICAS', '2024-06-26 09:15:40', NULL),
+(11, 6, 32, 'SEMIAUTOMÁTICAS', '2024-06-26 09:17:45', NULL),
+(12, 6, 33, 'SEMIAUTOMÁTICAS', '2024-06-26 09:18:29', NULL),
+(13, 6, 34, 'SEMIAUTOMÁTICAS', '2024-06-26 09:39:25', NULL),
+(14, 6, 36, 'SEMIAUTOMÁTICAS', '2024-06-26 09:42:00', NULL),
+(15, 6, 37, 'SEMIAUTOMÁTICAS', '2024-06-26 09:42:34', NULL);
 
 -- --------------------------------------------------------
 
@@ -475,7 +559,8 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `motores`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_pedido` (`id_pedido`);
+  ADD KEY `id_pedido` (`id_pedido`),
+  ADD KEY `motores_ibfk_1` (`id_tipo_control`);
 
 --
 -- Indices de la tabla `password_reset_tokens`
@@ -543,7 +628,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `accesos`
 --
 ALTER TABLE `accesos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `detalles_generales`
@@ -555,7 +640,7 @@ ALTER TABLE `detalles_generales`
 -- AUTO_INCREMENT de la tabla `detalles_puertas`
 --
 ALTER TABLE `detalles_puertas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `estados_pedidos`
@@ -573,7 +658,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de la tabla `habilitaciones_accesos`
 --
 ALTER TABLE `habilitaciones_accesos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `jobs`
@@ -591,13 +676,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `motores`
 --
 ALTER TABLE `motores`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos_controles`
@@ -621,7 +706,7 @@ ALTER TABLE `tipos_obras`
 -- AUTO_INCREMENT de la tabla `tipos_puertas`
 --
 ALTER TABLE `tipos_puertas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -661,7 +746,7 @@ ALTER TABLE `habilitaciones_accesos`
 -- Filtros para la tabla `motores`
 --
 ALTER TABLE `motores`
-  ADD CONSTRAINT `motores_ibfk_1` FOREIGN KEY (`id`) REFERENCES `tipos_controles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `motores_ibfk_1` FOREIGN KEY (`id_tipo_control`) REFERENCES `tipos_controles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `motores_ibfk_2` FOREIGN KEY (`id_pedido`) REFERENCES `pedidos` (`id`);
 
 --
@@ -671,8 +756,7 @@ ALTER TABLE `pedidos`
   ADD CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`id_tipo_control`) REFERENCES `tipos_controles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `pedidos_ibfk_4` FOREIGN KEY (`id_tipo_obra`) REFERENCES `tipos_obras` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `pedidos_ibfk_5` FOREIGN KEY (`id_tipo_funcionamiento`) REFERENCES `tipos_funcionamientos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `pedidos_ibfk_6` FOREIGN KEY (`id_estado`) REFERENCES `estados_pedidos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `pedidos_ibfk_7` FOREIGN KEY (`id`) REFERENCES `tipos_controles` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `pedidos_ibfk_6` FOREIGN KEY (`id_estado`) REFERENCES `estados_pedidos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `tipos_controles`

@@ -88,7 +88,7 @@
     <div class="form-group">
         <label for="placa_cabina">Placa cabina</label>
         <select required  id="placa_cabina" name="placa_cabina" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="1">Sí</option>
             <option value="0">No</option>            
         </select>
@@ -97,7 +97,7 @@
     <div class="form-group">
         <label for="indicador_cabina">Indicador cabina</label>
         <select required  id="indicador_cabina" name="indicador_cabina" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="1">Sí</option>
             <option value="0">No</option>            
         </select>
@@ -106,7 +106,7 @@
     <div class="form-group">
         <label for="indicador_pb">Indicador Planta Baja</label>
         <select required  id="indicador_pb" name="indicador_pb" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="1">Sí</option>
             <option value="0">No</option>            
         </select>
@@ -115,7 +115,7 @@
     <div class="form-group">
         <label for="indicador_palier">Indicador Palier</label>
         <select required  id="indicador_palier" name="indicador_palier" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="1">Sí</option>
             <option value="0">No</option>            
         </select>

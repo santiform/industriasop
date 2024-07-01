@@ -71,7 +71,7 @@
     <div class="form-group">
         <label for="patin_retractil">Patin retráctil (Voltaje)</label>
         <select required  id="patin_retractil" name="patin_retractil" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="NO POSEE">NO POSEE PATIN RETRÁCTIL</option>
             <option value="220 AC">220 AC</option>
             <option value="110 DC">110 DC</option>

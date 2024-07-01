@@ -137,35 +137,35 @@
   margin-bottom: 5rem;
   text-align: center; /* Centra el contenido dentro del div */
   background-color: #E5ECF4;
-  width: 14vw;
+  width: 23vw;
   padding-bottom: 1.1rem;
   border-radius: 15px;
 }
 
 
 .btn {
-  width: 50px;
-  height: 50px;
-  margin: 5px;
-  margin-inline: 10px;
-  background-color: green; /* Color inicial */
+  width: 110px;
+  height: 35px;
+  margin: 12px;
+  margin-inline: -10px;
+  background-color: #3BCE6F; /* Color inicial */
   color: transparent;
   border: 1px solid transparent;
-  border-radius: 10px;
+  border-radius: 10px 10 px 0 0;
   font-size: 18px;
 }
 
 .red {
-  background-color: red !important;
+  background-color: #F76060 !important;
 } 
 
 
 .piso {
   width: 80px;
-  height: 50px;
-  margin: 5px;
+  height: 35px;
+  margin: 12px;
   margin-inline: 10px;
-  border-radius: 10px;
+  font-weight: 700;
   font-size: 18px;
   background-color: #f7f7f7;
   border: 1px solid black;
@@ -175,7 +175,7 @@
 
 
 .btnEnc {
-  width: 50px;
+  width: 40px;
   height: 50px;
   margin: 5px;
   margin-inline: 10px;

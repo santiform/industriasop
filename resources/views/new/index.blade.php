@@ -74,7 +74,7 @@
 
         <label for="tipo_obra">Tipo de obra</label>
           <select required  id="tipo_obra" name="tipo_obra">
-              <option disabled selected>Seleccione una opción</option>
+              <option value="" disabled selected></option>
               @foreach($tipos_obras as $tipo_obra)
                   <option value="{{ $tipo_obra->id }}">{{ $tipo_obra->nombre }}</option>
               @endforeach
@@ -86,7 +86,7 @@
       <div class="form-group">
           <label for="tipo_funcionamiento">Cuadro de maniobras</label>
           <select required  id="tipo_funcionamiento" name="tipo_funcionamiento">
-              <option disabled selected>Seleccione una opción</option>
+              <option value="" disabled selected></option>
               @foreach($tipos_funcionamientos as $tipo_funcionamiento)
                   <option value="{{ $tipo_funcionamiento->id }}">{{ $tipo_funcionamiento->nombre }}</option>
               @endforeach
@@ -122,3 +122,23 @@
 
 
 <?php include '../resources/views/new/includes/footer.blade.php'; ?>
+
+
+@if (session('errorValidacion')  == 'ok')
+
+     <script type="text/javascript">
+         
+                 Swal.fire({
+          
+          icon: 'error',
+          iconColor: 'red',
+          color: 'black',
+          background: '#E5ECF4',
+          title: 'Algunos datos no fueron completados',
+          showConfirmButton: false,
+          timer: 4000
+        })
+
+     </script> 
+
+@endif

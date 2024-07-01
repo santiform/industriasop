@@ -66,7 +66,7 @@
     <div class="form-group">
         <label for="motor_encoder">Encoder</label>
         <select required  id="motor_encoder" name="motor_encoder" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="ECN 1313">ECN 1313</option>
             <option value="otra">Otro...</option>
         </select>

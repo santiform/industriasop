@@ -606,7 +606,15 @@ class NuevoPedidoController extends Controller
     $indicador_pb = $request->input('indicador_pb');
     $indicador_palier = $request->input('indicador_palier');
 
-    // Obtener nombres de los tipos desde la base de datos
+
+
+
+
+
+
+
+
+
     $tipo_funcionamiento_nombre = DB::table('tipos_funcionamientos')->where('id', $tipo_funcionamiento)->value('nombre');
     $tipo_control_nombre = DB::table('tipos_controles')->where('id', $tipo_control)->value('nombre');
     $tipo_obra_nombre = DB::table('tipos_obras')->where('id', $tipo_obra)->value('nombre');
@@ -710,6 +718,7 @@ class NuevoPedidoController extends Controller
         $subsuelos = $request->input('subsuelos');
         
         $estadoBotones = $request->input('estadoBotones');
+        $data = json_decode(html_entity_decode($request->input('data')), true);
 
         $vista = $request->input('vista');
 
@@ -746,6 +755,7 @@ class NuevoPedidoController extends Controller
             'paradas' => $paradas,
             'subsuelos' => $subsuelos,
             'estadoBotones' => $estadoBotones,
+            'data' => $data,
             'vista' => $vista,
             'placa_cabina' => $placa_cabina,
             'indicador_cabina' => $indicador_cabina,
@@ -759,16 +769,26 @@ class NuevoPedidoController extends Controller
         ];
 
         // Generar el PDF
-        $pdf = PDF::loadView('emails.pdf', $variables);
+        $pdf = PDF::loadView('emails.pdf', $variables)->setOptions([
+        'isHtml5ParserEnabled' => true,
+        'isPhpEnabled' => true,
+        'isRemoteEnabled' => true,
+        'isFontSubsettingEnabled' => true,
+        'isJavascriptEnabled' => true,
+        'defaultPaperSize' => 'a4',
+        'defaultPaperOrientation' => 'portrait',
+        ]);
+
         $pdfPath = storage_path('app/public/documento.pdf');
         $pdf->save($pdfPath);
 
         // Nombre del pdf
         $archivoPdf = "documento.pdf";
 
+
+
         // Enviar el correo con el PDF adjunto
         Mail::to('santiform@gmail.com')->send(new MiCorreoConAdjunto($archivoPdf));
-        Mail::to('divoxsoluciones@gmail.com')->send(new MiCorreoConAdjunto($archivoPdf));
 
         return "Correo con adjunto enviado con éxito!";
     }

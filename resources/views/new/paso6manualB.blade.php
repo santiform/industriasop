@@ -71,7 +71,7 @@
     <div class="form-group">
         <label for="puerta_voltaje">Voltaje de la puerta</label>
         <select required  id="puerta_voltaje" name="puerta_voltaje" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="220V">220V</option>
             <option value="380V">380V</option>
             <option value="VVF">VVF</option>

@@ -71,7 +71,7 @@
     <div class="form-group">
         <label for="puerta_marca">Marca de la puerta</label>
         <select required  id="puerta_marca" name="puerta_marca" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="WILCOX">WILCOX</option>
             <option value="FERMATOR">FERMATOR</option>
             <option value="MAMUT">MAMUT</option>
@@ -87,7 +87,7 @@
     <div class="form-group">
         <label for="puerta_voltaje">Voltaje de la puerta</label>
         <select required  id="puerta_voltaje" name="puerta_voltaje" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="220V">220V</option>
             <option value="380V">380V</option>
             <option value="VVF">VVF</option>

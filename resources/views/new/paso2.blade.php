@@ -59,7 +59,7 @@
     <div class="form-group">
         <label for="tipo_control">Tipo de control</label>
         <select required  id="tipo_control" name="tipo_control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             @foreach($tipos_controles as $tipo_control)
                 <option value="{{ $tipo_control->id }}">{{ $tipo_control->nombre }}</option>
             @endforeach
@@ -78,7 +78,7 @@
 <div class="form-group">
     <label for="motor_marca">Marca del Motor</label>
     <select required  id="motor_marca" name="motor_marca" class="form-control">
-        <option disabled selected>Seleccione una opción</option>
+        <option value="" disabled selected></option>
         <option value="MORRIS">MORRIS</option>
         <option value="ROJAS">ROJAS</option>
         <option value="OMAR LIFE">OMAR LIFE</option>
@@ -95,7 +95,7 @@
       <div class="form-group">
     <label for="motor_voltaje">Voltaje del Motor:</label>
     <select required  id="motor_voltaje" name="motor_voltaje" class="form-control" >
-        <option disabled selected>Seleccione una opción</option>
+        <option value="" disabled selected></option>
         <option value="BOBINA 48V DC">BOBINA 48V DC</option>
         <option value="BOBINA 220V AC">BOBINA 220V AC</option>
         <option value="BOBINA 220V DC">BOBINA 220V DC</option>
@@ -124,7 +124,7 @@
 <div class="form-group">
     <label for="motor_marca">Marca del Motor</label>
     <select required  id="motor_marca" name="motor_marca" class="form-control" onchange="mostrarinput required Otro('motor_marca')">
-        <option disabled selected>Seleccione una opción</option>
+        <option value="" disabled selected></option>
         <option value="ADSUR">ADSUR</option>
         <option value="REDUAR">REDUAR</option>
         <option value="otra">Otro...</option>
@@ -140,7 +140,7 @@
       <div class="form-group">
     <label for="motor_voltaje">Freno del Motor:</label>
     <select required  id="motor_voltaje" name="motor_voltaje" class="form-control" onchange="mostrarinput required Otro('motor_voltaje')">
-        <option disabled selected>Seleccione una opción</option>
+        <option value="" disabled selected></option>
         <option value="FRENO 110V DC">FRENO 110V DC</option>
         <option value="FRENO 110V AC">FRENO 110V AC</option>
         <option value="FRENO 220V DC">FRENO 220V DC</option>

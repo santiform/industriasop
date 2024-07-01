@@ -76,7 +76,7 @@
     <div class="form-group">
         <label for="accesos">Cantidad de accesos</label>
         <select required  id="accesos" name="accesos" class="form-control">
-            <option disabled selected>Seleccione una opción</option>
+            <option value="" disabled selected></option>
             <option value="SIMPLE">SIMPLE</option>
             <option value="DOBLE">DOBLE</option>
             <option value="TRIPLE">TRIPLE</option>
