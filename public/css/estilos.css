@@ -1,0 +1,259 @@
+/* Estilo base */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    padding-top: 110px;
+}
+
+/* Contenedor hoja: ancho máximo y margen */
+.hoja {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 70%; /* Ancho máximo */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Contenedor Principal: 2 columnas */
+.principal {
+    display: flex;
+    gap: 40px; /* Espacio entre columnas */
+    margin-bottom: 20px; /* Separación después del contenedor principal */
+    flex: 1;
+}
+
+.principal .izquierda {
+    flex: 1 1 30%; /* 30% de ancho mínimo */
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;          /* Añadido para centrar contenido */
+    justify-content: center; /* Centrado horizontal */
+    align-items: top;
+}
+
+.principal .derecha {
+    flex: 1 1 70%; /* 70% de ancho mínimo */
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;          /* Añadido para centrar contenido */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center;    /* Centrado vertical */
+}
+
+
+
+
+/* Estilo del Footer */
+.footer {
+    display: flex;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box; /* Asegura que el padding se incluya en el cálculo del ancho */
+    justify-content: center; /* Centra el contenido del footer */
+}
+
+/* Contenedor del contenido del footer */
+.footer-container {
+    display: flex;
+    width: 70%; /* Limita el ancho al 70% */
+    justify-content: space-between; /* Espacio entre las columnas */
+    align-items: stretch; /* Para que todas las columnas tengan la misma altura */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+/* Clases de las columnas en el footer */
+.footer .izquierda {
+    flex: 1 1 25%; /* 40% de ancho para la columna izquierda */
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    box-sizing: border-box; /* Incluye el padding dentro del ancho total */
+}
+
+.footer .centro {
+    flex: 1 1 32%; /* 30% de ancho para la columna central */
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    box-sizing: border-box; /* Incluye el padding dentro del ancho total */
+    display: flex; /* Usamos flexbox en esta columna */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    flex-direction: column; /* Apila los párrafos verticalmente */
+}
+
+.footer .derecha {
+    flex: 1 1 43%; /* 30% de ancho para la columna derecha */
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    box-sizing: border-box; /* Incluye el padding dentro del ancho total */
+    display: flex; /* Usamos flexbox en esta columna */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    flex-direction: column; /* Apila los párrafos verticalmente */
+}
+
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 1100px) {
+    /* Aseguramos que las columnas se apilen en la sección principal */
+    .principal {
+        flex-direction: column; /* Acomoda las columnas en fila en pantallas pequeñas */
+    }
+
+
+    /* Ajusta el ancho del contenedor de la hoja */
+    .hoja {
+        max-width: 95%; /* Reducir el ancho máximo en pantallas pequeñas */
+    }
+
+
+    .footer {
+        flex-direction: column; /* Apilar las columnas en pantallas pequeñas */
+        align-items: center; /* Alineación centrada */
+        padding: 15px 10px; /* Reducir el padding en pantallas pequeñas para evitar desbordamientos */
+    }
+
+    .footer-container {
+        width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
+        flex-direction: column; /* Apilar las columnas */
+        justify-content: center; /* Alineación centrada */
+        align-items: center; /* Alineación centrada */
+    }
+
+    /* Asegura que cada columna ocupe todo el ancho disponible */
+    .footer .izquierda,
+    .footer .centro,
+    .footer .derecha {
+        flex: 0 0 100%; /* Las columnas ocupan el 100% del ancho */
+        margin: 10px 0; /* Añadir un poco de margen entre las columnas */
+        padding: 20px;
+    }
+
+
+
+
+
+}
+
+
+
+/* ------------ */
+
+/* Estilo general para el header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    padding-right: 29px;
+    background-color: #e7e7e7;
+    color: white;
+    margin-bottom: 20px; /* Se mantiene la separación con el contenedor principal */
+    position: fixed; /* Lo fija al top */
+    top: 0; /* Se coloca en la parte superior */
+    left: 0; /* Alineado al borde izquierdo */
+    right: 0; /* Alineado al borde derecho */
+    z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
+    transition: top 0.3s; /* Transición suave para el movimiento del header */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header oculto cuando se hace scroll hacia abajo */
+.header.hidden {
+    top: -180px;  /* Ajusta el valor si el alto de tu header es mayor a 100px */
+}
+
+/* Para asegurarse de que el contenido no quede cubierto por el header */
+main {
+    margin-top: 80px; /* Este valor debe ser mayor o igual al alto del header */
+}
+
+/* Contenedor interno para limitar el ancho */
+.header-container {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 70%; /* Limita el ancho del contenido a la misma proporción que la hoja */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Estilo para el logo */
+.header .logo-img {
+    height: 50px; /* Ajusta el tamaño del logo según necesites */
+}
+
+/* Estilo para los botones */
+.header .botones {
+    display: flex;
+    gap: 10px;
+}
+
+.header .btn {
+    background-color: #005177;
+    color: white;
+    padding: 12px 19px;
+    border-radius: 13px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.header .btn:hover {
+    background-color: #007db7;
+}
+
+/* Responsividad */
+@media (max-width: 1100px) {
+    .header {
+        flex-direction: column; /* Apilamos los elementos en columna */
+        align-items: center;     /* Centramos los elementos */
+        text-align: center;      /* Alineamos el texto al centro */
+    }
+
+    .header-container {
+        max-width: 95%; /* Limita el ancho del contenido a la misma proporción que la hoja */
+    }
+
+    body {
+        padding-top: 160px;
+    }
+
+    .header .botones {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header .logo-img {
+        margin-bottom: 10px; /* Espacio entre logo y botones */
+    }
+}
+
+
+
+
+
+.icono-texto-linea {
+    display: flex; /* Usamos flexbox para alinear el ícono y el texto */
+    align-items: center; /* Alineamos verticalmente los elementos */
+    margin-bottom: 10px; /* Separación entre los íconos/textos */
+    padding: 5px 0; /* Padding para separar el contenido */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+.icono-texto-linea i {
+    margin-right: 10px; /* Espaciado entre el ícono y el texto */
+    font-size: 18px; /* Ajustamos el tamaño del ícono */
+}
+
+.icono-texto-linea .texto {
+    font-size: 16px; /* Tamaño del texto */
+    color: #333; /* Color del texto */
+}
+
