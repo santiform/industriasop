@@ -1,4 +1,9 @@
 /* Estilo base */
+* {
+    box-sizing: border-box;
+}
+
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -9,39 +14,57 @@ body {
 .hoja {
     margin: 0 auto;
     width: 100%;
-    max-width: 70%; /* Ancho máximo */
+    max-width: 73%; /* Ancho máximo */
     padding: 20px;
     box-sizing: border-box;
 }
 
-/* Contenedor Principal: 2 columnas */
+/* Contenedor Principal: 2 columnas con proporciones ajustadas */
 .principal {
     display: flex;
     gap: 40px; /* Espacio entre columnas */
     margin-bottom: 20px; /* Separación después del contenedor principal */
+    margin-top: 100px;
     flex: 1;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
+/* Ajuste para la columna izquierda */
 .principal .izquierda {
-    flex: 1 1 30%; /* 30% de ancho mínimo */
-    background-color: #f0f0f0;
+    flex: 0 0 calc(29% - 20px); /* Resta el 50% del gap (40px/2) */
     padding: 20px;
     box-sizing: border-box;
-    display: flex;          /* Añadido para centrar contenido */
-    justify-content: center; /* Centrado horizontal */
-    align-items: top;
+    overflow-x: hidden;
 }
 
+/* Ajuste para la columna derecha */
 .principal .derecha {
-    flex: 1 1 70%; /* 70% de ancho mínimo */
-    background-color: #f0f0f0;
+    flex: 0 0 calc(71% - 20px); /* Resta el 50% del gap (40px/2) */
     padding: 20px;
+    padding-top: 27px;
     box-sizing: border-box;
-    display: flex;          /* Añadido para centrar contenido */
-    justify-content: center; /* Centrado horizontal */
-    align-items: center;    /* Centrado vertical */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    min-height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    overflow-x: hidden;
 }
 
+/* Evitar desbordamientos en los inputs, select o textarea */
+input, select, textarea {
+    width: 100%; /* Asegura que los campos de formulario ocupen todo el ancho */
+    box-sizing: border-box; /* Incluye el padding y los bordes en el ancho total */
+}
+
+/* Contener los elementos internos dentro de la columna derecha */
+.derecha > * {
+    max-width: 100%; /* Asegura que los elementos no se excedan del contenedor */
+    overflow: hidden; /* Evita que los elementos internos desborden */
+}
 
 
 
@@ -100,16 +123,17 @@ body {
 
 
 /* Media query para pantallas más pequeñas */
-@media (max-width: 1100px) {
+@media (max-width: 1255px) {
     /* Aseguramos que las columnas se apilen en la sección principal */
     .principal {
         flex-direction: column; /* Acomoda las columnas en fila en pantallas pequeñas */
+        margin-top: 30px;
     }
 
 
     /* Ajusta el ancho del contenedor de la hoja */
     .hoja {
-        max-width: 95%; /* Reducir el ancho máximo en pantallas pequeñas */
+        max-width: 73%; /* Reducir el ancho máximo en pantallas pequeñas */
     }
 
 
@@ -135,11 +159,21 @@ body {
         padding: 20px;
     }
 
+    .botones-container {
+        flex-direction: column; /* Los botones se apilan en pantallas pequeñas */
+        gap: 20px; /* Añade más espacio entre los botones */
+    }
+    .btnPrev button, .btnNext button {
+        width: 100%; /* En pantallas pequeñas los botones ocuparán el 100% */
+    }
 
-
-
-
+    .timeline {
+        display: none;
+    }
 }
+
+
+
 
 
 
@@ -152,9 +186,9 @@ body {
     align-items: center;
     padding: 20px 24px;
     padding-right: 29px;
-    background-color: #e7e7e7;
+    background-color: #f1f1f1;
     color: white;
-    margin-bottom: 20px; /* Se mantiene la separación con el contenedor principal */
+    margin-bottom: 40px; /* Se mantiene la separación con el contenedor principal */
     position: fixed; /* Lo fija al top */
     top: 0; /* Se coloca en la parte superior */
     left: 0; /* Alineado al borde izquierdo */
@@ -218,7 +252,7 @@ main {
     }
 
     .header-container {
-        max-width: 95%; /* Limita el ancho del contenido a la misma proporción que la hoja */
+        max-width: 80%; /* Limita el ancho del contenido a la misma proporción que la hoja */
     }
 
     body {
@@ -235,6 +269,24 @@ main {
     }
 }
 
+
+
+@media (max-width: 800px) {
+    .hoja {
+        max-width: 94%;
+
+    }
+}
+
+
+@media (max-width: 520px) {
+    .principal {
+        margin-top: 60px;
+    }
+    .hoja {
+        max-width: 99%;
+    }
+}
 
 
 
@@ -257,3 +309,410 @@ main {
     color: #333; /* Color del texto */
 }
 
+
+
+
+/* a partir de acá son los estilos viejos (del proyecto antes de refactorizar) */
+
+
+@import url("https://use.typekit.net/biu5kds.css");
+@import url('https://fonts.googleapis.com/css2?family=Inter:slnt,wght@-10..0,100..900&family=Michroma&display=swap');
+
+
+.michroma {
+  font-family: "Michroma", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.paralucent {
+  font-family: paralucent, sans-serif;
+}
+
+.inter {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" <slant>;
+}
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .formulario {
+      border-radius: 8px;
+      margin-top: -1rem;
+    }
+    h1{
+      margin: 0;
+    }
+    .title {
+      text-align: center;
+      color: #333;
+    }
+    .titleSection {
+      color: #004991;
+      font-family: paralucent, sans-serif;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      margin-bottom: 1.7rem;
+    }
+    hr {
+      border: 0;
+      height: 1px;
+      background-color: #e0e0e0;
+      margin: 20px 0;
+    }
+    /* Aplicamos box-sizing a todos los elementos */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Aseguramos que el formulario ocupe el 100% del contenedor */
+.formulario {
+    width: 100%; /* Ocupa el 100% del contenedor */
+    padding: 0;
+    margin: 0 auto; /* Centrado automático en el contenedor */
+}
+
+
+
+/* Estilo para los contenedores de .form-group */
+.form-group {
+    margin-bottom: 3rem;
+    margin-top: 0.9rem;
+    background-color: #E5ECF4;
+    padding-inline: 20px; /* Ajustamos padding lateral */
+    padding-bottom: 35px; /* Ajustamos padding inferior */
+    padding-top: 35px;
+    border-radius: 30px;
+    width: 100%; /* Aseguramos que no se exceda el ancho */
+    box-sizing: border-box; /* Asegura que padding no cause desbordes */
+}
+
+/* Ajuste para los labels dentro del form-group */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    margin-left: 1rem;
+    color: #555;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: "Inter", sans-serif;
+    color: black;
+}
+
+.form-group input,
+.form-group select {
+    display: block;              /* Los hace bloques para poder usar margin: auto */
+    width: 95%;                  /* Ajusta el ancho del campo */
+    height: 45px;
+    padding: 10px;
+    font-size: 17px;
+    border: 1px solid #919395;
+    border-radius: 12px;
+    outline: none;
+    margin: 0 auto;              /* Centra el input/select dentro de su contenedor */
+}
+
+/* Efecto de foco en los campos de entrada */
+.form-group input:focus,
+.form-group select:focus,
+.form-group select option:checked {
+    border: 2px solid #004991;
+}
+
+/* Título del form-group */
+.titulo-form-group {
+    font-weight: 800;
+    font-size: 18px;
+    font-family: "Inter", sans-serif;
+    color: #004991;
+    margin-left: 0.6rem;
+}
+
+/* Contenedor de los botones en dos columnas */
+.botones-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales */
+    margin-top: 20px;
+}
+
+/* Estilo para los botones */
+.botones-container button {
+    padding: 20px 30px; /* Aumento de padding para botones más grandes */
+    font-size: 18px; /* Tamaño de la fuente */
+    border: 2px solid #005177; /* Borde visible */
+    background-color: #007db7; /* Fondo azul */
+    color: white; /* Texto blanco */
+    border-radius: 8px; /* Bordes redondeados */
+    cursor: pointer;
+    width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
+    box-sizing: border-box; /* Asegura que padding y borde estén incluidos en el tamaño total */
+    display: flex;
+    justify-content: center; /* Centra el texto horizontalmente */
+    align-items: center; /* Centra el texto verticalmente */
+    height: auto; /* Deja que la altura se ajuste automáticamente */
+    transition: background-color 0.3s, transform 0.3s; /* Efecto hover */
+    min-height: 60px; /* Asegura una altura mínima */
+    flex-grow: 1; /* Hace que el botón se expanda si es necesario */
+}
+
+
+/* Estilo para los botones dentro de las clases btnPrev y btnNext */
+.btnPrev, .btnNext {
+    text-align: center;
+}
+
+.btnPrev button, .btnNext button {
+    font-family: paralucent, sans-serif;
+    font-size: 17px;
+    font-weight: 500;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%; /* Aseguramos que los botones ocupen el 100% del contenedor */
+    padding: 14px 7vw; /* Ajusta el padding horizontal utilizando vw para que se adapte al tamaño de la pantalla */
+}
+
+.btnPrev button {
+    background-color: #EDEBEB;
+    color: black;
+}
+
+.btnNext button {
+    background-color: #004991;
+    color: white;
+}
+
+
+
+
+
+#botonera {
+  margin: 0 auto;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  text-align: center; /* Centra el contenido dentro del div */
+  background-color: #E5ECF4;
+  width: 23vw;
+  padding-bottom: 1.1rem;
+  border-radius: 15px;
+}
+
+
+/* esta es una clase vieja... 
+  .btn {
+  width: 110px;
+  height: 35px;
+  margin: 12px;
+  margin-inline: -10px;
+  background-color: #3BCE6F;
+  color: transparent;
+  border: 1px solid transparent;
+  border-radius: 10px 10 px 0 0;
+  font-size: 18px;
+} */
+
+.red {
+  background-color: #F76060 !important;
+} 
+
+
+.piso {
+  width: 80px;
+  height: 35px;
+  margin: 12px;
+  margin-inline: 10px;
+  font-weight: 700;
+  font-size: 18px;
+  background-color: #f7f7f7;
+  border: 1px solid black;
+  color: black;
+}
+
+
+
+.btnEnc {
+  width: 40px;
+  height: 50px;
+  margin: 5px;
+  margin-inline: 10px;
+  margin-top: 5px; /* Ajustar el margen superior */
+  margin-bottom: 5px; /* Ajustar el margen inferior */
+  background-color: transparent; /* Color inicial */
+  color: black;
+  font-weight: 700;
+  border: none;
+  font-size: 22px;
+  text-align: center;
+}
+
+
+
+.btnEncPiso {
+  width: 80px;
+  height: 50px;
+  margin-inline: 10px;
+  margin-top: 5px;
+  margin-bottom: 1px !important;
+  background-color: transparent; /* Color inicial */
+  color: black;
+  font-weight: 700;
+  border: none;
+  font-size: 22px;
+  text-align: center;
+  vertical-align: top; /* Añadido para alinear verticalmente con los botones */
+}
+
+
+.campo-adicional {
+            background-color: #DADADA;
+            padding-inline: 2.3rem; /* Agrega un poco de espacio interior */
+            padding-block: 0.8rem;
+            margin-top: 0.5rem;
+            margin-bottom: -0.5rem;
+            color: darkblue;
+            border-radius: 8px;
+            margin-inline: 4rem;
+            margin-right: 5rem;
+
+        }
+
+.campo-adicional label {
+  color: black;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.campo-adicional input, .campo-adicional select {
+      width: 100%;
+      font-size: 14px;
+      padding: 0.3rem;
+    }
+
+
+.div-paso {
+  border-radius: 40px;
+  width: 35px;
+  height: 35px;
+  background-color: #004991;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px; /* Espacio entre el número y el texto */
+  font-size: 18px; /* Ajusta según tus necesidades */
+  color: white;
+  margin-right: 0.8rem;
+  padding: 0;
+}
+
+
+
+
+
+
+
+/* styles.css */
+
+.timeline {
+    
+    font-family: paralucent, sans-serif;
+    
+}
+
+.circle {
+    width: 29px;
+    height: 29px;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #004991;
+    margin-right: 10px;
+    margin-block: 3px;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.circle-azul {
+  color: #004991;
+}
+.circle-gris {
+  color: #000000;
+}
+
+.paso {
+    margin-block: 0.5rem;
+    background-color: #004991;
+    padding: 5px 10px;
+    border-radius: 70px;
+    color: white;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.linea {
+    background-color: #004991;
+    color: #004991;
+    width: 0.25rem;
+    margin: 0 auto;
+    margin-block: -0.5rem;
+    font-size: 10px;
+}
+
+.linea-azul {
+  background-color: #004991;
+}
+.linea-gris {
+  background-color: #EDEBEB;
+  color: #EDEBEB;
+}
+
+.paso-azul {
+  background-color: #004991;
+}
+.paso-gris {
+  background-color: #EDEBEB;
+  color: #000000;
+}
+
+
+
+
+
+
+.boton-derecho {
+  flex: 0 0 50%; /* La columna izquierda ocupa el 35% del espacio disponible */
+  margin: 0 auto;
+}
+
+.boton-izquierdo {
+  flex: 0 0 50%; /* La columna izquierda ocupa el 35% del espacio disponible */
+  margin: 0 auto;
+}
+
+
+.titulo_resumen {
+  font-weight: 800;
+  color: #004991;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  margin-left: 1rem;
+}
+
+
+.timeline, .formulario {
+    flex: 1; /* Permite que se expandan en altura */
+}

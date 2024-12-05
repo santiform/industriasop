@@ -16,7 +16,9 @@
             <div class="header-container"> <!-- Nuevo contenedor -->
                 <!-- Logo a la izquierda -->
                 <div class="logo">
-                    <img src="{{ asset('img/logo.webp') }}" alt="Logo" class="logo-img">
+                    <a href="">
+                        <img src="{{ asset('img/logo.webp') }}" alt="Logo" class="logo-img">
+                    </a>
                 </div>
 
                 <!-- Botones a la derecha -->
@@ -44,77 +46,90 @@
 
         <!-- Contenedor Principal (2 Columnas) -->
         <div class="principal">
-            <div class="izquierda">Columna Izquierda (30%)</div>
+            <div class="izquierda">
+                <div class="timeline">
+                    <div class="paso paso-azul">
+                      <div class="circle circle-azul">1</div> Datos básicos
+                    </div>
+                    <div class="linea linea-azul">|</div>
+                    <div class="paso paso-gris">
+                        <div class="circle circle-gris">2</div> Control
+                    </div>
+                    <div class="linea linea-gris">|</div>
+                    <div class="paso paso-gris">
+                        <div class="circle circle-gris">3</div> Puertas
+                    </div>
+                    <div class="linea linea-gris">|</div>
+                    <div class="paso paso-gris">
+                        <div class="circle circle-gris">4</div> Detalles generales
+                    </div>
+                    <div class="linea linea-gris">|</div>
+                    <div class="paso paso-gris">
+                        <div class="circle circle-gris">5</div> Confirmación
+                    </div>
+                </div>
+            </div>
             <div class="derecha">
-                Columna Derecha (70%)<br><br><br><br><br><br> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <div class="formulario">
+                  <h2 class="titleSection"><div class="div-paso">1</div> DATOS BÁSICOS</h2>
+                  <form action="" method="POST" required>
+                    @csrf
+                      <div class="titulo-form-group">Empresa</div>
+                      <div class="form-group">
+                        <label for="nombre">Nombre de empresa</label>
+                        <input required  type="text" id="nombre" name="nombre" placeholder="">
+                        <div style="height: 1.6rem;" ></div>
+                        <label for="email">Email de empresa</label>
+                        <input required  type="email" id="email" name="email" placeholder="">
+                        <div style="height: 1.6rem;" ></div>
+                        <label for="telefono">Teléfono de empresa</label>
+                        <input required  type="tel" id="telefono" name="telefono" placeholder="">
+                      </div>
+                      <div class="titulo-form-group">Obra</div>
+                      <div class="form-group">
 
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <label for="direccion">Dirección de obra</label>
+                        <input required  type="text" id="direccion" name="direccion" placeholder="">
 
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <div style="height: 1.6rem;" ></div>
 
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        <label for="tipo_obra">Tipo de obra</label>
+                          <select required  id="tipo_obra" name="tipo_obra">
+                              <option value="" disabled selected></option>
+                              
+                                  <option value=""></option>
+                              
+                          </select>
 
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                      </div>
 
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                      <div class="titulo-form-group">Ascensor</div>
+                      <div class="form-group">
+                          <label for="tipo_funcionamiento">Cuadro de maniobras</label>
+                          <select required  id="tipo_funcionamiento" name="tipo_funcionamiento">
+                              <option value="" disabled selected></option>
+                              
+                                  <option value=""></option>
+                              
+                          </select>
+                      </div>
 
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <div class="botones-container">
+                        <div class="boton-izquierdo">
+                            
+                        </div>
 
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.                   
+                        <div class="boton-derecho">
+                            <div class="btnNext">
+                                <button type="submit">Siguiente</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    </form>
+                </div>         
             </div>
         </div>
     </div>
