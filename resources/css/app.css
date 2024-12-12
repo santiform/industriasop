@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+input:focus {
+    border-color: #; /* Color del borde en focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Brillo azul */
+}

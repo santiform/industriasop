@@ -243,6 +243,29 @@ main {
     background-color: #007db7;
 }
 
+.header .btnAuth {
+    background-color: #007706;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 13px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.header .btnAuth:hover {
+    background-color: #00b70d;
+}
+
+
+.bienvenida {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center;     /* Centra verticalmente */
+    margin: 0 auto;          /* Centrado horizontal */
+    color: #000;
+}
+
 /* Responsividad */
 @media (max-width: 1100px) {
     .header {
@@ -263,10 +286,6 @@ main {
         flex-direction: column;
         gap: 10px;
     }
-
-    .header .logo-img {
-        margin-bottom: 10px; /* Espacio entre logo y botones */
-    }
 }
 
 
@@ -274,15 +293,20 @@ main {
 @media (max-width: 800px) {
     .hoja {
         max-width: 94%;
-
+    }
+    .header .logo-img {
+        height: 40px;
+    }
+    .header-container {
+        max-width: 99%; /* Limita el ancho del contenido a la misma proporción que la hoja */
+    }
+    .user-info span {
+        font-size: 13px!important;
     }
 }
 
 
 @media (max-width: 520px) {
-    .principal {
-        margin-top: 60px;
-    }
     .hoja {
         max-width: 99%;
     }
@@ -475,8 +499,7 @@ main {
 
 .btnPrev button, .btnNext button {
     font-family: paralucent, sans-serif;
-    font-size: 17px;
-    font-weight: 500;
+    font-size: 18px;
     border: none;
     border-radius: 30px;
     cursor: pointer;
@@ -715,4 +738,93 @@ main {
 
 .timeline, .formulario {
     flex: 1; /* Permite que se expandan en altura */
+}
+
+
+
+
+
+/* Contenedor del dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+/* Información del usuario (nombre + icono) */
+.user-info {
+    padding: 10px 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: #2d3748; /* Fondo oscuro */
+    color: white;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: background-color 0.3s ease;
+}
+
+
+.user-info:hover {
+    background-color: #4a5568; /* Fondo más claro al pasar el ratón */
+}
+
+.user-info i {
+    margin-left: 8px;
+}
+
+/* Estilo del menú desplegable */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1;
+}
+
+/* Estilos de los enlaces dentro del dropdown */
+.dropdown-content a,
+.dropdown-content button {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    text-decoration: none;
+    color: #333;
+    background-color: #fff;
+    border: none;
+    width: 100%;
+    transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+.dropdown-content a:hover,
+.dropdown-content button:hover {
+    background-color: #ebf2ff;
+    color: #2d3748;
+}
+
+.dropdown-content i {
+    margin-right: 10px;
+}
+
+/* Mostrar el contenido del dropdown cuando el usuario hace clic */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* Estilo del botón de cierre de sesión */
+form button {
+    background: none;
+    border: none;
+    padding: 12px;
+    margin-right: 10px;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    font-size: 16px;
+    width: 100%;
 }
